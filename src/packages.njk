@@ -1,0 +1,60 @@
+---
+layout: base.njk
+pagination:
+  data: packages
+  size: 1
+  alias: p
+permalink: "/packages/{{ p.id }}/"
+section: services
+eleventyComputed:
+  title: "{{ p.title }}"
+  seoTitle: "{{ p.title }} — {{ p.price }} {{ p.period }} — Viko"
+  description: "{{ p.summary }}"
+---
+        <section class="hero">
+            <div class="container">
+                <a class="article-back" href="/#packages"><i class="fas fa-arrow-left"></i> All packages</a>
+                <h1>{{ p.title }} — {{ p.chip }}</h1>
+                <p>{{ p.summary }}</p>
+            </div>
+        </section>
+
+        <section class="container case-panel">
+            <div class="case-meta">
+                <span><i class="fas fa-tag"></i> <strong>{{ p.price }}</strong> {{ p.period }}</span>
+                <span><i class="fas fa-chart-line"></i> {{ p.tag }}</span>
+            </div>
+            <div class="case-content">
+                <h2>About this package</h2>
+                <p>{{ p.lead }}</p>
+
+                <h2>{{ p.includedTitle }}</h2>
+                <ul class="package-features package-features--single">
+                    {%- for item in p.included %}
+                    <li>{{ item }}</li>
+                    {%- endfor %}
+                </ul>
+                {%- if p.proof %}
+                <div class="proof-callout">
+                    <p class="section-kicker">{{ p.proof.label }}</p>
+                    <p><strong>{{ p.proof.title }}</strong></p>
+                    <p>{{ p.proof.metrics }}</p>
+                    <a href="{{ p.proof.url }}">Read the full case study →</a>
+                </div>
+                {%- endif %}
+
+                <p>All work is 100% manual using our network of high-karma accounts. No bots. No spam. Just sustainable growth and long-term credibility.</p>
+                <p>{{ p.note }}</p>
+
+                <h2>Ready to start?</h2>
+                <p>Choose the <strong>{{ p.title }}</strong> and start building momentum on Reddit this week.</p>
+                <div class="cta-row">
+                    <a class="btn btn-primary" href="/#booking"><i class="far fa-calendar-check"></i> {{ p.cta }} — book a call</a>
+                    <a class="btn btn-outline" href="mailto:{{ site.email }}">Email us instead</a>
+                </div>
+                <p class="package-others">Prefer something else? Compare the
+                    {%- set sep = joiner(" or the") %}
+                    {%- for other in packages %}{% if other.id != p.id %}{{ sep() }} <a href="/packages/{{ other.id }}/">{{ other.title }}</a>{% endif %}{% endfor %},
+                    or <a href="/#packages">see all packages side by side</a>.</p>
+            </div>
+        </section>

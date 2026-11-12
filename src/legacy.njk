@@ -1,0 +1,41 @@
+---
+pagination:
+  data: legacyPages
+  size: 1
+  alias: lp
+permalink: "/{{ lp.file }}"
+legacyRedirect: true
+eleventyExcludeFromCollections: true
+legacyPages:
+  - { file: "blog.html", to: "/insights/", param: "", kind: "" }
+  - { file: "blog-post.html", to: "/insights/", param: "id", kind: "posts" }
+  - { file: "case-study.html", to: "/case-studies/", param: "id", kind: "cases" }
+  - { file: "package.html", to: "/#packages", param: "id", kind: "packages" }
+  - { file: "service.html", to: "/#capabilities", param: "topic", kind: "services" }
+  - { file: "terms.html", to: "/terms/", param: "", kind: "" }
+  - { file: "privacy.html", to: "/privacy/", param: "", kind: "" }
+  - { file: "thankyou.html", to: "/thankyou/", param: "", kind: "" }
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting… — {{ site.name }}</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="{{ lp.to | absolute(site.url) }}">
+<script>
+(function () {
+    var map = {
+        {%- if lp.kind == "posts" %}{% for post in collections.posts %}{% if post.data.legacy_id %}{{ post.data.legacy_id | json | safe }}: {{ post.url | url | json | safe }},{% endif %}{% endfor %}
+        {%- elif lp.kind == "cases" %}{% for c in collections.cases %}{{ c.fileSlug | json | safe }}: {{ c.url | url | json | safe }},{% endfor %}{% for id, link in retired %}{{ id | json | safe }}: {{ link | json | safe }},{% endfor %}
+        {%- elif lp.kind == "packages" %}{% for p in packages %}{{ p.id | json | safe }}: {{ ("/packages/" + p.id + "/") | url | json | safe }},{% endfor %}
+        {%- elif lp.kind == "services" %}{% for s in services %}{{ s.id | json | safe }}: {{ ("/services/" + s.id + "/") | url | json | safe }},{% endfor %}
+        {%- endif %}
+    };
+    var id = {% if lp.param %}new URLSearchParams(location.search).get({{ lp.param | json | safe }}){% else %}null{% endif %};
+    location.replace((id && map[id]) || {{ lp.to | url | json | safe }});
+})();
+</script>
+</head>
+<body><p><a href="{{ lp.to }}">Continue to the new page</a></p></body>
+</html>

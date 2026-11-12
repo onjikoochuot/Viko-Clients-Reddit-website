@@ -1,0 +1,27 @@
+---
+layout: base.njk
+title: Reddit case studies
+seoTitle: Reddit Case Studies — Viko
+description: Reddit campaigns with real numbers. Strategy, execution, thread links and results for each one.
+permalink: /case-studies/
+section: cases
+---
+        <section class="hero">
+            <div class="container">
+                <h1>Reddit case studies</h1>
+                <p>{{ collections.cases.length }} campaigns with real numbers. Open any story for the full breakdown: strategy, execution, thread links, and results.</p>
+            </div>
+        </section>
+
+        <section class="container case-panel">
+            <div class="catalog-list">
+                {%- for item in collections.cases %}
+                <a class="service-tile" href="{{ item.url }}">
+                    <i class="fas {{ item.data.icon }} service-icon"></i>
+                    <h3>{{ item.data.short_title }} <span class="catalog-line">{{ item.data.summary }}</span></h3>
+                    <div class="service-thumb-container"><img class="service-thumb" src="{{ item.data.thumbnail }}" alt="{{ item.data.thumbnail_alt }}" loading="lazy" decoding="async"></div>
+                </a>
+                {%- endfor %}
+            </div>
+            <p class="catalog-cta">Want results like these? <a class="btn btn-primary" href="/#booking"><i class="far fa-calendar-check"></i> Book a strategy call</a></p>
+        </section>

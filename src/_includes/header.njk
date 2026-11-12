@@ -1,0 +1,23 @@
+{%- set wa = "https://wa.me/" + site.whatsapp + "?text=" + (site.whatsappText | urlencode) %}
+{%- set section = section or "" %}
+<header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="logo" aria-label="{{ site.name }} home">
+                <div class="logo-icon">V</div>
+                <div class="logo-text">
+                    <div class="logo-name">Viko</div>
+                    <div class="tagline"><i class="fab fa-reddit-alien"></i> <span>agency</span></div>
+                </div>
+            </a>
+            <nav class="primary-nav" aria-label="Main navigation">
+                <a href="/"{% if section == "home" %} aria-current="page"{% endif %}>Home</a>
+                <a href="/#capabilities"{% if section == "services" %} aria-current="page"{% endif %}>Services</a>
+                <a href="/case-studies/"{% if section == "cases" %} aria-current="page"{% endif %}>Case studies</a>
+                <a href="/insights/"{% if section == "insights" %} aria-current="page"{% endif %}>Insights</a>
+            </nav>
+            <div class="header-actions">
+                <a href="{{ wa }}" class="btn btn-wa" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+                <a href="/#booking" class="btn btn-primary"><i class="far fa-calendar-check"></i> Book call</a>
+            </div>
+        </div>
+    </header>

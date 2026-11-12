@@ -1,0 +1,52 @@
+{% extends "base.njk" %}
+{% set section = "insights" %}
+{% set ogType = "article" %}
+{% block head %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": {{ title | json | safe }},
+        "description": {{ (description or "") | json | safe }},
+        "datePublished": "{{ page.date | isoDate }}",
+        "image": "{{ (thumbnail or '/viko-logo-512.png') | absolute(site.url) }}",
+        "mainEntityOfPage": "{{ page.url | absolute(site.url) }}",
+        "author": { "@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}/" },
+        "publisher": { "@type": "Organization", "name": "{{ site.name }}", "logo": { "@type": "ImageObject", "url": "{{ site.url }}/viko-logo-512.png" } }
+    }
+    </script>
+{% endblock %}
+{% block main %}
+        <article class="container article">
+            <header class="article-header">
+                <a class="article-back" href="/insights/"><i class="fas fa-arrow-left"></i> All insights</a>
+                {%- if category %}<div class="section-kicker">{{ category }}</div>{% endif %}
+                <h1>{{ title }}</h1>
+                {%- if description %}<p class="article-lead">{{ description }}</p>{% endif %}
+                <div class="post-meta">
+                    <span><i class="far fa-calendar"></i> <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time></span>
+                    {%- set rt = content | readingTime %}{% if rt %}
+                    <span><i class="far fa-clock"></i> {{ rt }}</span>{% endif %}
+                </div>
+            </header>
+            {%- if thumbnail %}
+            <figure class="article-cover"><img src="{{ thumbnail }}" alt="{{ thumbnail_alt or '' }}" decoding="async"></figure>
+            {%- endif %}
+            <div class="post-content">
+                {{ content | safe }}
+            </div>
+            <div class="post-footer">
+                <p>Want these strategies working for your brand?</p>
+                <a href="/#booking" class="btn btn-primary"><i class="far fa-calendar-check"></i> Book a strategy call</a>
+            </div>
+        </article>
+        {%- set more = collections.posts | exclude(page.url) | limit(3) %}
+        {%- if more.length %}
+        <section class="container more-insights">
+            <h2 class="section-title">More insights</h2>
+            <div class="insight-grid">
+                {%- for post in more %}{% include "insight-card.njk" %}{% endfor %}
+            </div>
+        </section>
+        {%- endif %}
+{% endblock %}

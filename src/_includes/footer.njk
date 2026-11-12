@@ -1,0 +1,27 @@
+<footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <p class="footer-brand">Viko</p>
+                    <p>{{ site.tagline }}</p>
+                </div>
+                <div>
+                    <p class="footer-heading">Explore</p>
+                    <ul>
+                        <li><a href="/#packages">Packages</a></li>
+                        <li><a href="/case-studies/">Case studies</a></li>
+                        <li><a href="/insights/">Insights</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="footer-heading">Contact</p>
+                    <ul>
+                        <li><a href="mailto:{{ site.email }}"><i class="far fa-envelope"></i> {{ site.email }}</a></li>
+                        <li><a href="https://wa.me/{{ site.whatsapp }}?text={{ site.whatsappText | urlencode }}"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><a href="/#booking"><i class="far fa-calendar-check"></i> Book a strategy call</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="footer-legal">© {{ build.year }} {{ site.legalName }}. All rights reserved. · <a href="/terms/">Terms and Conditions</a> · <a href="/privacy/">Privacy Policy</a></p>
+        </div>
+    </footer>

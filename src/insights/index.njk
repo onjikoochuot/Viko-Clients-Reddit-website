@@ -1,0 +1,30 @@
+---
+layout: base.njk
+title: Insights
+seoTitle: Reddit Marketing Insights — Viko
+description: Insights on Reddit marketing, AI search visibility, and community growth strategies from the Viko team.
+permalink: /insights/
+section: insights
+---
+        <section class="hero">
+            <div class="container">
+                <h1>Viko Insights</h1>
+                <p>Reddit marketing, AI search visibility, and community growth strategies.</p>
+            </div>
+        </section>
+
+        <section class="container insights-section">
+            {%- if collections.posts.length %}
+            {%- set post = collections.posts[0] %}{% set featured = true %}
+            {% include "insight-card.njk" %}
+            {%- set featured = false %}
+            <div class="insight-grid">
+                {%- for post in collections.posts %}{% if not loop.first %}
+                {% include "insight-card.njk" %}
+                {%- endif %}{% endfor %}
+            </div>
+            {%- else %}
+            <p>New articles are on the way.</p>
+            {%- endif %}
+            <p class="catalog-cta">Want these strategies working for your brand? <a class="btn btn-primary" href="/#booking"><i class="far fa-calendar-check"></i> Book a strategy call</a></p>
+        </section>

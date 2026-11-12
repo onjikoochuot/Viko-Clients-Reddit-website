@@ -1,0 +1,41 @@
+---
+layout: base.njk
+pagination:
+  data: services
+  size: 1
+  alias: s
+permalink: "/services/{{ s.id }}/"
+section: services
+eleventyComputed:
+  title: "{{ s.title }}"
+  description: "{{ s.lead }}"
+---
+        <section class="hero">
+            <div class="container">
+                <h1>{{ s.title }}</h1>
+                <p>{{ s.lead }}</p>
+            </div>
+        </section>
+
+        <section class="container service-panel">
+            <div class="service-meta">{% for m in s.meta %}<span>{{ m }}</span>{% endfor %}</div>
+            <div class="service-content">
+                <h2>{{ s.heading }}</h2>
+                <p>{{ s.description }}</p>
+                <ul>
+                    {%- for item in s.items %}
+                    <li>{{ item }}</li>
+                    {%- endfor %}
+                </ul>
+                <div class="service-image">
+                    <picture>
+                        {%- if s.image.avif %}<source srcset="{{ s.image.avif }}" type="image/avif">{% endif %}
+                        <img src="{{ s.image.src }}" width="{{ s.image.w }}" height="{{ s.image.h }}" alt="{{ s.title }}" loading="lazy" decoding="async">
+                    </picture>
+                </div>
+            </div>
+            <div class="post-footer">
+                <p>Not sure which service fits? We will tell you honestly.</p>
+                <a href="/#booking" class="btn btn-primary"><i class="far fa-calendar-check"></i> Book a strategy call</a>
+            </div>
+        </section>

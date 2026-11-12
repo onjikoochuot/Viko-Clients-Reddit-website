@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{%- set pageTitle = (title + " — " + site.name) if title else (site.name + " · Reddit Agency") %}
+{%- if seoTitle %}{% set pageTitle = seoTitle %}{% endif %}
+{%- set pageDescription = description or site.description %}
+{%- set canonical = page.url | absolute(site.url) %}
+{%- set shareImage = (thumbnail or "/viko-logo-512.png") | absolute(site.url) %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle }}</title>
+    <meta name="description" content="{{ pageDescription }}">
+    <link rel="canonical" href="{{ canonical }}">
+    {%- if noindex %}
+    <meta name="robots" content="noindex">
+    {%- endif %}
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:type" content="{{ ogType or 'website' }}">
+    <meta property="og:title" content="{{ title or pageTitle }}">
+    <meta property="og:description" content="{{ pageDescription }}">
+    <meta property="og:url" content="{{ canonical }}">
+    <meta property="og:image" content="{{ shareImage }}">
+    <meta name="twitter:card" content="{{ 'summary_large_image' if thumbnail else 'summary' }}">
+    <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96">
+    <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#f6f4ef">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    {%- block head %}{% endblock %}
+</head>
+
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {% include "header.njk" %}
+
+    <main id="main">
+        {%- block main %}{{ content | safe }}{% endblock %}
+    </main>
+
+    {% include "footer.njk" %}
+    {%- block scripts %}{% endblock %}
+</body>
+
+</html>

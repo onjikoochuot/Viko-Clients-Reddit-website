@@ -1,0 +1,21 @@
+{% extends "base.njk" %}
+{% set section = "cases" %}
+{% set ogType = "article" %}
+{% block main %}
+        <section class="hero">
+            <div class="container">
+                <a class="article-back" href="/case-studies/"><i class="fas fa-arrow-left"></i> All case studies</a>
+                <h1>{{ title }}</h1>
+            </div>
+        </section>
+        <section class="container case-panel">
+            <div class="case-meta">{% for tag in stats %}<span>{{ tag }}</span>{% endfor %}</div>
+            <div class="case-content">
+                {{ content | safe }}
+            </div>
+            <div class="post-footer">
+                <p>Want results like these?</p>
+                <a href="/#booking" class="btn btn-primary"><i class="far fa-calendar-check"></i> Book a strategy call</a>
+            </div>
+        </section>
+{% endblock %}

@@ -1,0 +1,423 @@
+---
+description: "Viko is a Reddit growth agency: organic community marketing, managed Reddit ads, AI search visibility and reputation management for brands."
+permalink: /
+section: home
+---
+{% extends "base.njk" %}
+{% block head %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            { "@type": "Organization", "@id": "{{ site.url }}/#organization", "name": "{{ site.name }}", "url": "{{ site.url }}/", "logo": "{{ site.url }}/viko-logo-512.png", "email": "{{ site.email }}" },
+            { "@type": "WebSite", "@id": "{{ site.url }}/#website", "name": "{{ site.name }}", "url": "{{ site.url }}/", "publisher": { "@id": "{{ site.url }}/#organization" } }
+        ]
+    }
+    </script>
+{% endblock %}
+{% block main %}
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <h1 class="hero-title">
+                            Get discovered<br>
+                            <span>on Reddit</span>.
+                        </h1>
+                        <p class="hero-lead">
+                            Reach customers where they already research, compare, and ask for advice. We make your brand visible to real people and AI-powered search engines through authentic, high-trust Reddit marketing.
+                        </p>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">aged accounts</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">1300+</div>
+                                <div class="stat-label">campaigns</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">5★</div>
+                                <div class="stat-label">feedback</div>
+                            </div>
+                        </div>
+                        <div class="cta-row">
+                            <a class="btn btn-primary" href="#booking"><i class="fas fa-rocket"></i> Start growing</a>
+                            <a class="btn btn-outline" href="#packages"><i class="fas fa-layer-group"></i> Compare packages</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="package-preview">
+                            <div class="package-preview-header">
+                                <div>
+                                    <div class="eyebrow">Growth packages</div>
+                                    <h2>Three ways to build Reddit demand</h2>
+                                </div>
+                                <div class="package-count">3</div>
+                            </div>
+                            <div class="package-preview-list">
+                                <a class="package-preview-item" href="/packages/ads/" aria-label="Reddit Ads Accelerator - full details">
+                                    <div class="package-preview-icon"><i class="fas fa-bullhorn"></i></div>
+                                    <div>
+                                        <strong>Reddit Ads Accelerator</strong>
+                                        <span>Managed ads for fast traffic</span>
+                                    </div>
+                                    <span class="package-preview-price">$80/wk</span>
+                                </a>
+                                <a class="package-preview-item" href="/packages/organic/" aria-label="Organic Growth Engine - full details">
+                                    <div class="package-preview-icon"><i class="fas fa-seedling"></i></div>
+                                    <div>
+                                        <strong>Organic Growth Engine</strong>
+                                        <span>Posts, comments, and AI visibility</span>
+                                    </div>
+                                    <span class="package-preview-price">$210/wk</span>
+                                </a>
+                                <a class="package-preview-item" href="/packages/ambassador/" aria-label="Reddit Ambassador Program - full details">
+                                    <div class="package-preview-icon"><i class="fas fa-user-check"></i></div>
+                                    <div>
+                                        <strong>Reddit Ambassador Program</strong>
+                                        <span>Official brand voice in your communities</span>
+                                    </div>
+                                    <span class="package-preview-price">$85/wk</span>
+                                </a>
+                            </div>
+                            <a class="btn btn-primary" style="margin-top: 22px; width: 100%; justify-content: center;" href="#packages"><i class="fas fa-table-columns"></i> See package details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="content-section" id="about">
+            <div class="container split-section">
+                <div class="narrative-panel">
+                    <div class="section-kicker">Who we are</div>
+                    <h2>Premium Reddit marketing for brands that need trust, not noise.</h2>
+                    <p>Viko Reddit Experts helps ambitious brands build genuine authority and visibility on Reddit, the world's most powerful but often misunderstood community platform.</p>
+                    <p>Viko turns Reddit into a predictable growth channel through community-approved strategies that drive organic engagement, qualified traffic, and long-term discoverability in Google and AI search.</p>
+                    <p>Every campaign is 100% manual, data-driven, and built around authentic storytelling instead of aggressive promotion.</p>
+                </div>
+                <div class="proof-panel">
+                    <h3>Built for modern discovery</h3>
+                    <p>We combine high-karma account placement, subreddit research, AI/LLM optimization, and careful reporting so brands can grow without risking reputation.</p>
+                    <div class="proof-list">
+                        <div class="proof-item">
+                            <i class="fas fa-user-shield"></i>
+                            <div>
+                                <strong>500+ aged accounts</strong>
+                                <span>High-karma profiles with 10k+ karma each</span>
+                            </div>
+                        </div>
+                        <div class="proof-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <strong>1300+ campaigns</strong>
+                                <span>SaaS, fintech, travel, health, dating, and service brands</span>
+                            </div>
+                        </div>
+                        <div class="proof-item">
+                            <i class="fas fa-robot"></i>
+                            <div>
+                                <strong>AI-search ready</strong>
+                                <span>Built for Reddit, Google, ChatGPT, Perplexity, and Claude</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capabilities Section -->
+        <section class="content-section" id="capabilities">
+            <div class="container">
+                <div class="section-heading-row">
+                    <div>
+                        <div class="section-kicker">Our services</div>
+                        <h2 class="section-title">Flexible Reddit growth, from organic authority to paid acquisition</h2>
+                    </div>
+                    <p>Pick a weekly package or a fully managed custom campaign. The strategy stays the same: useful content, careful targeting, and measurable outcomes.</p>
+                </div>
+                <div class="capability-grid">
+                    <article class="capability-card">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Organic Reddit Growth</h3>
+                        <p>Strategic posting and commenting using high-karma accounts to build trust, brand mentions, and long-term niche authority.</p>
+                    </article>
+                    <article class="capability-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>Reddit Advertising</h3>
+                        <p>Fully managed Reddit Ads with native-feeling creatives built to deliver impressions, clicks, leads, and sales.</p>
+                    </article>
+                    <article class="capability-card">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI & LLM Optimization</h3>
+                        <p>Content engineered for AI-powered search engines and recommendation systems, so your brand stays discoverable.</p>
+                    </article>
+                    <article class="capability-card">
+                        <i class="fas fa-magnifying-glass-chart"></i>
+                        <h3>Subreddit Research</h3>
+                        <p>Deep analysis of the right communities, search intent, ranking threads, trends, and audience-fit opportunities.</p>
+                    </article>
+                    <article class="capability-card">
+                        <i class="fas fa-shield-halved"></i>
+                        <h3>Reputation Management</h3>
+                        <p>Proactive monitoring and value-first engagement that protects your brand while improving trust across Reddit.</p>
+                    </article>
+                    <article class="capability-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <h3>Performance Reporting</h3>
+                        <p>Weekly or monthly reporting across views, engagement, sentiment, leads, estimated reach, and campaign ROI.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section class="packages-section" id="packages">
+            <div class="container">
+                <div class="section-kicker">Growth packages</div>
+                <h2 class="section-title">Pick the Reddit channel that matches your next move</h2>
+                <p class="section-lead">Every package is handled manually through high-karma accounts, careful subreddit targeting, and value-first creative built to earn trust instead of triggering spam filters.</p>
+                <div class="packages-grid">
+                    <article class="package-card">
+                        <div class="package-card-top">
+                            <div class="package-card-icon"><i class="fas fa-bullhorn"></i></div>
+                            <span class="package-tag">Fast traffic</span>
+                        </div>
+                        <h3>Reddit Ads Accelerator</h3>
+                        <div class="package-price">$80 <span>/ week</span></div>
+                        <p class="package-summary">Fully managed Reddit ads for qualified impressions, clicks, leads, and bookings.</p>
+                        <ul class="package-features">
+                            <li>1 high-impact Reddit ad created weekly</li>
+                            <li>Precise targeting in high-intent subreddits</li>
+                            <li>Daily monitoring, bid optimization, and A/B testing</li>
+                            <li>Weekly performance report and recommendations</li>
+                        </ul>
+                        <a class="btn btn-outline" href="/packages/ads/"><i class="fas fa-circle-info"></i> View details</a>
+                    </article>
+
+                    <article class="package-card featured">
+                        <div class="package-card-top">
+                            <div class="package-card-icon"><i class="fas fa-seedling"></i></div>
+                            <span class="package-tag">Organic + AI</span>
+                        </div>
+                        <h3>Organic Growth Engine</h3>
+                        <div class="package-price">$210 <span>/ week</span></div>
+                        <p class="package-summary">Steady organic visibility through strategic posts, comments, and LLM-friendly Reddit placement.</p>
+                        <ul class="package-features">
+                            <li>12+ authentic brand mentions every week</li>
+                            <li>6 premium organic posts in relevant subreddits</li>
+                            <li>12 strategic promotional comments</li>
+                            <li>Subreddit research, reputation management, and weekly reporting</li>
+                        </ul>
+                        <a class="btn btn-primary" href="/packages/organic/"><i class="fas fa-circle-info"></i> View details</a>
+                    </article>
+
+                    <article class="package-card">
+                        <div class="package-card-top">
+                            <div class="package-card-icon"><i class="fas fa-user-check"></i></div>
+                            <span class="package-tag">Brand voice</span>
+                        </div>
+                        <h3>Reddit Ambassador Program</h3>
+                        <div class="package-price">$85 <span>/ week</span></div>
+                        <p class="package-summary">We run an official Reddit account for your brand and act as your professional, transparent voice in the communities that matter.</p>
+                        <ul class="package-features">
+                            <li>Official branded account managed on your behalf</li>
+                            <li>Active participation in relevant subreddits</li>
+                            <li>Open, helpful advice given as a brand representative</li>
+                            <li>Replies to mentions, questions, and brand-related threads</li>
+                            <li>Drafts shared with you for review before posting</li>
+                            <li>Monthly summary of conversations, sentiment, and insights</li>
+                        </ul>
+                        <a class="btn btn-outline" href="/packages/ambassador/"><i class="fas fa-circle-info"></i> View details</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="container" id="services">
+            <div class="section-kicker">Proof</div>
+            <h2 class="section-title">Case studies</h2>
+            <div class="services-grid">
+                {%- for item in collections.featuredCases | limit(3) %}
+                <a class="service-tile" href="{{ item.url }}">
+                    <i class="fas {{ item.data.icon }} service-icon"></i>
+                    <h3>{{ item.data.short_title }}</h3>
+                    <div class="service-thumb-container"><img class="service-thumb" src="{{ item.data.thumbnail }}" alt="{{ item.data.thumbnail_alt }}" loading="lazy" decoding="async"></div>
+                </a>
+                {%- endfor %}
+            </div>
+            <div style="margin-top: 16px;">
+                <a class="btn btn-outline" href="/case-studies/"><i class="fas fa-arrow-right"></i> View all case studies</a>
+            </div>
+        </section>
+
+        <section class="content-section comparison-section" id="comparison">
+            <div class="container">
+                <div class="section-heading-row">
+                    <div>
+                        <div class="section-kicker">A clearer split of work</div>
+                        <h2 class="section-title">Your team knows the brand. We handle the Reddit work.</h2>
+                    </div>
+                    <p>A managed campaign pairs your product knowledge with Viko’s community research, manual execution, and performance reporting.</p>
+                </div>
+                <div class="comparison-wrap">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Workstream</th>
+                                <th scope="col">Your team</th>
+                                <th scope="col">Viko</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Community research</th>
+                                <td>Share product context, audience, and campaign goals.</td>
+                                <td>Map relevant subreddits, search intent, and thread opportunities.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Content &amp; engagement</th>
+                                <td>Review brand details and provide feedback.</td>
+                                <td>Plan and manually create value-first posts and comments.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Monitoring &amp; reporting</th>
+                                <td>Set business priorities and share outcome context.</td>
+                                <td>Report on views, engagement, sentiment, leads, and campaign performance.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reputation</th>
+                                <td>Keep Viko informed about brand sensitivities.</td>
+                                <td>Use community-first engagement and reputation management.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest insights (filled automatically from the newest articles) -->
+        {%- if collections.posts.length %}
+        <section class="container" id="insights">
+            <div class="section-kicker">Insights</div>
+            <h2 class="section-title">Latest from the Viko team</h2>
+            <div class="insight-grid">
+                {%- for post in collections.posts | limit(3) %}{% include "insight-card.njk" %}{% endfor %}
+            </div>
+            <div style="margin-top: 16px;">
+                <a class="btn btn-outline" href="/insights/"><i class="fas fa-arrow-right"></i> Read all insights</a>
+            </div>
+        </section>
+        {%- endif %}
+
+        <!-- FAQ Section -->
+        <section class="content-section" id="faq">
+            <div class="container">
+                <div class="section-heading-row">
+                    <div>
+                        <div class="section-kicker">FAQ</div>
+                        <h2 class="section-title">Common questions before we start</h2>
+                    </div>
+                    <p>Still unsure? Book a strategy call and we will tell you honestly whether Reddit is the right channel for your brand.</p>
+                </div>
+                <div class="faq-grid">
+                    <details class="faq-item">
+                        <summary>Do you use bots or automation?</summary>
+                        <p>No. All posts, comments, and ads are handled manually using high-karma accounts, which keeps the work safer and more authentic.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>How fast will I see results?</summary>
+                        <p>Organic posts can start gaining traction within days. Reddit Ads can deliver leads within the first week. Authority compounds over 4-8 weeks.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Can you work in my niche?</summary>
+                        <p>Yes. We have run campaigns across health, finance, SaaS, travel, dating, tech, local services, and more.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>What reporting do you provide?</summary>
+                        <p>Weekly or monthly reports can include views, upvotes, comments, sentiment, leads for ads, estimated reach, and recommendations.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Is my brand safe from bans?</summary>
+                        <p>Our community-first approach is designed to survive moderation and build positive reputation. We avoid spam tactics that put brands at risk.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Do you offer custom packages?</summary>
+                        <p>Yes. We can build custom campaigns for enterprise brands, unusual niches, product launches, reputation work, or blended paid and organic strategies.</p>
+                    </details>
+                </div>
+                <div style="margin-top: 28px;">
+                    <a class="btn btn-primary" href="#booking"><i class="far fa-calendar-check"></i> Still have questions? Book a free strategy call</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <!-- Booking + Inquiry -->
+        <section class="container" id="booking">
+            <div class="booking-section">
+                <div class="booking-header">
+                    <h2>Book a strategy call</h2>
+                    <p>No pitch, just honest advice. 30 minutes, zero pressure. Prefer to write? The form goes straight to our inbox — we reply within 2 hours.</p>
+                </div>
+                <div class="booking-btn-group">
+                    <button type="button" class="btn btn-primary btn-lg" id="open-calendar"><i class="far fa-calendar-check"></i> Open calendar</button>
+                    <a href="https://wa.me/{{ site.whatsapp }}?text={{ site.whatsappText | urlencode }}" class="btn btn-wa btn-lg" aria-label="Quick chat on WhatsApp">
+                        <i class="fab fa-whatsapp"></i> Quick chat on WhatsApp
+                    </a>
+                </div>
+                <p class="booking-divider">or send a message</p>
+                <form id="contact-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <input type="text" placeholder=" " id="name" name="name" required>
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder=" " id="email" name="email" required>
+                            <label for="email">Email address</label>
+                        </div>
+                        <div class="form-group full-width">
+                            <textarea rows="4" placeholder=" " id="message" name="message" required></textarea>
+                            <label for="message">Tell us about your project...</label>
+                        </div>
+                    </div>
+                    <div class="form-consent">
+                        <label for="consent">
+                            <input type="checkbox" id="consent" required>
+                            <span>I have read and agree to the <a href="/terms/">Terms and Conditions</a> and the <a href="/privacy/">Privacy Policy</a>.</span>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send message</button>
+                        <button type="button" id="form-wa-btn" class="btn btn-wa"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+                    </div>
+                    <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
+                </form>
+            </div>
+        </section>
+
+        <div id="calendlyModal" class="modal" role="dialog" aria-modal="true" aria-label="Book a strategy call">
+            <div class="modal-content" id="calendlyContainer">
+                <button type="button" class="modal-close" id="close-calendar" aria-label="Close">&times;</button>
+                <div id="calendlyFrame"></div>
+            </div>
+        </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        window.VIKO = {
+            calendly: {{ site.calendly | json | safe }},
+            whatsapp: {{ site.whatsapp | json | safe }},
+            whatsappText: {{ site.whatsappText | json | safe }},
+            formKey: {{ site.web3formsKey | json | safe }},
+            email: {{ site.email | json | safe }},
+            thankYou: {{ "/thankyou/" | url | json | safe }}
+        };
+    </script>
+    <script src="/assets/js/home.js" defer></script>
+{% endblock %}
