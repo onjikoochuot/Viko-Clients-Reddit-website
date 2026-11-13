@@ -298,3 +298,14 @@ button.st-gallery-item:hover { border-color: var(--st-accent); box-shadow: 0 0 0
     .st-brand > span:last-child { display: none; }
     .st-cta-box { grid-template-columns: 1fr; }
 }
+
+/* Block controls keep their own size and font wherever they sit (quotes, callouts, lists). */
+#studio .st-block { color: var(--ink, #1f1c18); font: 400 15px/1.5 var(--sans, Inter, sans-serif); text-align: left; }
+#studio .st-block-tools .st-chip, #studio .st-block-tools .st-block-label { font: 600 13px/1.2 var(--sans, Inter, sans-serif); }
+#studio .st-block-tools .st-block-label { font-size: 12px; font-weight: 700; }
+#studio .st-linkcard-site { justify-content: flex-start; font: 600 13px/1.3 var(--sans, Inter, sans-serif); }
+#studio .st-linkcard-url, #studio .st-embed-box a { font: 400 13px/1.4 var(--sans, Inter, sans-serif); }
+#studio .st-embed-box strong { font: 600 15px/1.4 var(--sans, Inter, sans-serif); }
+#studio .st-caption { font: 400 14.5px/1.4 var(--sans, Inter, sans-serif); }
+#studio .st-alt { font: 400 12.5px/1.4 var(--sans, Inter, sans-serif); }
+#studio .st-fav { display: inline-block; flex: 0 0 auto; margin: 0 !important; border: 0 !important; }
