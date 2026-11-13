@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex">
-    <title>Viko — Content editor</title>
+    <meta name="robots" content="noindex, nofollow">
+    <title>Viko Studio</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+    <!-- The site's own styles, so the article looks exactly as it will when published. -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+    <link rel="stylesheet" href="/admin/studio/cropper.css">
+    <link rel="stylesheet" href="/admin/studio/studio.css">
 </head>
-<body>
-    <!-- The editor reads its settings from config.yml in this folder. -->
-    <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+<body class="st-body">
+    <div id="studio"></div>
+    <noscript>Viko Studio needs JavaScript turned on.</noscript>
+    <script type="module" src="/admin/studio/main.js"></script>
 </body>
 </html>

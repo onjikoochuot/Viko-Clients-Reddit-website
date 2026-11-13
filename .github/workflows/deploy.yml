@@ -28,6 +28,12 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
       - run: npm ci
+      # Remember link-card previews between builds (refreshed weekly)
+      - uses: actions/cache@v4
+        with:
+          path: .cache
+          key: link-previews-${{ github.run_id }}
+          restore-keys: link-previews-
       - run: npm run build
         env:
           PATH_PREFIX: ${{ steps.pages.outputs.base_path }}/

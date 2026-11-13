@@ -4,25 +4,61 @@ The client-facing website for Viko Reddit Experts (vikoredditexperts.com).
 
 Every article and case study is its own page with its own address, so Google and AI search engines can read them. You manage them from a visual editor, not by editing code.
 
-## Writing and editing articles
+## Writing and editing articles: Viko Studio
 
-1. Open `/admin/` on the live site (for example `https://vikoredditexperts.com/admin/`).
-2. Choose **Sign in with Token** and follow the on-screen steps the first time. The browser remembers you afterwards.
-3. Pick **Insights articles**, then:
-   - **New article** to write one. Add a title, short description, date, category and thumbnail, then write the article. The toolbar adds headings, bold text, links, lists and images.
-   - Click an existing article to **edit** it.
-   - Open an article and use the menu next to Save to **delete** it.
-   - Turn on **Draft** to save an article without showing it on the site.
-4. Press **Save**. The site rebuilds and the change is live in about two minutes.
+Open **`/admin/`** on the live site (https://vikoredditexperts.com/admin/) and sign in with your GitHub access token. The token is stored in that browser only.
 
-Case studies work the same way under **Case studies**. Turn on **Show on homepage** to feature one on the homepage.
+**Your articles.** Every article is listed as a card showing its thumbnail and whether it's published or a draft. Search or filter the list, click a card to edit it, or use **New article**, **Import Word** or **Import PDF**.
 
-Notes:
+**Writing.** The page looks like the published article. Type the title and the short description at the top, add a thumbnail, then write. The toolbar has:
+- text styles (heading, subheading, small heading)
+- bold, italic, underline, strikethrough and highlight
+- links (Ctrl+K)
+- bulleted and numbered lists, and quotes
+- left, centre and right alignment
 
-- The newest article (by publish date) appears as the large card at the top of the Insights page, and the three newest appear on the homepage.
-- An article with no thumbnail gets a branded placeholder showing its category.
-- To add a caption under an image, put a line in *italics* directly below it.
-- Uploaded images are stored in `src/media/uploads/`. Keep them under about 500 KB each so pages stay fast.
+**Insert menu.**
+- images, which you can also paste or drag in; they are resized automatically
+- tables
+- callout boxes (tip, key point, warning)
+- link previews
+- YouTube videos and Reddit posts
+- a call-to-action button
+- a downloadable file
+- a divider
+- content from a Word document or PDF, inserted at the cursor
+
+**Images.** Each image has a caption, a description for Google, three widths (small, normal, wide), crop, replace, and **Use as thumbnail**.
+
+**Links.** Paste a link on its own empty line and it becomes a preview card. The title, description and picture are filled in from the page when the site publishes. YouTube links become a video player, and Reddit post links become the embedded post. Press Ctrl+Z to keep a link as plain text.
+
+**Word import (.docx).** Brings in the title, subtitle (used as the description), headings, bold and italic text, lists, tables, links, quotes, images and their captions. You're then asked to pick a thumbnail from the document's images. You can also crop one.
+
+**PDF import.**
+- Shows every page. Click a page to drag a box over any part of it: a chart, a table or a quote. Use that part as the thumbnail or add it to the article.
+- Lists the pictures found inside the PDF.
+- Rebuilds the text as paragraphs, headings and lists.
+- Can attach the original PDF as a download at the end of the article.
+
+Scanned PDFs have no text to extract, but you can still use their pages as images.
+
+**Before publishing**, the right-hand panel checks the title, description, thumbnail, category, length and image descriptions. **Preview** hides every editing control and the phone button shows a phone-width view.
+
+**Saving.**
+- **Save draft** keeps the article off the site.
+- **Publish** or **Update** puts it live in about 2 minutes. The article and its images are saved together.
+- Ctrl+S saves.
+- If the browser closes before saving, the editor offers to restore your text next time.
+
+**Deleting.** The settings panel has **Delete article**, which also removes its uploaded images. You type DELETE to confirm. **Unpublish** turns a live article back into a draft.
+
+Case studies are still edited in the classic editor at `/admin/cms/`.
+
+### Good to know
+
+- The web address (`/insights/your-title/`) comes from the title and is fixed after the first save, so links to the article keep working.
+- Images from another website (pasted from Google Docs, for example) stay hosted on that site. Download and upload important images instead.
+- Each image or file must be under 25 MB.
 
 ## Where things live
 
@@ -35,7 +71,9 @@ Notes:
 | Homepage | `src/index.njk` |
 | Header and footer (shared by every page) | `src/_includes/` |
 | Design | `src/assets/css/styles.css` and `src/assets/css/site.css` |
-| Editor settings | `src/admin/config.yml` |
+| Viko Studio (article editor) source | `studio-src/` (bundled into `src/admin/studio/` on every build) |
+| Article page design | `src/_includes/post.njk`, `src/assets/css/article.css`, `src/assets/js/article.js`, `lib/enhance-article.js` |
+| Classic editor settings (case studies) | `src/admin/cms/config.yml` |
 
 Package names and prices also appear in the homepage text (`src/index.njk`), so update both places when a price changes.
 
@@ -55,4 +93,6 @@ npm start      # preview at http://localhost:8080
 npm run build  # output in _site/
 ```
 
-Built with [Eleventy](https://www.11ty.dev/). The editor is [Sveltia CMS](https://github.com/sveltia/sveltia-cms).
+Built with [Eleventy](https://www.11ty.dev/). Viko Studio uses [Tiptap](https://tiptap.dev/), [mammoth.js](https://github.com/mwilliamson/mammoth.js), [PDF.js](https://mozilla.github.io/pdf.js/) and [Cropper.js](https://github.com/fengyuan-chen/cropperjs). The classic editor is [Sveltia CMS](https://github.com/sveltia/sveltia-cms).
+
+Set `SKIP_LINK_PREVIEWS=1` to build without fetching link-card previews.

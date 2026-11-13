@@ -1,4 +1,5 @@
-# Settings for the content editor at /admin
+# Settings for the classic editor at /admin/cms/ (case studies).
+# Insights articles are written in Viko Studio at /admin/.
 # Docs: https://github.com/sveltia/sveltia-cms
 
 backend:
@@ -19,33 +20,6 @@ media_folder: src/media/uploads
 public_folder: /media/uploads
 
 collections:
-  - name: insights
-    label: Insights articles
-    label_singular: article
-    description: Articles shown on the Insights page. The newest date appears first.
-    folder: src/insights/posts
-    extension: md
-    format: yaml-frontmatter
-    create: true
-    delete: true
-    slug: '{{slug}}'
-    summary: '{{title}} ({{date}})'
-    sortable_fields: [date, title]
-    fields:
-      - { name: title, label: Title, widget: string }
-      - { name: description, label: Short description, widget: text, hint: 'One or two sentences. Shown on the article card, under the title, and in Google results.' }
-      - { name: date, label: Publish date, widget: datetime, format: YYYY-MM-DD, date_format: YYYY-MM-DD, time_format: false }
-      - name: category
-        label: Category
-        widget: select
-        required: false
-        options: [Authority, Organic growth, Lead generation, AI search, Community, Reputation, Reddit ads, Strategy]
-      - { name: thumbnail, label: Thumbnail image, widget: image, required: false, hint: 'Shown on the article card and at the top of the article. A wide image (about 1600 × 900) works best.' }
-      - { name: thumbnail_alt, label: Thumbnail description, widget: string, required: false, hint: 'Describe the image in a few words for screen readers and search engines.' }
-      - { name: draft, label: Draft, widget: boolean, default: false, required: false, hint: 'Turn on to save without showing the article on the site.' }
-      - { name: legacy_id, widget: hidden, required: false }
-      - { name: body, label: Article, widget: markdown }
-
   - name: case-studies
     label: Case studies
     label_singular: case study

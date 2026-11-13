@@ -1,14 +1,31 @@
 {
   "name": "viko-website",
   "version": "1.0.0",
-  "description": "Viko Reddit Experts \u2014 client-facing website",
+  "description": "Viko Reddit Experts — client-facing website",
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.8",
-    "markdown-it": "^15.0.3"
+    "@tiptap/core": "^3.33.1",
+    "@tiptap/extension-character-count": "^3.33.1",
+    "@tiptap/extension-highlight": "^3.33.1",
+    "@tiptap/extension-image": "^3.33.1",
+    "@tiptap/extension-placeholder": "^3.33.1",
+    "@tiptap/extension-table": "^3.33.1",
+    "@tiptap/extension-text-align": "^3.33.1",
+    "@tiptap/extension-typography": "^3.33.1",
+    "@tiptap/extension-youtube": "^3.33.1",
+    "@tiptap/pm": "^3.33.1",
+    "@tiptap/starter-kit": "^3.33.1",
+    "cropperjs": "^1.7.0",
+    "esbuild": "^0.28.2",
+    "js-yaml": "^5.5.0",
+    "mammoth": "^1.13.0",
+    "markdown-it": "^15.0.3",
+    "node-html-parser": "^9.0.7",
+    "pdfjs-dist": "^6.5.438"
   },
   "type": "module",
   "private": true

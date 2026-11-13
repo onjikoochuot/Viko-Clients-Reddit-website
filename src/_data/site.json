@@ -9,5 +9,17 @@
   "whatsappText": "Hi Viko, I want to grow on Reddit",
   "calendly": "https://calendly.com/vikoredditexperts/30min",
   "web3formsKey": "1fc110e0-d475-495e-a3af-276f2fc850f9",
-  "categories": ["Authority", "Organic growth", "Lead generation", "AI search", "Community", "Reputation", "Reddit ads", "Strategy"]
+  "categories": [
+    "Authority",
+    "Organic growth",
+    "Lead generation",
+    "AI search",
+    "Community",
+    "Reputation",
+    "Reddit ads",
+    "Strategy"
+  ],
+  "repo": "onjikoochuot/Viko-Clients-Reddit-website",
+  "branch": "main",
+  "defaultAuthor": "Viko team"
 }

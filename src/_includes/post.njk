@@ -1,7 +1,14 @@
 {% extends "base.njk" %}
 {% set section = "insights" %}
 {% set ogType = "article" %}
+{% set art = content | enhanceArticle(linkPreviews) %}
+{% set authorName = author or site.defaultAuthor %}
+{% set readTime = art.words | minutesRead %}
+{% set pageUrl = page.url | absolute(site.url) %}
 {% block head %}
+    <link rel="stylesheet" href="/assets/css/article.css">
+    <meta property="article:published_time" content="{{ page.date | isoDate }}">
+    {%- if updated %}<meta property="article:modified_time" content="{{ updated | isoDate }}">{% endif %}
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -9,37 +16,98 @@
         "headline": {{ title | json | safe }},
         "description": {{ (description or "") | json | safe }},
         "datePublished": "{{ page.date | isoDate }}",
+        "dateModified": "{{ (updated or page.date) | isoDate }}",
+        "wordCount": {{ art.words }},
         "image": "{{ (thumbnail or '/viko-logo-512.png') | absolute(site.url) }}",
-        "mainEntityOfPage": "{{ page.url | absolute(site.url) }}",
-        "author": { "@type": "Organization", "name": "{{ site.name }}", "url": "{{ site.url }}/" },
+        "mainEntityOfPage": "{{ pageUrl }}",
+        {%- if category %}"articleSection": {{ category | json | safe }},{% endif %}
+        "author": { "@type": "Organization", "name": {{ authorName | json | safe }}, "url": "{{ site.url }}/" },
         "publisher": { "@type": "Organization", "name": "{{ site.name }}", "logo": { "@type": "ImageObject", "url": "{{ site.url }}/viko-logo-512.png" } }
     }
     </script>
 {% endblock %}
 {% block main %}
-        <article class="container article">
+        <div class="read-progress" aria-hidden="true"><span></span></div>
+        <article class="container article-shell">
             <header class="article-header">
                 <a class="article-back" href="/insights/"><i class="fas fa-arrow-left"></i> All insights</a>
                 {%- if category %}<div class="section-kicker">{{ category }}</div>{% endif %}
                 <h1>{{ title }}</h1>
                 {%- if description %}<p class="article-lead">{{ description }}</p>{% endif %}
-                <div class="post-meta">
-                    <span><i class="far fa-calendar"></i> <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time></span>
-                    {%- set rt = content | readingTime %}{% if rt %}
-                    <span><i class="far fa-clock"></i> {{ rt }}</span>{% endif %}
+                <div class="article-byline">
+                    <span class="byline-avatar" aria-hidden="true">V</span>
+                    <span class="byline-text">
+                        <strong>{{ authorName }}</strong>
+                        <span>
+                            <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+                            {%- if updated and (updated | isoDate) != (page.date | isoDate) %} · Updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time>{% endif %}
+                            · {{ readTime }}
+                        </span>
+                    </span>
                 </div>
             </header>
+
             {%- if thumbnail %}
-            <figure class="article-cover"><img src="{{ thumbnail }}" alt="{{ thumbnail_alt or '' }}" decoding="async"></figure>
+            <figure class="article-cover"><img src="{{ thumbnail }}" alt="{{ thumbnail_alt or '' }}" decoding="async" fetchpriority="high"></figure>
             {%- endif %}
-            <div class="post-content">
-                {{ content | safe }}
-            </div>
-            <div class="post-footer">
-                <p>Want these strategies working for your brand?</p>
-                <a href="/#booking" class="btn btn-primary"><i class="far fa-calendar-check"></i> Book a strategy call</a>
+
+            <div class="article-layout{% if art.toc.length >= 3 %} has-toc{% endif %}">
+                {%- if art.toc.length >= 3 %}
+                <aside class="article-toc" aria-label="On this page">
+                    <details open>
+                        <summary>On this page</summary>
+                        <nav>
+                            {%- for item in art.toc %}
+                            <a href="#{{ item.id }}" class="toc-l{{ item.level }}">{{ item.text }}</a>
+                            {%- endfor %}
+                        </nav>
+                    </details>
+                </aside>
+                {%- endif %}
+
+                <div class="article-main">
+                    <div class="post-content">
+                        {{ art.html | safe }}
+                    </div>
+
+                    {%- if attachment %}
+                    <div class="article-attachment">
+                        <p class="section-kicker">Download</p>
+                        <div class="file-card">
+                            <span class="file-card-icon" aria-hidden="true">{{ (attachment.split('.') | last) | upper }}</span>
+                            <span class="file-card-body">
+                                <span class="file-card-name">{{ attachment_name or title }}</span>
+                                <span class="file-card-meta">The original document</span>
+                            </span>
+                            <span class="file-card-actions">
+                                <a class="btn btn-outline" href="{{ attachment }}" target="_blank" rel="noopener">View</a>
+                                <a class="btn btn-primary" href="{{ attachment }}" download><i class="fas fa-download" aria-hidden="true"></i> Download</a>
+                            </span>
+                        </div>
+                    </div>
+                    {%- endif %}
+
+                    <div class="article-share">
+                        <span>Share this article</span>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ pageUrl | urlencode }}" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com/intent/tweet?url={{ pageUrl | urlencode }}&text={{ title | urlencode }}" target="_blank" rel="noopener" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://www.reddit.com/submit?url={{ pageUrl | urlencode }}&title={{ title | urlencode }}" target="_blank" rel="noopener" aria-label="Share on Reddit"><i class="fab fa-reddit-alien"></i></a>
+                        <a href="https://wa.me/?text={{ (title + ' ' + pageUrl) | urlencode }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <button type="button" class="share-copy" data-url="{{ pageUrl }}" aria-label="Copy link"><i class="fas fa-link"></i> <span>Copy link</span></button>
+                    </div>
+
+                    <div class="article-cta-box">
+                        <div>
+                            <p class="section-kicker">Work with Viko</p>
+                            <h2>Want these strategies working for your brand?</h2>
+                            <p>Book a free 30-minute strategy call. No pitch, just honest advice on whether Reddit fits your growth plan.</p>
+                        </div>
+                        <a href="/#booking" class="btn btn-primary btn-lg"><i class="far fa-calendar-check"></i> Book a strategy call</a>
+                    </div>
+                </div>
             </div>
         </article>
+
         {%- set more = collections.posts | exclude(page.url) | limit(3) %}
         {%- if more.length %}
         <section class="container more-insights">
@@ -49,4 +117,13 @@
             </div>
         </section>
         {%- endif %}
+
+        <dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+            <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+            <img alt="">
+            <p class="lightbox-caption"></p>
+        </dialog>
+{% endblock %}
+{% block scripts %}
+    <script src="/assets/js/article.js" defer></script>
 {% endblock %}

@@ -1,5 +1,7 @@
 import { HtmlBasePlugin } from "@11ty/eleventy";
 import markdownIt from "markdown-it";
+import { enhanceArticle } from "./lib/enhance-article.js";
+import { buildStudio } from "./lib/build-studio.js";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(HtmlBasePlugin);
@@ -44,8 +46,12 @@ export default function (eleventyConfig) {
     return picked.length ? picked : all;
   });
 
-  // The editor lives at /admin
-  eleventyConfig.addPassthroughCopy("src/admin");
+  // Viko Studio (article editor) at /admin and the classic editor at /admin/cms.
+  // The Studio app is bundled from studio-src/ before every build.
+  eleventyConfig.on("eleventy.before", buildStudio);
+  eleventyConfig.addWatchTarget("studio-src/");
+  eleventyConfig.addPassthroughCopy("src/admin/cms");
+  eleventyConfig.addPassthroughCopy("src/admin/studio");
 
   // Filters
   eleventyConfig.addFilter("readableDate", (d) =>
@@ -56,6 +62,8 @@ export default function (eleventyConfig) {
     const minutes = Math.round(words / 220);
     return minutes >= 2 ? minutes + " min read" : ""; // very short pieces show no reading time
   });
+  eleventyConfig.addFilter("enhanceArticle", (html, previews) => enhanceArticle(html, previews || {}));
+  eleventyConfig.addFilter("minutesRead", (words) => Math.max(1, Math.round((words || 0) / 220)) + " min read");
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
   eleventyConfig.addFilter("exclude", (arr, url) => (arr || []).filter((i) => i.url !== url));
   eleventyConfig.addFilter("json", (v) => JSON.stringify(v));
