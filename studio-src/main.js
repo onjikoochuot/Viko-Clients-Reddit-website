@@ -1,4 +1,4 @@
-// Viko Studio: write, import, edit and publish Insights articles.
+// Viko Studio: write, import, edit and publish Insights articles and case studies.
 import { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Highlight from "@tiptap/extension-highlight";
@@ -23,7 +23,26 @@ setRawBase(`https://raw.githubusercontent.com/${REPO}/${BRANCH}`);
 
 const app = document.getElementById("studio");
 let gh = null;
-let listCache = null; // [{ path, slug, data }]
+let listCache = {}; // kind -> [{ path, slug, data }]
+
+// The two kinds of content Viko Studio manages.
+const KINDS = {
+  insights: { dir: POSTS_DIR, urlBase: "/insights/", label: "Insights articles", one: "article", hash: "#/",
+    intro: "The newest date shows first on the site. Drafts stay hidden until you publish them." },
+  cases: { dir: "src/case-studies/items", urlBase: "/case-studies/", label: "Case studies", one: "case study", hash: "#/cases/",
+    intro: "Lower positions show first. Turn on \"Show on homepage\" for the three you want on the homepage." },
+};
+let kind = "insights";
+const K = () => KINDS[kind];
+const isCase = () => kind === "cases";
+const editHref = (slug) => `${K().hash}edit/${encodeURIComponent(slug)}`;
+const uploadsFolder = (slug) => (isCase() ? `case-studies/${slug}` : slug);
+
+export const CASE_ICONS = [
+  ["fa-chart-line", "Chart"], ["fa-bullhorn", "Megaphone (ads)"], ["fa-plane", "Plane (travel)"], ["fa-house", "House (property)"],
+  ["fa-dumbbell", "Dumbbell (fitness)"], ["fa-wallet", "Wallet (finance)"], ["fa-running", "Runner (health)"], ["fa-robot", "Robot (AI)"],
+  ["fa-shield-halved", "Shield (reputation)"], ["fa-laptop", "Laptop (software)"], ["fa-cart-shopping", "Cart (e-commerce)"],
+  ["fa-graduation-cap", "Cap (education)"], ["fa-heart", "Heart (dating)"], ["fa-utensils", "Food"], ["fa-gamepad", "Games"]];
 
 // ======================= Start =======================
 
@@ -47,15 +66,16 @@ window.addEventListener("hashchange", route);
 
 function route() {
   if (!gh) return;
-  const m = location.hash.match(/^#\/(edit|new)(?:\/(.+))?$/);
-  if (m && m[1] === "edit" && m[2]) return openEditor({ slug: decodeURIComponent(m[2]) });
-  if (m && m[1] === "new") return openEditor({});
+  const m = location.hash.match(/^#\/(?:(cases)(?:\/|$))?(?:(edit|new)(?:\/(.+))?)?$/);
+  kind = m && m[1] ? "cases" : "insights";
+  if (m && m[2] === "edit" && m[3]) return openEditor({ slug: decodeURIComponent(m[3]) });
+  if (m && m[2] === "new") return openEditor({});
   showList();
 }
 
 function topBar(...right) {
   return h("header", { class: "st-top" },
-    h("a", { class: "st-brand", href: "#/" }, h("span", { class: "st-brand-mark" }, "V"), h("span", {}, "Viko Studio")),
+    h("a", { class: "st-brand", href: K().hash, title: `Back to ${K().label.toLowerCase()}` }, h("span", { class: "st-brand-mark" }, "V"), h("span", {}, "Viko Studio")),
     h("div", { class: "st-top-right" }, ...right));
 }
 
@@ -73,7 +93,7 @@ function showSignIn(error) {
   } },
   h("span", { class: "st-brand-mark st-brand-mark--lg" }, "V"),
   h("h1", {}, "Viko Studio"),
-  h("p", {}, "Write and publish Insights articles. Sign in with your GitHub access token."),
+  h("p", {}, "Write and publish your articles and case studies. Sign in with your GitHub access token."),
   error ? h("p", { class: "st-error" }, error) : null,
   h("label", { class: "st-field" }, h("span", {}, "Access token"), input,
     h("small", {}, "Lost it? Open ", h("a", { href: "https://github.com/settings/personal-access-tokens", target: "_blank", rel: "noopener" }, "your GitHub tokens"),
@@ -87,7 +107,7 @@ function showSignIn(error) {
 function signOut() {
   clearToken();
   gh = null;
-  listCache = null;
+  listCache = {};
   location.hash = "";
   showSignIn();
 }
@@ -95,8 +115,8 @@ function signOut() {
 // ======================= Article list =======================
 
 async function loadList(force = false) {
-  if (listCache && !force) return listCache;
-  const items = (await gh.listDir(POSTS_DIR)).filter((f) => f.type === "file" && f.name.endsWith(".md"));
+  if (listCache[kind] && !force) return listCache[kind];
+  const items = (await gh.listDir(K().dir)).filter((f) => f.type === "file" && f.name.endsWith(".md"));
   const out = [];
   const queue = [...items];
   await Promise.all(Array.from({ length: 6 }, async () => {
@@ -109,30 +129,36 @@ async function loadList(force = false) {
       } catch {}
     }
   }));
-  out.sort((a, b) => String(b.data.date || "").localeCompare(String(a.data.date || "")));
-  listCache = out;
+  if (isCase()) out.sort((a, b) => (Number(a.data.order) || 99) - (Number(b.data.order) || 99));
+  else out.sort((a, b) => String(b.data.date || "").localeCompare(String(a.data.date || "")));
+  listCache[kind] = out;
   return out;
 }
 
 async function showList() {
   if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
-  document.title = "Articles — Viko Studio";
-  const grid = h("div", { class: "st-cards" }, h("p", { class: "st-muted" }, "Loading your articles…"));
-  const search = h("input", { type: "search", placeholder: "Search articles", class: "st-search" });
+  const k = K();
+  const one = k.one;
+  document.title = `${k.label} — Viko Studio`;
+  const grid = h("div", { class: "st-cards" }, h("p", { class: "st-muted" }, `Loading your ${k.label.toLowerCase()}…`));
+  const search = h("input", { type: "search", placeholder: `Search ${k.label.toLowerCase()}`, class: "st-search" });
   const filter = h("select", { class: "st-select" },
-    h("option", { value: "all" }, "All articles"), h("option", { value: "published" }, "Published"), h("option", { value: "draft" }, "Drafts"));
+    h("option", { value: "all" }, "All"), h("option", { value: "published" }, "Published"), h("option", { value: "draft" }, "Drafts"),
+    isCase() ? h("option", { value: "home" }, "On homepage") : null);
+  const tab = (key) => h("a", { class: "st-tab" + (kind === key ? " is-on" : ""), href: KINDS[key].hash },
+    icon(key === "cases" ? "briefcase" : "newspaper"), h("span", {}, KINDS[key].label));
   app.replaceChildren(
     topBar(
-      h("a", { class: "st-btn st-btn--ghost", href: "/admin/cms/", title: "Edit case studies in the classic editor" }, icon("briefcase"), h("span", {}, "Case studies")),
-      h("a", { class: "st-btn st-btn--ghost", href: "/insights/", target: "_blank" }, icon("arrow-up-right-from-square"), h("span", {}, "View site")),
+      h("a", { class: "st-btn st-btn--ghost", href: k.urlBase, target: "_blank" }, icon("arrow-up-right-from-square"), h("span", {}, "View site")),
       h("button", { class: "st-btn st-btn--ghost", onclick: signOut }, icon("right-from-bracket"), h("span", {}, "Sign out"))),
     h("main", { class: "st-list" },
+      h("nav", { class: "st-tabs", "aria-label": "Sections" }, tab("insights"), tab("cases")),
       h("div", { class: "st-list-head" },
-        h("div", {}, h("h1", {}, "Insights articles"), h("p", { class: "st-muted" }, "The newest date shows first on the site. Drafts stay hidden until you publish them.")),
+        h("div", {}, h("h1", {}, k.label), h("p", { class: "st-muted" }, k.intro)),
         h("div", { class: "st-list-actions" },
           h("button", { class: "st-btn", onclick: () => importIntoNew("word") }, icon("file-word"), " Import Word"),
           h("button", { class: "st-btn", onclick: () => importIntoNew("pdf") }, icon("file-pdf"), " Import PDF"),
-          h("a", { class: "st-btn st-btn--primary", href: "#/new" }, icon("pen-to-square"), " New article"))),
+          h("a", { class: "st-btn st-btn--primary", href: `${k.hash}new` }, icon("pen-to-square"), ` New ${one}`))),
       h("div", { class: "st-list-tools" }, search, filter),
       grid));
 
@@ -144,23 +170,27 @@ async function showList() {
   const render = () => {
     const q = search.value.trim().toLowerCase();
     const f = filter.value;
-    const shown = items.filter((it) => (!q || `${it.data.title} ${it.data.description} ${it.data.category}`.toLowerCase().includes(q)) &&
-      (f === "all" || (f === "draft" ? it.data.draft : !it.data.draft)));
+    const shown = items.filter((it) => (!q || `${it.data.title} ${it.data.short_title || ""} ${it.data.description || ""} ${it.data.summary || ""} ${it.data.category || ""}`.toLowerCase().includes(q)) &&
+      (f === "all" || (f === "home" ? it.data.featured && !it.data.draft : f === "draft" ? it.data.draft : !it.data.draft)));
     if (!shown.length) {
-      grid.replaceChildren(h("div", { class: "st-empty" }, h("p", {}, items.length ? "No articles match." : "No articles yet."),
-        h("a", { class: "st-btn st-btn--primary", href: "#/new" }, "Write your first article")));
+      grid.replaceChildren(h("div", { class: "st-empty" }, h("p", {}, items.length ? "Nothing matches." : `No ${k.label.toLowerCase()} yet.`),
+        h("a", { class: "st-btn st-btn--primary", href: `${k.hash}new` }, `Write your first ${one}`)));
       return;
     }
-    grid.replaceChildren(...shown.map((it) => h("a", { class: "st-card", href: `#/edit/${encodeURIComponent(it.slug)}` },
-      h("div", { class: "st-card-thumb" }, it.data.thumbnail
-        ? h("img", { src: displaySrc(it.data.thumbnail), alt: "", loading: "lazy" })
-        : h("span", {}, it.data.category || "Insights")),
-      h("div", { class: "st-card-body" },
-        h("div", { class: "st-card-meta" },
-          it.data.draft ? h("span", { class: "st-badge st-badge--draft" }, "Draft") : h("span", { class: "st-badge" }, "Published"),
-          h("span", {}, formatDate(it.data.date))),
-        h("h3", {}, it.data.title || it.slug),
-        it.data.description ? h("p", {}, it.data.description) : null))));
+    grid.replaceChildren(...shown.map((it) => {
+      const d = it.data;
+      return h("a", { class: "st-card", href: editHref(it.slug) },
+        h("div", { class: "st-card-thumb" }, d.thumbnail
+          ? h("img", { src: displaySrc(d.thumbnail), alt: "", loading: "lazy" })
+          : h("span", {}, isCase() ? "Case study" : d.category || "Insights")),
+        h("div", { class: "st-card-body" },
+          h("div", { class: "st-card-meta" },
+            d.draft ? h("span", { class: "st-badge st-badge--draft" }, "Draft") : h("span", { class: "st-badge" }, "Published"),
+            isCase() && d.featured && !d.draft ? h("span", { class: "st-badge st-badge--home" }, icon("house"), " Homepage") : null,
+            h("span", {}, isCase() ? `Position ${d.order ?? "–"}` : formatDate(d.date))),
+          h("h3", {}, isCase() ? (d.short_title || d.title || it.slug) : (d.title || it.slug)),
+          (isCase() ? d.summary : d.description) ? h("p", {}, isCase() ? d.summary : d.description) : null));
+    }));
   };
   search.addEventListener("input", render);
   filter.addEventListener("change", render);
@@ -180,10 +210,10 @@ let state = null;
 
 async function openEditor({ slug, importFile, importKind }) {
   if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
-  state = { slug: slug || "", path: slug ? `${POSTS_DIR}/${slug}.md` : null, data: {}, html: "", dirty: false, wasPublished: false, saving: false };
+  state = { kind, slug: slug || "", path: slug ? `${K().dir}/${slug}.md` : null, data: {}, html: "", dirty: false, wasPublished: false, saving: false };
 
   if (slug) {
-    const b = busy("Opening the article…");
+    const b = busy(`Opening the ${K().one}…`);
     try {
       const file = await gh.getFile(state.path);
       const parsed = parseArticle(file.text);
@@ -193,10 +223,14 @@ async function openEditor({ slug, importFile, importKind }) {
     } catch (e) {
       b.done();
       toast(e.message, { type: "error" });
-      location.hash = "#/";
+      location.hash = K().hash;
       return;
     }
     b.done();
+  } else if (isCase()) {
+    let order = 1;
+    try { order = Math.max(0, ...(await loadList()).map((c) => Number(c.data.order) || 0)) + 1; } catch {}
+    state.data = { title: "", short_title: "", summary: "", lead: "", stats: [], icon: "fa-chart-line", featured: false, order, draft: true };
   } else {
     state.data = { title: "", description: "", date: today(), category: "", author: "", draft: true };
   }
@@ -234,15 +268,18 @@ function buildEditorScreen() {
 
   // Title, lead and cover sit in the page like the published article.
   els.kicker = h("div", { class: "section-kicker st-kicker" });
-  els.title = h("textarea", { class: "st-title", rows: 1, placeholder: "Article title", oninput: (e) => { state.data.title = e.target.value; autoGrow(e.target); markDirty(); if (!state.path && !state.slugManual && els.sideFields) els.sideFields(); } });
-  els.lead = h("textarea", { class: "st-lead", rows: 1, placeholder: "One or two sentences that sum up the article. Shown under the title, on cards and in Google.", oninput: (e) => { state.data.description = e.target.value; autoGrow(e.target); markDirty(); updateChecks(); } });
+  els.title = h("textarea", { class: "st-title", rows: 1, placeholder: isCase() ? "Case study title, e.g. GetROI: 61K views in finance communities" : "Article title", oninput: (e) => { state.data.title = e.target.value; autoGrow(e.target); markDirty(); if (!state.path && !state.slugManual && els.sideFields) els.sideFields(); } });
+  els.lead = h("textarea", { class: "st-lead", rows: 1,
+    placeholder: isCase() ? "One or two sentences on the client and the result. Shown under the title and in Google." : "One or two sentences that sum up the article. Shown under the title, on cards and in Google.",
+    oninput: (e) => { state.data[isCase() ? "lead" : "description"] = e.target.value; autoGrow(e.target); markDirty(); updateChecks(); } });
+  els.stats = isCase() ? h("div", { class: "st-stats" }) : null;
   els.cover = h("div", { class: "st-cover" });
   els.content = h("div", { class: "post-content st-content" });
 
   els.toolbar = h("div", { class: "st-toolbar", role: "toolbar", "aria-label": "Formatting" });
   els.canvas = h("div", { class: "st-canvas" },
     h("article", { class: "st-page" },
-      h("header", { class: "st-page-head" }, els.kicker, els.title, els.lead),
+      h("header", { class: "st-page-head" }, els.kicker, els.title, els.lead, els.stats),
       els.cover,
       els.content));
 
@@ -314,7 +351,72 @@ function buildEditorScreen() {
   state.dirty = false;
   updateStatus();
   updateToolbar();
-  document.title = (d.title || "New article") + " — Viko Studio";
+  document.title = (d.title || `New ${K().one}`) + " — Viko Studio";
+}
+
+function setKicker() {
+  if (isCase()) {
+    const tags = (state.data.stats || []).filter((x) => !isNumberStat(x));
+    els.kicker.replaceChildren(h("i", { class: `fas ${state.data.icon || "fa-chart-line"}` }), " Case study", tags.length ? ` · ${tags.join(" · ")}` : "");
+    els.kicker.hidden = false;
+  } else {
+    els.kicker.textContent = state.data.category || "";
+    els.kicker.hidden = !state.data.category;
+  }
+}
+
+// Same rule as the site: "61K Views" is shown as a big number, "Finance" as a tag.
+const NUMBER_STAT = /^([~$€£]?\d[\d.,]*\s*(?:[KkMmBb]\b|%|x\b)?\+?)\s+(.+)$/;
+const isNumberStat = (x) => NUMBER_STAT.test(String(x).trim());
+
+// Headline results for case studies: big numbers above the cover, tags in the kicker.
+function renderStats() {
+  if (!els.stats) return;
+  const stats = state.data.stats || (state.data.stats = []);
+  const input = h("input", { type: "text", class: "st-stat-input", placeholder: stats.length ? "Add another…" : "Add a result, e.g. 61K Views, then press Enter",
+    onkeydown: (e) => {
+      if (e.key === "Enter" || e.key === ",") {
+        e.preventDefault();
+        const v = input.value.trim().replace(/,$/, "");
+        if (!v) return;
+        stats.push(v);
+        markDirty();
+        renderStats();
+        els.stats.querySelector(".st-stat-input").focus();
+      } else if (e.key === "Backspace" && !input.value && stats.length) {
+        stats.pop();
+        markDirty();
+        renderStats();
+        els.stats.querySelector(".st-stat-input").focus();
+      }
+    } });
+  let dragFrom = null;
+  const numbers = [];
+  const tags = [];
+  stats.forEach((x, i) => {
+    const m = String(x).trim().match(NUMBER_STAT);
+    const remove = h("button", { type: "button", class: "st-stat-x", "aria-label": `Remove ${x}`, onclick: () => { stats.splice(i, 1); markDirty(); renderStats(); } }, icon("xmark"));
+    const el = m
+      ? h("div", { class: "st-stat st-stat--num", draggable: "true" }, h("strong", {}, m[1].replace(/\s+/g, "")), h("span", {}, m[2]), remove)
+      : h("div", { class: "st-stat st-stat--tag", draggable: "true" }, h("span", {}, x), remove);
+    el.addEventListener("dragstart", () => { dragFrom = i; });
+    el.addEventListener("dragover", (e) => e.preventDefault());
+    el.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if (dragFrom === null || dragFrom === i) return;
+      const [moved] = stats.splice(dragFrom, 1);
+      stats.splice(i, 0, moved);
+      markDirty();
+      renderStats();
+    });
+    el.title = "Drag to reorder";
+    (m ? numbers : tags).push(el);
+  });
+  els.stats.replaceChildren(
+    h("div", { class: "st-stats-head" }, h("span", {}, "Headline results"),
+      h("small", {}, "Numbers like \"61K Views\" show as big figures. Words like \"Finance\" show as tags.")),
+    numbers.length ? h("div", { class: "st-stats-nums" }, numbers) : null,
+    h("div", { class: "st-stats-tags" }, tags, input));
 }
 
 function autoGrow(t) {
@@ -325,9 +427,9 @@ function autoGrow(t) {
 function fillFields() {
   const d = state.data;
   els.title.value = d.title || "";
-  els.lead.value = d.description || "";
-  els.kicker.textContent = d.category || "";
-  els.kicker.hidden = !d.category;
+  els.lead.value = (isCase() ? d.lead : d.description) || "";
+  setKicker();
+  renderStats();
   requestAnimationFrame(() => { autoGrow(els.title); autoGrow(els.lead); });
   renderCover();
   if (els.sideFields) els.sideFields();
@@ -346,7 +448,7 @@ function renderCover() {
   } else {
     els.cover.className = "st-cover st-cover--empty";
     els.cover.replaceChildren(h("button", { class: "st-cover-add", onclick: chooseThumbnail }, icon("image"),
-      h("span", {}, h("strong", {}, "Add a thumbnail"), " Shown on the article card, at the top of the article and when shared.")));
+      h("span", {}, h("strong", {}, "Add a thumbnail"), ` Shown on the ${K().one} card, at the top of the page and when shared.`)));
   }
 }
 
@@ -391,6 +493,12 @@ function buildSide() {
   const rebuildCats = () => category.replaceChildren(h("option", { value: "" }, "No category"),
     ...cats.map((c) => h("option", { value: c, selected: c === state.data.category }, c)), h("option", { value: "__new" }, "+ New category…"));
   const author = h("input", { type: "text", placeholder: site.defaultAuthor || "Viko team", oninput: (e) => { state.data.author = e.target.value; markDirty(); } });
+  const shortTitle = h("input", { type: "text", placeholder: "e.g. GetROI: finance community placement", oninput: (e) => { state.data.short_title = e.target.value; markDirty(); } });
+  const summary = h("input", { type: "text", placeholder: "e.g. Finance · 61K views · 247 comments", oninput: (e) => { state.data.summary = e.target.value; markDirty(); } });
+  const iconSel = h("select", { onchange: (e) => { state.data.icon = e.target.value; setKicker(); markDirty(); } },
+    ...CASE_ICONS.map(([v, l]) => h("option", { value: v }, l)));
+  const featured = h("input", { type: "checkbox", onchange: (e) => { state.data.featured = e.target.checked; markDirty(); } });
+  const order = h("input", { type: "number", min: "1", step: "1", oninput: (e) => { state.data.order = e.target.value === "" ? "" : Number(e.target.value); markDirty(); } });
   const alt = h("input", { type: "text", placeholder: "Describe the thumbnail in a few words", oninput: (e) => { state.data.thumbnail_alt = e.target.value; markDirty(); } });
   const attachBox = h("div", { class: "st-attach" });
   const urlHint = h("small", {});
@@ -404,6 +512,11 @@ function buildSide() {
     date.value = state.data.date || "";
     rebuildCats();
     author.value = state.data.author || "";
+    shortTitle.value = state.data.short_title || "";
+    summary.value = state.data.summary || "";
+    iconSel.value = state.data.icon || "fa-chart-line";
+    featured.checked = !!state.data.featured;
+    order.value = state.data.order ?? "";
     alt.value = state.data.thumbnail_alt || "";
     if (state.data.attachment) {
       attachBox.replaceChildren(h("div", { class: "st-attach-file" }, icon("file-arrow-down"),
@@ -424,6 +537,15 @@ function buildSide() {
 
   els.side.replaceChildren(
     h("section", { class: "st-side-sec" }, h("h2", {}, "Before you publish"), els.checks),
+    isCase() ? h("section", { class: "st-side-sec" },
+      h("h2", {}, "Case study"),
+      h("label", { class: "st-field" }, h("span", {}, "Web address"),
+        h("div", { class: "st-url" }, h("span", {}, "/case-studies/"), slugInput), urlHint),
+      h("label", { class: "st-field" }, h("span", {}, "Card title"), shortTitle, h("small", {}, "The short name on the Case studies page and the homepage.")),
+      h("label", { class: "st-field" }, h("span", {}, "Card summary"), summary, h("small", {}, "One line under the card title.")),
+      h("label", { class: "st-field" }, h("span", {}, "Icon"), iconSel),
+      h("label", { class: "st-check" }, featured, h("span", {}, h("strong", {}, "Show on homepage"), h("br"), h("small", { class: "st-muted" }, "The first three (by position) appear on the homepage."))),
+      h("label", { class: "st-field" }, h("span", {}, "Position"), order, h("small", {}, "1 shows first. Change the numbers to reorder."))) :
     h("section", { class: "st-side-sec" },
       h("h2", {}, "Article"),
       h("label", { class: "st-field" }, h("span", {}, "Web address"),
@@ -437,24 +559,33 @@ function buildSide() {
       h("label", { class: "st-field" }, h("span", {}, "Thumbnail description"), alt)),
     h("section", { class: "st-side-sec" },
       h("h2", {}, "Download for readers"),
-      h("p", { class: "st-muted st-small" }, "Attach the original PDF or document. It appears as a download at the end of the article."),
+      h("p", { class: "st-muted st-small" }, `Attach the original PDF or document. It appears as a download at the end of the ${K().one}.`),
       attachBox),
     h("section", { class: "st-side-sec" },
       h("h2", {}, "Status"),
       h("p", { class: "st-small", id: "st-state-text" }),
-      state.path && !state.data.draft ? h("a", { class: "st-btn st-btn--block st-btn--ghost", href: `/insights/${state.slug}/`, target: "_blank" }, icon("arrow-up-right-from-square"), " View live article") : null,
+      state.path && !state.data.draft ? h("a", { class: "st-btn st-btn--block st-btn--ghost", href: `${K().urlBase}${state.slug}/`, target: "_blank" }, icon("arrow-up-right-from-square"), ` View live ${K().one}`) : null,
       state.path && !state.data.draft ? h("button", { class: "st-btn st-btn--block", onclick: () => save("unpublish") }, icon("eye-slash"), " Unpublish (make a draft)") : null,
-      state.path ? h("button", { class: "st-btn st-btn--block st-btn--danger-ghost", onclick: deleteArticle }, icon("trash-can"), " Delete article") : null));
+      state.path ? h("button", { class: "st-btn st-btn--block st-btn--danger-ghost", onclick: deleteArticle }, icon("trash-can"), ` Delete ${K().one}`) : null));
   els.sideFields();
   const st = els.side.querySelector("#st-state-text");
-  st.textContent = !state.path ? "New article, not saved yet." : state.data.draft ? "Draft: only you can see it here." : "Published on the site.";
+  st.textContent = !state.path ? `New ${K().one}, not saved yet.` : state.data.draft ? "Draft: only you can see it here." : "Published on the site.";
 }
 
 function updateChecks() {
   if (!els.checks || !currentEditor) return;
   const d = state.data;
   const words = wordCount(currentEditor.getHTML());
-  const list = [
+  const nums = (d.stats || []).filter(isNumberStat).length;
+  const list = isCase() ? [
+    [!!(d.title && d.title.trim()), "Title"],
+    [!!(d.short_title && d.short_title.trim()), "Card title"],
+    [!!(d.summary && d.summary.trim()), "Card summary"],
+    [nums >= 2, `Headline results: ${nums}` + (nums < 2 ? " (add at least 2 numbers)" : "")],
+    [!!d.thumbnail, "Thumbnail"],
+    [words >= 250, `Length: ${words} words` + (words < 250 ? " (tell the full story)" : "")],
+    [!articleImages().some((i) => !i.alt), "Every image has a description"],
+  ] : [
     [!!(d.title && d.title.trim()), "Title"],
     [!!(d.description && d.description.trim().length >= 50), "Description (at least a sentence)"],
     [!!d.thumbnail, "Thumbnail"],
@@ -709,7 +840,8 @@ async function runImport(file, kind, asNewArticle) {
 function applyImport({ html, title, description }, asNewArticle) {
   if (asNewArticle) {
     if (title && !state.data.title) state.data.title = title;
-    if (description && !state.data.description) state.data.description = description;
+    const leadField = isCase() ? "lead" : "description";
+    if (description && !state.data[leadField]) state.data[leadField] = description;
     if (html) currentEditor.commands.setContent(html);
   } else if (html) {
     currentEditor.chain().focus().insertContent(html).run();
@@ -736,7 +868,7 @@ function markDirty() {
   updateStatus();
   clearTimeout(backupTimer);
   backupTimer = setTimeout(writeBackup, 1500);
-  if (els.kicker) { els.kicker.textContent = state.data.category || ""; els.kicker.hidden = !state.data.category; }
+  if (els.kicker) setKicker();
   updateChecks();
 }
 
@@ -755,7 +887,7 @@ function updateStatus() {
   els.draftBtn.hidden = !isNew && !draft;
 }
 
-const backupKey = () => `viko-studio-backup:${state.slug || "new"}`;
+const backupKey = () => `viko-studio-backup:${state.kind}:${state.slug || "new"}`;
 function writeBackup() {
   if (!currentEditor || !state.dirty) return;
   try { localStorage.setItem(backupKey(), JSON.stringify({ at: Date.now(), data: state.data, html: currentEditor.getHTML() })); } catch {}
@@ -764,7 +896,7 @@ function readBackup() {
   try { return JSON.parse(localStorage.getItem(backupKey()) || "null"); } catch { return null; }
 }
 function clearBackup() {
-  try { localStorage.removeItem(backupKey()); localStorage.removeItem("viko-studio-backup:new"); } catch {}
+  try { localStorage.removeItem(backupKey()); localStorage.removeItem(`viko-studio-backup:${state.kind}:new`); } catch {}
 }
 
 window.addEventListener("beforeunload", (e) => {
@@ -783,25 +915,25 @@ window.addEventListener("keydown", (e) => {
 async function save(action) {
   if (state.saving) return;
   const d = state.data;
-  if (!d.title || !d.title.trim()) { toast("Give the article a title first.", { type: "error" }); els.title.focus(); return; }
+  if (!d.title || !d.title.trim()) { toast(`Give the ${K().one} a title first.`, { type: "error" }); els.title.focus(); return; }
   const isNew = !state.path;
   let slug = state.slug;
   if (isNew) {
     slug = state.newSlug || slugify(d.title);
     if (!slug) return toast("The web address can't be empty.", { type: "error" });
-    const existing = await gh.fileSha(`${POSTS_DIR}/${slug}.md`);
+    const existing = await gh.fileSha(`${K().dir}/${slug}.md`);
     if (existing) {
-      toast(`An article already uses the address /insights/${slug}/. Change the web address in the settings panel.`, { type: "error", timeout: 8000 });
+      toast(`Something already uses the address ${K().urlBase}${slug}/. Change the web address in the settings panel.`, { type: "error", timeout: 8000 });
       els.shell.classList.remove("no-side");
       return;
     }
   }
   if (action === "publish") {
     const missing = [];
-    if (!d.description) missing.push("a description");
+    if (!(isCase() ? d.summary : d.description)) missing.push(isCase() ? "a card summary" : "a description");
     if (!d.thumbnail) missing.push("a thumbnail");
     if (missing.length && !(await confirmBox({ title: "Publish anyway?", okLabel: "Publish",
-      message: `This article has no ${missing.join(" or ")}. It will still look fine, but articles with both get more clicks.` }))) return;
+      message: `This ${K().one} has no ${missing.join(" or ")}. It will still look fine, but pages with both get more clicks.` }))) return;
   }
 
   state.saving = true;
@@ -812,21 +944,26 @@ async function save(action) {
     const data = { ...d };
     if (action === "publish") {
       data.draft = false;
-      if (state.wasPublished && data.date !== today()) data.updated = today();
+      if (!isCase() && state.wasPublished && data.date !== today()) data.updated = today();
     } else data.draft = true;
     if (!data.author) delete data.author;
+    if (isCase()) {
+      if (!data.short_title) data.short_title = data.title;
+      if (data.order === "" || data.order === undefined) delete data.order;
+      if (!data.lead) delete data.lead;
+    }
 
     let html = currentEditor.getHTML();
-    const plan = await planUploads(slug, [html, data.thumbnail, data.attachment]);
+    const plan = await planUploads(uploadsFolder(slug), [html, data.thumbnail, data.attachment]);
     html = plan.replace(html);
     data.thumbnail = plan.replace(data.thumbnail);
     if (data.attachment) data.attachment = plan.replace(data.attachment);
-    const path = `${POSTS_DIR}/${slug}.md`;
+    const path = `${K().dir}/${slug}.md`;
     const text = serializeArticle(data, html);
     const verb = isNew ? "Add" : action === "publish" && wasDraft ? "Publish" : action === "unpublish" ? "Unpublish" : "Update";
     await gh.commit({
       files: [...plan.files, { path, base64: utf8ToBase64(text) }],
-      message: `${verb} article: ${data.title}`,
+      message: `${verb} ${K().one}: ${data.title}`,
       onProgress: (m) => b.update(m),
     });
 
@@ -840,15 +977,15 @@ async function save(action) {
       currentEditor.commands.setContent(html, { emitUpdate: false });
     }
     state.dirty = false;
-    listCache = null;
-    if (location.hash !== `#/edit/${encodeURIComponent(slug)}`) history.replaceState(null, "", `#/edit/${encodeURIComponent(slug)}`);
+    listCache = {};
+    if (location.hash !== editHref(slug)) history.replaceState(null, "", editHref(slug));
     buildSide();
     fillFields();
     state.dirty = false;
     updateStatus();
     if (data.draft) toast("Draft saved. It's not on the site until you publish it.", { type: "success" });
     else toast(`${verb === "Update" ? "Updated" : "Published"}! It will be live in about 2 minutes.`, { type: "success", timeout: 9000,
-      action: { label: "Open article", href: `/insights/${slug}/`, target: "_blank" } });
+      action: { label: `Open ${K().one}`, href: `${K().urlBase}${slug}/`, target: "_blank" } });
   } catch (e) {
     toast(e.message, { type: "error", timeout: 10000 });
   } finally {
@@ -859,18 +996,18 @@ async function save(action) {
 }
 
 async function deleteArticle() {
-  const ok = await confirmBox({ title: "Delete this article?", danger: true, okLabel: "Delete", typeToConfirm: "DELETE",
+  const ok = await confirmBox({ title: `Delete this ${K().one}?`, danger: true, okLabel: "Delete", typeToConfirm: "DELETE",
     message: `"${state.data.title}" and the images uploaded for it will be removed from the site. This can't be undone here (your developer can recover it from GitHub's history).` });
   if (!ok) return;
   const b = busy("Deleting…");
   try {
-    const media = (await gh.listDir(`${UPLOADS_DIR}/${state.slug}`)).filter((f) => f.type === "file").map((f) => f.path);
-    await gh.commit({ deletes: [state.path, ...media], message: `Delete article: ${state.data.title}`, onProgress: (m) => b.update(m) });
+    const media = (await gh.listDir(`${UPLOADS_DIR}/${uploadsFolder(state.slug)}`)).filter((f) => f.type === "file").map((f) => f.path);
+    await gh.commit({ deletes: [state.path, ...media], message: `Delete ${K().one}: ${state.data.title}`, onProgress: (m) => b.update(m) });
     clearBackup();
     state.dirty = false;
-    listCache = null;
-    toast("Article deleted.", { type: "success" });
-    location.hash = "#/";
+    listCache = {};
+    toast(`${K().one[0].toUpperCase() + K().one.slice(1)} deleted.`, { type: "success" });
+    location.hash = K().hash;
   } catch (e) {
     toast(e.message, { type: "error" });
   } finally { b.done(); }

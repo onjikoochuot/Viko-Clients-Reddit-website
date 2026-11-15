@@ -4,7 +4,7 @@ The client-facing website for Viko Reddit Experts (vikoredditexperts.com).
 
 Every article and case study is its own page with its own address, so Google and AI search engines can read them. You manage them from a visual editor, not by editing code.
 
-## Writing and editing articles: Viko Studio
+## Writing and editing articles and case studies: Viko Studio
 
 Open **`/admin/`** on the live site (https://vikoredditexperts.com/admin/) and sign in with your GitHub access token. The token is stored in that browser only.
 
@@ -52,7 +52,10 @@ Scanned PDFs have no text to extract, but you can still use their pages as image
 
 **Deleting.** The settings panel has **Delete article**, which also removes its uploaded images. You type DELETE to confirm. **Unpublish** turns a live article back into a draft.
 
-Case studies are still edited in the classic editor at `/admin/cms/`.
+**Case studies** have their own tab in the Studio, at the top of the list. They use the same editor, Word and PDF import, and image tools. Each case study also has:
+- **Headline results** under the title. Type something like `61K Views` and press Enter. Numbers show as big figures on the page, and words like `Finance` show as tags. Drag them to reorder.
+- **Card title** and **Card summary**: what the Case studies page and the homepage show.
+- **Icon**, **Show on homepage** (the first three by position appear there) and **Position** (1 shows first).
 
 ### Good to know
 
@@ -65,7 +68,7 @@ Case studies are still edited in the classic editor at `/admin/cms/`.
 | What | Where |
 | --- | --- |
 | Articles | `src/insights/posts/` (one file each) |
-| Case studies | `src/case-studies/items/` (one file each) |
+| Case studies | `src/case-studies/items/` (one file each; images in `src/media/uploads/case-studies/`) |
 | Packages and prices on the package pages | `src/_data/packages.json` |
 | Contact details, WhatsApp number, Calendly link | `src/_data/site.json` |
 | Homepage | `src/index.njk` |
@@ -73,7 +76,6 @@ Case studies are still edited in the classic editor at `/admin/cms/`.
 | Design | `src/assets/css/styles.css` and `src/assets/css/site.css` |
 | Viko Studio (article editor) source | `studio-src/` (bundled into `src/admin/studio/` on every build) |
 | Article page design | `src/_includes/post.njk`, `src/assets/css/article.css`, `src/assets/js/article.js`, `lib/enhance-article.js` |
-| Classic editor settings (case studies) | `src/admin/cms/config.yml` |
 
 Package names and prices also appear in the homepage text (`src/index.njk`), so update both places when a price changes.
 
@@ -93,6 +95,6 @@ npm start      # preview at http://localhost:8080
 npm run build  # output in _site/
 ```
 
-Built with [Eleventy](https://www.11ty.dev/). Viko Studio uses [Tiptap](https://tiptap.dev/), [mammoth.js](https://github.com/mwilliamson/mammoth.js), [PDF.js](https://mozilla.github.io/pdf.js/) and [Cropper.js](https://github.com/fengyuan-chen/cropperjs). The classic editor is [Sveltia CMS](https://github.com/sveltia/sveltia-cms).
+Built with [Eleventy](https://www.11ty.dev/). Viko Studio uses [Tiptap](https://tiptap.dev/), [mammoth.js](https://github.com/mwilliamson/mammoth.js), [PDF.js](https://mozilla.github.io/pdf.js/) and [Cropper.js](https://github.com/fengyuan-chen/cropperjs).
 
 Set `SKIP_LINK_PREVIEWS=1` to build without fetching link-card previews.

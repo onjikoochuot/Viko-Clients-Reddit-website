@@ -1,21 +1,129 @@
 {% extends "base.njk" %}
 {% set section = "cases" %}
 {% set ogType = "article" %}
+{% set art = content | enhanceArticle(linkPreviews) %}
+{% set pageUrl = page.url | absolute(site.url) %}
+{% set results = stats | caseResults %}
+{% block head %}
+    <link rel="stylesheet" href="/assets/css/article.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": {{ title | json | safe }},
+        "description": {{ (summary or description or "") | json | safe }},
+        "image": "{{ (thumbnail or '/viko-logo-512.png') | absolute(site.url) }}",
+        "mainEntityOfPage": "{{ pageUrl }}",
+        "publisher": { "@type": "Organization", "name": "{{ site.name }}", "logo": { "@type": "ImageObject", "url": "{{ site.url }}/viko-logo-512.png" } }
+    }
+    </script>
+{% endblock %}
 {% block main %}
-        <section class="hero">
-            <div class="container">
+        <div class="read-progress" aria-hidden="true"><span></span></div>
+        <article class="container article-shell case-shell">
+            <header class="article-header">
                 <a class="article-back" href="/case-studies/"><i class="fas fa-arrow-left"></i> All case studies</a>
+                <div class="section-kicker"><i class="fas {{ icon or 'fa-chart-line' }}" aria-hidden="true"></i> Case study{% if results.tags.length %} · {{ results.tags | join(" · ") }}{% endif %}</div>
                 <h1>{{ title }}</h1>
+                {%- if lead %}<p class="article-lead">{{ lead }}</p>{% endif %}
+            </header>
+
+            {%- if results.numbers.length %}
+            <dl class="case-results">
+                {%- for r in results.numbers %}
+                <div class="case-result"><dt>{{ r.label }}</dt><dd>{{ r.value }}</dd></div>
+                {%- endfor %}
+            </dl>
+            {%- endif %}
+
+            {%- if thumbnail %}
+            <figure class="article-cover"><img src="{{ thumbnail }}" alt="{{ thumbnail_alt or '' }}" decoding="async" fetchpriority="high"></figure>
+            {%- endif %}
+
+            <div class="article-layout{% if art.toc.length >= 3 %} has-toc{% endif %}">
+                {%- if art.toc.length >= 3 %}
+                <aside class="article-toc" aria-label="On this page">
+                    <details open>
+                        <summary>On this page</summary>
+                        <nav>
+                            {%- for item in art.toc %}
+                            <a href="#{{ item.id }}" class="toc-l{{ item.level }}">{{ item.text }}</a>
+                            {%- endfor %}
+                        </nav>
+                    </details>
+                </aside>
+                {%- endif %}
+
+                <div class="article-main">
+                    <div class="post-content">
+                        {{ art.html | safe }}
+                    </div>
+
+                    {%- if attachment %}
+                    <div class="article-attachment">
+                        <p class="section-kicker">Download</p>
+                        <div class="file-card">
+                            <span class="file-card-icon" aria-hidden="true">{{ (attachment.split('.') | last) | upper }}</span>
+                            <span class="file-card-body">
+                                <span class="file-card-name">{{ attachment_name or title }}</span>
+                                <span class="file-card-meta">The full report</span>
+                            </span>
+                            <span class="file-card-actions">
+                                <a class="btn btn-outline" href="{{ attachment }}" target="_blank" rel="noopener">View</a>
+                                <a class="btn btn-primary" href="{{ attachment }}" download><i class="fas fa-download" aria-hidden="true"></i> Download</a>
+                            </span>
+                        </div>
+                    </div>
+                    {%- endif %}
+
+                    <div class="article-share">
+                        <span>Share this case study</span>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ pageUrl | urlencode }}" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com/intent/tweet?url={{ pageUrl | urlencode }}&text={{ title | urlencode }}" target="_blank" rel="noopener" aria-label="Share on X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://wa.me/?text={{ (title + ' ' + pageUrl) | urlencode }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <button type="button" class="share-copy" data-url="{{ pageUrl }}" aria-label="Copy link"><i class="fas fa-link"></i> <span>Copy link</span></button>
+                    </div>
+
+                    <div class="article-cta-box">
+                        <div>
+                            <p class="section-kicker">Work with Viko</p>
+                            <h2>Want results like these?</h2>
+                            <p>Book a free 30-minute strategy call. We'll look at your market and tell you honestly what Reddit can do for you.</p>
+                        </div>
+                        <a href="/#booking" class="btn btn-primary btn-lg"><i class="far fa-calendar-check"></i> Book a strategy call</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        {%- set more = collections.cases | exclude(page.url) | limit(3) %}
+        {%- if more.length %}
+        <section class="container more-insights">
+            <h2 class="section-title">More case studies</h2>
+            <div class="insight-grid">
+                {%- for item in more %}
+                <a class="insight-card" href="{{ item.url }}">
+                    <div class="insight-thumb">
+                        {%- if item.data.thumbnail %}<img src="{{ item.data.thumbnail }}" alt="{{ item.data.thumbnail_alt or '' }}" loading="lazy" decoding="async">
+                        {%- else %}<div class="insight-thumb-fallback"><span>Case study</span></div>{% endif %}
+                    </div>
+                    <div class="insight-body">
+                        <p class="section-kicker"><i class="fas {{ item.data.icon or 'fa-chart-line' }}" aria-hidden="true"></i> Case study</p>
+                        <h3>{{ item.data.short_title or item.data.title }}</h3>
+                        <p class="insight-meta">{{ item.data.summary }}</p>
+                    </div>
+                </a>
+                {%- endfor %}
             </div>
         </section>
-        <section class="container case-panel">
-            <div class="case-meta">{% for tag in stats %}<span>{{ tag }}</span>{% endfor %}</div>
-            <div class="case-content">
-                {{ content | safe }}
-            </div>
-            <div class="post-footer">
-                <p>Want results like these?</p>
-                <a href="/#booking" class="btn btn-primary"><i class="far fa-calendar-check"></i> Book a strategy call</a>
-            </div>
-        </section>
+        {%- endif %}
+
+        <dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+            <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+            <img alt="">
+            <p class="lightbox-caption"></p>
+        </dialog>
+{% endblock %}
+{% block scripts %}
+    <script src="/assets/js/article.js" defer></script>
 {% endblock %}

@@ -37,10 +37,12 @@ export default function (eleventyConfig) {
       .sort((a, b) => b.date - a.date));
   eleventyConfig.addCollection("cases", (api) =>
     api.getFilteredByGlob("src/case-studies/items/*.md")
+      .filter((c) => !c.data.draft)
       .sort((a, b) => (a.data.order || 99) - (b.data.order || 99)));
 
   eleventyConfig.addCollection("featuredCases", (api) => {
     const all = api.getFilteredByGlob("src/case-studies/items/*.md")
+      .filter((c) => !c.data.draft)
       .sort((a, b) => (a.data.order || 99) - (b.data.order || 99));
     const picked = all.filter((c) => c.data.featured);
     return picked.length ? picked : all;
@@ -50,8 +52,19 @@ export default function (eleventyConfig) {
   // The Studio app is bundled from studio-src/ before every build.
   eleventyConfig.on("eleventy.before", buildStudio);
   eleventyConfig.addWatchTarget("studio-src/");
-  eleventyConfig.addPassthroughCopy("src/admin/cms");
   eleventyConfig.addPassthroughCopy("src/admin/studio");
+
+  // Case-study headline stats: "61K Views" becomes a big number, "Finance" a tag.
+  eleventyConfig.addFilter("caseResults", (stats) => {
+    const numbers = [];
+    const tags = [];
+    for (const s of stats || []) {
+      const m = String(s).trim().match(/^([~$€£]?[\d][\d.,]*\s*(?:[KkMmBb]\b|%|x\b)?\+?)\s+(.+)$/);
+      if (m) numbers.push({ value: m[1].replace(/\s+/g, ""), label: m[2] });
+      else tags.push(String(s).trim());
+    }
+    return { numbers, tags };
+  });
 
   // Filters
   eleventyConfig.addFilter("readableDate", (d) =>
