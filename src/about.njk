@@ -4,16 +4,16 @@ permalink: /about/
 section: about
 title: About Elvis and Viko
 seoTitle: "About Viko — Elvis Ochuot, Reddit marketer"
-description: "Viko is run by Elvis Ochuot, a Top Rated Reddit marketer on Upwork based in Nakuru, Kenya, with 5+ years helping SaaS, app and travel brands get found on Reddit."
+description: "Viko is run by Elvis Ochuot, a Top Rated Reddit marketer on Upwork with 5+ years helping SaaS, app and travel brands get found on Reddit."
 ---
 {%- set up = site.upwork %}
 {%- set f = site.founder %}
         <section class="container about">
             <div class="about-grid">
-                <div class="founder-mark founder-mark--lg" aria-hidden="true">{% if f.photo %}<img src="{{ f.photo }}" alt="">{% else %}<span>EO</span>{% endif %}</div>
+                <div class="founder-mark founder-mark--lg">{% if f.photo %}<img src="{{ f.photo }}" alt="Elvis Ochuot, founder of Viko" width="600" height="600" decoding="async">{% else %}<span>EO</span>{% endif %}</div>
                 <div>
                     <h1 class="sec-title sec-title--xl">Hi, I'm Elvis.</h1>
-                    <p class="sec-lead">I run Viko, a small Reddit marketing agency based in {{ f.location }}. For {{ f.years }} years I've helped SaaS, app and travel brands get found in the Reddit threads their buyers read, and that Google and AI tools now quote.</p>
+                    <p class="sec-lead">I run Viko, a small Reddit marketing agency. For {{ f.years }} years I've helped SaaS, app and travel brands get found in the Reddit threads their buyers read, and that Google and AI tools now quote.</p>
                     <a class="proof-strip proof-strip--inline" href="{{ up.url }}" target="_blank" rel="noopener" aria-label="My Upwork profile (opens Upwork)">
                         <span class="proof-strip-src"><i class="fas fa-circle-check" aria-hidden="true"></i> Verified on Upwork</span>
                         <span><strong>{{ up.badge }}</strong></span>
@@ -39,10 +39,9 @@ description: "Viko is run by Elvis Ochuot, a Top Rated Reddit marketer on Upwork
                     <ul class="about-facts">
                         <li><strong>{{ up.badge }} on Upwork</strong> with {{ up.jss }} Job Success, {{ up.jobs }} completed jobs and {{ up.earned }} earned</li>
                         <li><strong>{{ f.years }} years</strong> of Reddit marketing for SaaS, finance apps, fitness, travel and real estate</li>
-                        <li><strong>BEng, Civil Engineering</strong>, Moi University</li>
-                        <li><strong>BCom, Marketing</strong>, University of Nairobi</li>
-                        <li><strong>Based in {{ f.location }}</strong> (East Africa Time, UTC+3), working with clients in the US, UK and Europe</li>
-                        <li>English and Swahili</li>
+                        <li><strong>BEng, Civil Engineering</strong></li>
+                        <li><strong>BCom, Marketing</strong></li>
+                        <li><strong>Working with clients</strong> in the US, UK and Europe</li>
                     </ul>
                     <p><a class="hx-link" href="/case-studies/">See the case studies</a></p>
                 </div>

@@ -15,7 +15,7 @@ order: 4
 ---
 ## Client: Beyond the Plains Safaris (Premium Private Safari Tour Operator)
 
-Beyond the Plains Safaris is a leading local Kenyan safari company specializing in customized private family and multi-generational safaris across Kenya and Tanzania. They deliver stress-free, flexible itineraries with exceptional service tailored for all ages.
+Beyond the Plains Safaris is a leading safari company specializing in customized private family and multi-generational safaris. They deliver stress-free, flexible itineraries with exceptional service tailored for all ages.
 
 ### Campaign Objective
 

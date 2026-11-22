@@ -34,7 +34,7 @@ section: home
                     <span class="hx-shot"><img src="{{ heroCase.data.thumbnail }}" alt="Reddit Ads dashboard from the Beyond the Plains Safaris campaign" fetchpriority="high" decoding="async"></span>
                     <span class="hx-cap">
                         <span class="hx-cap-num">135</span>
-                        <span class="hx-cap-text"><strong>leads from $940 of Reddit Ads</strong> for a Kenyan safari operator, at $0.09 a click. Read the case study.</span>
+                        <span class="hx-cap-text"><strong>leads from $940 of Reddit Ads</strong> for a safari tour operator, at $0.09 a click. Read the case study.</span>
                     </span>
                 </a>
                 {%- endif %}
@@ -97,7 +97,7 @@ section: home
             <div class="sec-head">
                 <div>
                     <h2 id="packages-title" class="sec-title">Packages with clear prices</h2>
-                    <p class="sec-lead">Billed weekly, cancel with notice. Reddit ad spend is paid separately, straight to Reddit.</p>
+                    <p class="sec-lead">Billed weekly, cancel with notice. Reddit ad spend is paid separately, straight to Reddit. Need something different? We build <a href="#booking">custom packages</a> too.</p>
                 </div>
                 <a class="hx-link" href="/pricing/">Compare all packages</a>
             </div>
@@ -161,10 +161,10 @@ section: home
 
         <!-- Founder -->
         <section class="container founder" id="about" aria-labelledby="founder-title">
-            <div class="founder-mark" aria-hidden="true">{% if site.founder.photo %}<img src="{{ site.founder.photo }}" alt="">{% else %}<span>EO</span>{% endif %}</div>
+            <div class="founder-mark">{% if site.founder.photo %}<img src="{{ site.founder.photoSmall or site.founder.photo }}" alt="Elvis Ochuot" width="360" height="360" loading="lazy" decoding="async">{% else %}<span>EO</span>{% endif %}</div>
             <div class="founder-body">
                 <h2 id="founder-title" class="sec-title">You'll work with Elvis, not a call centre</h2>
-                <p>I'm {{ site.founder.name }}, and I run Viko from Nakuru, Kenya. I've spent {{ site.founder.years }} years helping SaaS, app and travel brands get found on Reddit, and I'm a {{ up.badge }} freelancer on Upwork with {{ up.jobs }} completed jobs. I hold degrees in engineering and marketing, which is why every campaign runs on numbers, not hunches.</p>
+                <p>I'm {{ site.founder.name }}, and I run Viko. I've spent {{ site.founder.years }} years helping SaaS, app and travel brands get found on Reddit, and I'm a {{ up.badge }} freelancer on Upwork with {{ up.jobs }} completed jobs. I hold degrees in engineering and marketing, which is why every campaign runs on numbers, not hunches.</p>
                 <p>You'll talk to me directly, from the first call to the weekly report.</p>
                 <a class="hx-link" href="/about/">More about me and how I work</a>
             </div>
@@ -221,6 +221,7 @@ section: home
                 <div class="booking-header">
                     <h2>Book a free strategy call</h2>
                     <p>No pitch, just honest advice: 30 minutes on whether Reddit can work for your brand. Prefer to write? The form goes straight to Elvis's inbox.</p>
+                    <p class="custom-note"><strong>Open to custom packages.</strong> Need a different mix, a bigger campaign or a one-off project? Tell us what you have in mind and we'll put together a package and quote for you.</p>
                 </div>
                 <div class="booking-btn-group">
                     <button type="button" class="btn btn-primary btn-lg" id="open-calendar"><i class="far fa-calendar-check"></i> Open calendar</button>
@@ -228,7 +229,7 @@ section: home
                         <i class="fab fa-whatsapp"></i> Quick chat on WhatsApp
                     </a>
                 </div>
-                <p class="wa-note"><span class="wa-dot" aria-hidden="true"></span>Elvis usually replies on WhatsApp within 2 hours (East Africa Time).</p>
+                <p class="wa-note"><span class="wa-dot" aria-hidden="true"></span>Elvis usually replies on WhatsApp within 2 hours.</p>
                 <p class="booking-divider">or send a message</p>
                 <form id="contact-form">
                     <div class="form-grid">

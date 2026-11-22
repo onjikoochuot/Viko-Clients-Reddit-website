@@ -324,3 +324,9 @@ section.container, .results, .pk, .founder, .faq2 { padding-block: clamp(48px, 6
 .btn:disabled, .btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; transform: none; }
 .hx-actions .btn-lg { white-space: nowrap; }
 .comparison-table thead th { letter-spacing: 0 !important; text-transform: none !important; font-size: 14px !important; }
+.custom-note { max-width: 640px; margin: 14px auto 0 !important; padding: 12px 16px; border: 1px solid var(--line-strong); background: var(--viko-card); color: var(--ink-soft); font-size: 16px; }
+.custom-note strong { color: var(--ink); }
+.sec-lead a { color: var(--accent-dark); }
+.founder-mark img { object-position: center 20%; } .byline-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.custom-note { margin-bottom: 22px !important; }
+.faq2 .faq-item summary::after { position: static !important; top: auto !important; right: auto !important; transform: none !important; align-self: center; }

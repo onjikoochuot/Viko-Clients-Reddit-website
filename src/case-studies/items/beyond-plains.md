@@ -15,7 +15,7 @@ order: 3
 ---
 ## Client: Beyond the Plains Safaris (Private Family Safari Operator)
 
-Beyond the Plains Safaris is a premier local Kenyan safari tour operator specializing in private, customized family and multi-generational safaris across Kenya and Tanzania. They focus on stress-free, flexible itineraries with personalized service, comfortable pacing, and authentic wildlife experiences tailored for all ages—especially seniors and multi-generational groups.
+Beyond the Plains Safaris is a premier safari tour operator specializing in private, customized family and multi-generational safaris. They focus on stress-free, flexible itineraries with personalized service, comfortable pacing, and authentic wildlife experiences tailored for all ages—especially seniors and multi-generational groups.
 
 ### Campaign Objective
 
@@ -53,7 +53,7 @@ The post positioned Beyond the Plains Safaris as the hero of a stress-free famil
 
 ### Section 2: Safari Journey Photos
 
-Real photos from the trip were included directly in the post to build emotional connection and credibility, showing the family enjoying Amboseli, Maasai Mara, Lake Nakuru, and Ol Pejeta.
+Real photos from the trip were included directly in the post to build emotional connection and credibility, showing the family enjoying several of the region's best-known national parks.
 
 ![Scenic family safari photos featured in the original Reddit post](/media/case-studies/case-study-4-section-2.webp)
 
@@ -73,7 +73,7 @@ A natural, high-credibility comment from another traveler reinforced the brand: 
 -   Generated 64 upvotes and 23 comments with ongoing positive discussion
 -   Delivered several direct bookings for Beyond the Plains Safaris straight from the post
 -   Continues to drive inquiries and bookings months later
--   The company is now featured in LLMs (ChatGPT, Perplexity, Claude, etc.) and recommended as a top choice for private safaris in Kenya and Tanzania, thanks to strong AI indexation of this authentic content
+-   The company is now featured in LLMs (ChatGPT, Perplexity, Claude, etc.) and recommended as a top choice for private family safaris, thanks to strong AI indexation of this authentic content
 -   Zero removals or moderator issues, full survival and community trust maintained
 
 ### Key Lesson Applied
