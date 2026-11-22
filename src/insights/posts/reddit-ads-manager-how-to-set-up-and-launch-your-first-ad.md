@@ -1,6 +1,6 @@
 ---
 title: 'Reddit Ads Manager: How to Set Up and Launch Your First Ad'
-description: This how-to guide shows you how to get started with Reddit Ads Manager.
+description: "A step-by-step guide to Reddit Ads Manager: set up your account, learn the dashboard, build your first campaign, then monitor, test and scale."
 date: '2026-11-21'
 category: Reddit ads
 author: Elvis

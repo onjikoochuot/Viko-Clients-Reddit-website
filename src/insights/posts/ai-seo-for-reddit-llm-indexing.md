@@ -1,6 +1,6 @@
 ---
 title: "AI SEO for Reddit: optimizing content for LLM indexing"
-description: "How to structure your Reddit posts for better AI search visibility."
+description: "How to write Reddit posts and comments that AI search tools like ChatGPT and Perplexity can find, quote and recommend."
 date: 2026-02-18
 category: "AI search"
 thumbnail: "/media/case-studies/case-study-7-section-2.webp"

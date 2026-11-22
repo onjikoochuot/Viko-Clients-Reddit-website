@@ -1,6 +1,6 @@
 ---
 title: "Building community trust: the foundation of Reddit marketing"
-description: "Why authentic engagement beats paid promotion every time."
+description: "Trust decides whether your Reddit content works. What trust looks like on Reddit and how brands build it with authentic, consistent activity."
 date: 2026-01-10
 category: "Community"
 thumbnail: ""

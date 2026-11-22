@@ -1,6 +1,6 @@
 ---
 title: "How to build Reddit authority without direct promotions"
-description: "Practical strategies for organic community growth and long-term karma gains."
+description: "Why direct promotion fails on Reddit, and how to earn authority with real answers, case studies and helpful comments instead."
 date: 2026-04-22
 category: "Organic growth"
 thumbnail: ""
