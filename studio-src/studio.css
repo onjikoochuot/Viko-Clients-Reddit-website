@@ -341,3 +341,6 @@ button.st-gallery-item:hover { border-color: var(--st-accent); box-shadow: 0 0 0
 .st-url input { min-width: 0; }
 .st-stats-nums { gap: 0; border-width: 1px 0 0 1px; background: transparent; }
 .st-stat--num { border-right: 1px solid var(--line-strong, #c9c1b3); border-bottom: 1px solid var(--line-strong, #c9c1b3); }
+
+/* Byline preview under the title, same look as the published article */
+.st-byline { margin-top: 18px; user-select: none; }

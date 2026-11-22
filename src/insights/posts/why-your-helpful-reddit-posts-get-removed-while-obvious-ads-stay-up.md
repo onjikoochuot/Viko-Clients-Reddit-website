@@ -3,7 +3,7 @@ title: Why your helpful Reddit posts get removed while obvious ads stay up
 description: A marketer asked why three months of link-free, helpful posts kept vanishing. The answer is about the account, not the post. Here's how to fix it.
 date: '2026-11-20'
 category: Organic growth
-author: Elvis
+author: Elvis Ochuot
 thumbnail: /media/uploads/why-your-helpful-reddit-posts-get-removed-while-obvious-ads-stay-up/crop-7rkjr4.webp
 thumbnail_alt: 'Cover graphic: why your helpful Reddit posts get removed while obvious ads stay up'
 attachment: /media/uploads/why-your-helpful-reddit-posts-get-removed-while-obvious-ads-stay-up/why-helpful-reddit-posts-get-removed-7rkjr5.docx

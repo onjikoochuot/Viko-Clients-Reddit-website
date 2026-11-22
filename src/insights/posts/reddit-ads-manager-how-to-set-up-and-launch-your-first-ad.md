@@ -3,9 +3,9 @@ title: 'Reddit Ads Manager: How to Set Up and Launch Your First Ad'
 description: "A step-by-step guide to Reddit Ads Manager: set up your account, learn the dashboard, build your first campaign, then monitor, test and scale."
 date: '2026-11-21'
 category: Reddit ads
-author: Elvis
-thumbnail: https://cdn.rankyak.com/181584/27675-ads-account-setup-steps.webp
-thumbnail_alt: Five-step process showing login, account creation, currency and time zone, payment method, and teammate invitations.
+author: Elvis Ochuot
+thumbnail: /media/uploads/reddit-ads-manager-how-to-set-up-and-launch-your-first-ad/reddit-ads-manager-cover.webp
+thumbnail_alt: 'Cover graphic: launch your first ad in Reddit Ads Manager'
 draft: false
 ---
 <p>To use <strong>Reddit Ads Manager</strong>, go to <a href="https://ads.reddit.com">ads.reddit.com</a>, sign in with a Reddit account, and create an ads account with your business details and a payment method. Then build a campaign: pick an objective, set a budget, choose the communities or interests to target, and upload an ad. The dashboard that opens afterward shows how every campaign, ad group, and ad performs.</p>

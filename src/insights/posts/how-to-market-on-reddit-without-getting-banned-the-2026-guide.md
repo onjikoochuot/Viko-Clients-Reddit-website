@@ -3,7 +3,7 @@ title: 'How to market on Reddit without getting banned: the 2026 guide'
 description: Reddit now screens new accounts, pauses repeat posting and lets mods automate rule checks. How brands can still promote in 2026 without losing the account.
 date: '2026-11-19'
 category: Organic growth
-author: By Elvis, Viko
+author: Elvis Ochuot
 thumbnail: /media/uploads/how-to-market-on-reddit-without-getting-banned-the-2026-guide/crop-ve5du5.webp
 attachment: /media/uploads/how-to-market-on-reddit-without-getting-banned-the-2026-guide/how-to-market-on-reddit-without-getting--ve5du6.docx
 attachment_name: How-to-market-on-Reddit-without-getting-banned-2026.docx

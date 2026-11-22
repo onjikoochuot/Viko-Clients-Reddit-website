@@ -2,7 +2,7 @@
 title: 'Reddit self-promotion rules in 2026: what 25 subreddits actually allow'
 description: We compared the written rules of 25 subreddits marketers target. Most ban promotion or squeeze it into one thread. Here's where you can post.
 date: '2026-11-20'
-author: Elvis, Viko Team
+author: Elvis Ochuot
 thumbnail: /media/uploads/reddit-self-promotion-rules-in-2026-what-25-subreddits-actually-allow/crop-y75ni4.webp
 thumbnail_alt: 'Cover graphic: Reddit self-promotion rules in 2026, what 25 subreddits actually allow'
 attachment: /media/uploads/reddit-self-promotion-rules-in-2026-what-25-subreddits-actually-allow/reddit-self-promotion-rules-25-subreddit-y75ni5.docx

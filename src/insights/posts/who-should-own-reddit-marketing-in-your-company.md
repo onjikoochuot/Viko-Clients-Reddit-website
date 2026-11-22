@@ -3,7 +3,7 @@ title: Who should own Reddit marketing in your company?
 description: 'Social, SEO, content or sales? A LinkedIn post asked who should run Reddit. Our answer: one person who uses Reddit, with every team feeding them.'
 date: '2026-11-20'
 category: Reputation
-author: Elvis
+author: Elvis Ochuot
 thumbnail: /media/uploads/who-should-own-reddit-marketing-in-your-company/crop-7xlok4.webp
 thumbnail_alt: 'Cover graphic: who should own Reddit marketing in your company?'
 draft: false

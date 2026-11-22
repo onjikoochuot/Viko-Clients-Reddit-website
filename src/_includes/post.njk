@@ -3,6 +3,7 @@
 {% set ogType = "article" %}
 {% set art = content | enhanceArticle(linkPreviews) %}
 {% set authorName = author or site.defaultAuthor %}
+{% set authorInfo = site.authors | findBy("name", authorName) %}
 {% set readTime = art.words | minutesRead %}
 {% set pageUrl = page.url | absolute(site.url) %}
 {% block head %}
@@ -21,7 +22,7 @@
         "image": "{{ (thumbnail or '/viko-logo-512.png') | absolute(site.url) }}",
         "mainEntityOfPage": "{{ pageUrl }}",
         {%- if category %}"articleSection": {{ category | json | safe }},{% endif %}
-        "author": {% if authorName == site.founder.name %}{ "@type": "Person", "name": {{ authorName | json | safe }}, "url": "{{ site.url }}/about/" }{% else %}{ "@type": "Organization", "name": {{ authorName | json | safe }}, "url": "{{ site.url }}/" }{% endif %},
+        "author": {% if authorInfo and authorInfo.person %}{ "@type": "Person", "name": {{ authorName | json | safe }}, "jobTitle": {{ authorInfo.role | json | safe }}, "url": "{{ site.url }}{{ authorInfo.url }}"{% if authorInfo.photo %}, "image": "{{ site.url }}{{ authorInfo.photo }}"{% endif %} }{% else %}{ "@type": "Organization", "name": {{ authorName | json | safe }}, "url": "{{ site.url }}/" }{% endif %},
         "publisher": { "@type": "Organization", "name": "{{ site.name }}", "logo": { "@type": "ImageObject", "url": "{{ site.url }}/viko-logo-512.png" } }
     }
     </script>
@@ -35,10 +36,10 @@
                 <h1>{{ title }}</h1>
                 {%- if description %}<p class="article-lead">{{ description }}</p>{% endif %}
                 <div class="article-byline">
-                    {%- set isFounder = authorName == site.founder.name %}
-                    <span class="byline-avatar" aria-hidden="true">{% if isFounder and site.founder.photo %}<img src="{{ site.founder.photoSmall or site.founder.photo }}" alt="" width="44" height="44">{% elif isFounder %}EO{% else %}V{% endif %}</span>
+                    {%- set initials = (authorName | default("V")).split(" ") %}
+                    <span class="byline-avatar" aria-hidden="true">{% if authorInfo and authorInfo.photo %}<img src="{{ authorInfo.photo }}" alt="" width="44" height="44">{% else %}{{ initials[0] | first }}{% if initials[1] %}{{ initials[1] | first }}{% endif %}{% endif %}</span>
                     <span class="byline-text">
-                        <strong>{% if isFounder %}<a href="/about/">{{ authorName }}</a>{% else %}{{ authorName }}{% endif %}</strong>
+                        <strong>{% if authorInfo and authorInfo.url %}<a href="{{ authorInfo.url }}">{{ authorName }}</a>{% else %}{{ authorName }}{% endif %}</strong>
                         <span>
                             <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
                             {%- if updated and (updated | isoDate) != (page.date | isoDate) %} · Updated <time datetime="{{ updated | isoDate }}">{{ updated | readableDate }}</time>{% endif %}

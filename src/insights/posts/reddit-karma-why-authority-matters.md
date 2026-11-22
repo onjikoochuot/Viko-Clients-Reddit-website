@@ -1,10 +1,11 @@
 ---
 title: "Reddit karma in 2025: why authority matters more than ever"
 description: "How Reddit’s algorithm changes affect brand visibility and what to do about it."
+author: Elvis Ochuot
 date: 2026-05-10
 category: "Authority"
-thumbnail: "/media/case-studies/case-study-1.webp"
-thumbnail_alt: "Reddit authority campaign snapshot"
+thumbnail: /media/uploads/reddit-karma-why-authority-matters/reddit-karma-authority-cover.webp
+thumbnail_alt: 'Cover graphic: Reddit karma, why authority matters'
 draft: false
 legacy_id: blog-1
 ---

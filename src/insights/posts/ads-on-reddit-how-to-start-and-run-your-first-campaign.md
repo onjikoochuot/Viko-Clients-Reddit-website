@@ -3,9 +3,9 @@ title: 'Ads on Reddit: How to Start and Run Your First Campaign'
 description: Learn how ads on Reddit work, whether they pay off, and how to set up, target, write, and optimize your first campaign in four clear steps.
 date: '2026-11-22'
 category: Reddit ads
-author: Elvis
-thumbnail: https://cdn.rankyak.com/182085/28176-reddit-ad-campaign-tools.webp
-thumbnail_alt: Header image
+author: Elvis Ochuot
+thumbnail: /media/uploads/ads-on-reddit-how-to-start-and-run-your-first-campaign/first-reddit-ads-campaign-cover.webp
+thumbnail_alt: 'Cover graphic: run your first Reddit Ads campaign'
 draft: false
 ---
 <p>The fastest way to start <strong>ads on Reddit</strong> is to open an account at <a href="https://ads.reddit.com">ads.reddit.com</a>, install the Reddit Pixel, choose one objective, target three to five relevant communities, and launch a native-looking ad on a small daily budget such as $20. Run it for two weeks, keep what converts, and cut the rest. That is the whole loop, and the steps below show how to do each part well.</p>

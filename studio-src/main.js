@@ -232,7 +232,7 @@ async function openEditor({ slug, importFile, importKind }) {
     try { order = Math.max(0, ...(await loadList()).map((c) => Number(c.data.order) || 0)) + 1; } catch {}
     state.data = { title: "", short_title: "", summary: "", lead: "", stats: [], icon: "fa-chart-line", featured: false, order, draft: true };
   } else {
-    state.data = { title: "", description: "", date: today(), category: "", author: "", draft: true };
+    state.data = { title: "", description: "", date: today(), category: "", author: site.defaultAuthor || "", draft: true };
   }
 
   buildEditorScreen();
@@ -273,13 +273,14 @@ function buildEditorScreen() {
     placeholder: isCase() ? "One or two sentences on the client and the result. Shown under the title and in Google." : "One or two sentences that sum up the article. Shown under the title, on cards and in Google.",
     oninput: (e) => { state.data[isCase() ? "lead" : "description"] = e.target.value; autoGrow(e.target); markDirty(); updateChecks(); } });
   els.stats = isCase() ? h("div", { class: "st-stats" }) : null;
+  els.byline = isCase() ? null : h("div", { class: "article-byline st-byline" });
   els.cover = h("div", { class: "st-cover" });
   els.content = h("div", { class: "post-content st-content" });
 
   els.toolbar = h("div", { class: "st-toolbar", role: "toolbar", "aria-label": "Formatting" });
   els.canvas = h("div", { class: "st-canvas" },
     h("article", { class: "st-page" },
-      h("header", { class: "st-page-head" }, els.kicker, els.title, els.lead, els.stats),
+      h("header", { class: "st-page-head" }, els.kicker, els.title, els.lead, els.stats, els.byline),
       els.cover,
       els.content));
 
@@ -424,12 +425,28 @@ function autoGrow(t) {
   t.style.height = t.scrollHeight + "px";
 }
 
+const AUTHORS = site.authors || [];
+const authorInfo = (name) => AUTHORS.find((a) => a.name === name);
+
+// The byline under the title, drawn the same way the published article shows it.
+function renderByline() {
+  if (!els.byline) return;
+  const name = state.data.author || site.defaultAuthor || "Viko Team";
+  const a = authorInfo(name);
+  const initials = name.split(/\s+/).slice(0, 2).map((w) => w[0] || "").join("").toUpperCase();
+  const when = state.data.date ? new Date(state.data.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }) : "No date yet";
+  els.byline.replaceChildren(
+    h("span", { class: "byline-avatar", "aria-hidden": "true" }, a && a.photo ? h("img", { src: a.photo, alt: "", width: 44, height: 44 }) : initials),
+    h("span", { class: "byline-text" }, h("strong", {}, name), h("span", {}, `${when} · ${a ? a.role : "Guest author"}`)));
+}
+
 function fillFields() {
   const d = state.data;
   els.title.value = d.title || "";
   els.lead.value = (isCase() ? d.lead : d.description) || "";
   setKicker();
   renderStats();
+  renderByline();
   requestAnimationFrame(() => { autoGrow(els.title); autoGrow(els.lead); });
   renderCover();
   if (els.sideFields) els.sideFields();
@@ -479,7 +496,7 @@ async function cropThumbnail() {
 function buildSide() {
   const d = state.data;
   const slugInput = h("input", { type: "text", placeholder: "made-from-the-title", oninput: (e) => { state.slugManual = true; state.newSlug = slugify(e.target.value) || ""; markDirty(); } });
-  const date = h("input", { type: "date", oninput: (e) => { state.data.date = e.target.value; markDirty(); } });
+  const date = h("input", { type: "date", oninput: (e) => { state.data.date = e.target.value; renderByline(); markDirty(); } });
   const cats = [...new Set([...(site.categories || []), d.category].filter(Boolean))];
   const category = h("select", { onchange: async (e) => {
     if (e.target.value === "__new") {
@@ -492,7 +509,24 @@ function buildSide() {
   } });
   const rebuildCats = () => category.replaceChildren(h("option", { value: "" }, "No category"),
     ...cats.map((c) => h("option", { value: c, selected: c === state.data.category }, c)), h("option", { value: "__new" }, "+ New category…"));
-  const author = h("input", { type: "text", placeholder: site.defaultAuthor || "Viko team", oninput: (e) => { state.data.author = e.target.value; markDirty(); } });
+  const author = h("select", { onchange: async (e) => {
+    if (e.target.value === "__new") {
+      const r = await ask({ title: "Someone else", fields: [{ name: "n", label: "Author's full name", required: true }] });
+      if (r && r.n.trim()) state.data.author = r.n.trim();
+    } else state.data.author = e.target.value;
+    rebuildAuthors();
+    renderByline();
+    markDirty();
+  } });
+  const rebuildAuthors = () => {
+    const cur = state.data.author || site.defaultAuthor || "";
+    const names = AUTHORS.map((a) => a.name);
+    if (cur && !names.includes(cur)) names.push(cur);
+    author.replaceChildren(...names.map((n) => {
+      const a = authorInfo(n);
+      return h("option", { value: n, selected: n === cur }, a ? `${n} (${a.role})` : n);
+    }), h("option", { value: "__new" }, "+ Someone else…"));
+  };
   const shortTitle = h("input", { type: "text", placeholder: "e.g. GetROI: finance community placement", oninput: (e) => { state.data.short_title = e.target.value; markDirty(); } });
   const summary = h("input", { type: "text", placeholder: "e.g. Finance · 61K views · 247 comments", oninput: (e) => { state.data.summary = e.target.value; markDirty(); } });
   const iconSel = h("select", { onchange: (e) => { state.data.icon = e.target.value; setKicker(); markDirty(); } },
@@ -511,7 +545,7 @@ function buildSide() {
     urlHint.replaceChildren(isNew ? "Set from the title. You can change it until the first save." : "Fixed after the first save, so links to it keep working.");
     date.value = state.data.date || "";
     rebuildCats();
-    author.value = state.data.author || "";
+    rebuildAuthors();
     shortTitle.value = state.data.short_title || "";
     summary.value = state.data.summary || "";
     iconSel.value = state.data.icon || "fa-chart-line";
@@ -552,7 +586,7 @@ function buildSide() {
         h("div", { class: "st-url" }, h("span", {}, "/insights/"), slugInput), urlHint),
       h("label", { class: "st-field" }, h("span", {}, "Publish date"), date, h("small", {}, "Newest dates appear first.")),
       h("label", { class: "st-field" }, h("span", {}, "Category"), category),
-      h("label", { class: "st-field" }, h("span", {}, "Author"), author)),
+      h("label", { class: "st-field" }, h("span", {}, "Author"), author, h("small", {}, "Shown under the title with their photo, linked to the About page."))),
     h("section", { class: "st-side-sec" },
       h("h2", {}, "Thumbnail"),
       h("button", { class: "st-btn st-btn--block", onclick: chooseThumbnail }, icon("image"), " Choose thumbnail"),
