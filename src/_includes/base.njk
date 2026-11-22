@@ -44,8 +44,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/styles.css?v={{ build.v }}">
+    <link rel="stylesheet" href="/assets/css/site.css?v={{ build.v }}">
     {%- block head %}{% endblock %}
 </head>
 
@@ -69,10 +69,10 @@
         <p>We use analytics cookies to see which pages help visitors, nothing else. <a href="/privacy/#cookies-and-analytics">Privacy policy</a></p>
         <div class="cookie-bar-btns"><button type="button" class="btn btn-outline" data-consent="no">Decline</button><button type="button" class="btn btn-primary" data-consent="yes">Accept</button></div>
     </div>
-    <script src="/assets/js/analytics.js" defer></script>
+    <script src="/assets/js/analytics.js?v={{ build.v }}" defer></script>
     {%- endif %}
     {%- if section == "leadmagnet" or layout == "post.njk" or page.url.startsWith("/insights/") %}
-    <script src="/assets/js/leadmagnet.js" defer></script>
+    <script src="/assets/js/leadmagnet.js?v={{ build.v }}" defer></script>
     {%- endif %}
     {%- block scripts %}{% endblock %}
 </body>
