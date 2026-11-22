@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Elvis Ochuot",
+    "title": "Founder, Viko",
+    "photo": "/media/team/elvis-ochuot-360.webp",
+    "link": "/about/",
+    "team": false
+  },
+  {
+    "name": "Viko Team",
+    "title": "Viko Reddit marketing team",
+    "photo": "",
+    "link": "/about/",
+    "team": true
+  }
+]

@@ -16,6 +16,7 @@ import { prepareImage, planUploads, forget, trackBlob, isPending } from "./media
 import { Figure, Callout, CALLOUT_KINDS, LinkCard, RedditEmbed, FileCard, CtaButton, hooks, setRawBase, displaySrc } from "./nodes.js";
 import { cropImage, chooseImage, pickFile, pdfWorkspace, classifyUrl } from "./tools.js";
 import { importWord } from "./importers.js";
+import { showAuthors, loadAuthors, getAuthors, findAuthor } from "./authors.js";
 
 const REPO = site.repo;
 const BRANCH = site.branch || "main";
@@ -58,6 +59,7 @@ async function start() {
     b.done();
     return showSignIn(e.message);
   }
+  await loadAuthors(gh);
   b.done();
   route();
 }
@@ -66,6 +68,14 @@ window.addEventListener("hashchange", route);
 
 function route() {
   if (!gh) return;
+  if (/^#\/authors\/?$/.test(location.hash)) {
+    if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
+    kind = "insights";
+    return showAuthors({ gh, app, topBar: () => topBar(
+        h("a", { class: "st-btn st-btn--ghost", href: "/insights/", target: "_blank" }, icon("arrow-up-right-from-square"), h("span", {}, "View site")),
+        h("button", { class: "st-btn st-btn--ghost", onclick: signOut }, icon("right-from-bracket"), h("span", {}, "Sign out"))),
+      tabs: navTabs, listArticles: async () => { const prev = kind; kind = "insights"; try { return await loadList(); } finally { kind = prev; } } });
+  }
   const m = location.hash.match(/^#\/(?:(cases)(?:\/|$))?(?:(edit|new)(?:\/(.+))?)?$/);
   kind = m && m[1] ? "cases" : "insights";
   if (m && m[2] === "edit" && m[3]) return openEditor({ slug: decodeURIComponent(m[3]) });
@@ -114,6 +124,14 @@ function signOut() {
 
 // ======================= Article list =======================
 
+function navTabs(active) {
+  const tab = (key, label, ic, href) => h("a", { class: "st-tab" + (active === key ? " is-on" : ""), href }, icon(ic), h("span", {}, label));
+  return h("nav", { class: "st-tabs", "aria-label": "Sections" },
+    tab("insights", KINDS.insights.label, "newspaper", KINDS.insights.hash),
+    tab("cases", KINDS.cases.label, "briefcase", KINDS.cases.hash),
+    tab("authors", "Authors", "user-pen", "#/authors"));
+}
+
 async function loadList(force = false) {
   if (listCache[kind] && !force) return listCache[kind];
   const items = (await gh.listDir(K().dir)).filter((f) => f.type === "file" && f.name.endsWith(".md"));
@@ -145,14 +163,13 @@ async function showList() {
   const filter = h("select", { class: "st-select" },
     h("option", { value: "all" }, "All"), h("option", { value: "published" }, "Published"), h("option", { value: "draft" }, "Drafts"),
     isCase() ? h("option", { value: "home" }, "On homepage") : null);
-  const tab = (key) => h("a", { class: "st-tab" + (kind === key ? " is-on" : ""), href: KINDS[key].hash },
-    icon(key === "cases" ? "briefcase" : "newspaper"), h("span", {}, KINDS[key].label));
+
   app.replaceChildren(
     topBar(
       h("a", { class: "st-btn st-btn--ghost", href: k.urlBase, target: "_blank" }, icon("arrow-up-right-from-square"), h("span", {}, "View site")),
       h("button", { class: "st-btn st-btn--ghost", onclick: signOut }, icon("right-from-bracket"), h("span", {}, "Sign out"))),
     h("main", { class: "st-list" },
-      h("nav", { class: "st-tabs", "aria-label": "Sections" }, tab("insights"), tab("cases")),
+      navTabs(kind),
       h("div", { class: "st-list-head" },
         h("div", {}, h("h1", {}, k.label), h("p", { class: "st-muted" }, k.intro)),
         h("div", { class: "st-list-actions" },
@@ -425,8 +442,7 @@ function autoGrow(t) {
   t.style.height = t.scrollHeight + "px";
 }
 
-const AUTHORS = site.authors || [];
-const authorInfo = (name) => AUTHORS.find((a) => a.name === name);
+const authorInfo = (name) => findAuthor(name);
 
 // The byline under the title, drawn the same way the published article shows it.
 function renderByline() {
@@ -436,8 +452,8 @@ function renderByline() {
   const initials = name.split(/\s+/).slice(0, 2).map((w) => w[0] || "").join("").toUpperCase();
   const when = state.data.date ? new Date(state.data.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }) : "No date yet";
   els.byline.replaceChildren(
-    h("span", { class: "byline-avatar", "aria-hidden": "true" }, a && a.photo ? h("img", { src: a.photo, alt: "", width: 44, height: 44 }) : initials),
-    h("span", { class: "byline-text" }, h("strong", {}, name), h("span", {}, `${when} · ${a ? a.role : "Guest author"}`)));
+    h("span", { class: "byline-avatar", "aria-hidden": "true" }, a && a.photo ? h("img", { src: displaySrc(a.photo), alt: "", width: 44, height: 44 }) : initials),
+    h("span", { class: "byline-text" }, h("strong", {}, name), h("span", {}, `${when}${a && a.title ? " · " + a.title : a ? "" : " · Not in your author list"}`)));
 }
 
 function fillFields() {
@@ -520,12 +536,12 @@ function buildSide() {
   } });
   const rebuildAuthors = () => {
     const cur = state.data.author || site.defaultAuthor || "";
-    const names = AUTHORS.map((a) => a.name);
+    const names = getAuthors().map((a) => a.name);
     if (cur && !names.includes(cur)) names.push(cur);
     author.replaceChildren(...names.map((n) => {
       const a = authorInfo(n);
-      return h("option", { value: n, selected: n === cur }, a ? `${n} (${a.role})` : n);
-    }), h("option", { value: "__new" }, "+ Someone else…"));
+      return h("option", { value: n, selected: n === cur }, a && a.title ? `${n} (${a.title})` : n);
+    }), h("option", { value: "__new" }, "+ Someone else (no photo)…"));
   };
   const shortTitle = h("input", { type: "text", placeholder: "e.g. GetROI: finance community placement", oninput: (e) => { state.data.short_title = e.target.value; markDirty(); } });
   const summary = h("input", { type: "text", placeholder: "e.g. Finance · 61K views · 247 comments", oninput: (e) => { state.data.summary = e.target.value; markDirty(); } });
@@ -586,7 +602,7 @@ function buildSide() {
         h("div", { class: "st-url" }, h("span", {}, "/insights/"), slugInput), urlHint),
       h("label", { class: "st-field" }, h("span", {}, "Publish date"), date, h("small", {}, "Newest dates appear first.")),
       h("label", { class: "st-field" }, h("span", {}, "Category"), category),
-      h("label", { class: "st-field" }, h("span", {}, "Author"), author, h("small", {}, "Shown under the title with their photo, linked to the About page."))),
+      h("label", { class: "st-field" }, h("span", {}, "Author"), author, h("small", {}, "Shown under the title with their photo. Add or edit authors in the ", h("a", { href: "#/authors", target: "_blank" }, "Authors"), " tab."))),
     h("section", { class: "st-side-sec" },
       h("h2", {}, "Thumbnail"),
       h("button", { class: "st-btn st-btn--block", onclick: chooseThumbnail }, icon("image"), " Choose thumbnail"),

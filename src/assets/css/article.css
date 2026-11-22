@@ -161,3 +161,5 @@
 .insight-meta .fas, .insight-body .section-kicker .fas { margin-right: 4px; }
 .case-results { gap: 0; border-width: 1px 0 0 1px; background: transparent; }
 .case-result { border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+.byline-text .byline-name { font-size: 15px; }
+.byline-text .byline-role { font-size: 14px; color: var(--muted); }

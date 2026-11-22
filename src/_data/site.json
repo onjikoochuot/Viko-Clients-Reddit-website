@@ -38,21 +38,5 @@
     "reviews": "68",
     "earned": "$70K+",
     "checked": "2026-11-22"
-  },
-  "authors": [
-    {
-      "name": "Elvis Ochuot",
-      "role": "Founder, Viko",
-      "photo": "/media/team/elvis-ochuot-360.webp",
-      "url": "/about/",
-      "person": true
-    },
-    {
-      "name": "Viko Team",
-      "role": "Viko Reddit marketing team",
-      "photo": "",
-      "url": "/about/",
-      "person": false
-    }
-  ]
+  }
 }
