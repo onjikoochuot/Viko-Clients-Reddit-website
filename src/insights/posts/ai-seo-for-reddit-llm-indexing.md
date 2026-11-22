@@ -1,17 +1,60 @@
 ---
-title: "AI SEO for Reddit: optimizing content for LLM indexing"
-description: "How to write Reddit posts and comments that AI search tools like ChatGPT and Perplexity can find, quote and recommend."
+title: "AI SEO for Reddit: how to get your brand cited in AI answers"
+description: "Why ChatGPT, Perplexity and Google's AI answers quote Reddit, which engines lean on it most, and how to write threads and comments they cite without breaking the rules."
 date: 2026-02-18
+updated: 2026-11-22
+author: Elvis Ochuot
 category: "AI search"
-thumbnail: "/media/case-studies/case-study-7-section-2.webp"
-thumbnail_alt: "Reddit campaign performance dashboard"
+thumbnail: /media/uploads/ai-seo-for-reddit-llm-indexing/ai-search-reddit-citations-cover.webp
+thumbnail_alt: "Cover graphic: get your brand cited in AI answers, with a mock AI answer citing a Reddit thread"
 draft: false
 legacy_id: blog-4
 ---
-AI search now indexes Reddit content more aggressively. Posts that answer questions clearly are more likely to be surfaced.
-
-## Best practice
-
-Use concise headings and write responses that can be read independently of the comments thread.
-
-![Reddit campaign performance dashboard](/media/case-studies/case-study-7-section-2.webp)
+<p>Ask ChatGPT, Perplexity or Google which project tool, safari operator or budgeting app to pick, and there is a good chance the answer leans on a Reddit thread. Buyers trust Reddit because it reads like real people comparing notes, and AI tools have learned to use it the same way.</p>
+<p>That makes Reddit one of the cheapest places to influence what AI says about your category. It also makes it one of the most policed. This guide covers what the data says in 2026, which engines care most, and how to write content that gets cited without getting your account or your brand into trouble.</p>
+<figure><img src="/media/uploads/ai-seo-for-reddit-llm-indexing/how-reddit-thread-becomes-ai-answer.webp" alt="Four-step diagram: a buyer asks an AI tool, the AI searches the web, a Reddit thread matches the question, the answer cites the thread"><figcaption>The path from a buyer's question to a cited Reddit thread.</figcaption></figure>
+<h2>Why AI answers keep quoting Reddit</h2>
+<p>Three things push Reddit into AI answers.</p>
+<ul><li><p><strong>Paid access.</strong> Google signed a reported $60 million a year deal for access to Reddit's data in 2024, and OpenAI followed with its own agreement. <a href="https://searchengineland.com/reddit-google-ai-content-licensing-deal-437782">Search Engine Land covered the Google deal</a> and how it lined up with Reddit's rise in Google results.</p></li><li><p><strong>Real comparisons.</strong> Threads where people say "I tried A and B, here's what happened" are exactly what an AI needs to answer "which one should I buy?".</p></li><li><p><strong>Volume.</strong> There is a thread for almost every niche question, written in the same words buyers use.</p></li></ul>
+<p>The result shows up in study after study. Peec AI analysed 30 million cited sources and found Reddit was the most-cited domain across ChatGPT, Google AI Mode, Gemini, Perplexity and AI Overviews (<a href="https://searchengineland.com/ai-search-engines-cite-reddit-youtube-and-linkedin-most-study-473138">Search Engine Land</a>). A Semrush study of 248,000 cited Reddit URLs found Reddit was the top domain on Perplexity and in the top three on ChatGPT Search and Google AI Mode (<a href="https://www.semrush.com/blog/reddit-ai-search-visibility-study/">Semrush</a>).</p>
+<h2>The catch: every engine treats Reddit differently</h2>
+<p>"AI cites Reddit" is true on average and misleading in detail. The engines behave very differently, and the numbers move every few months.</p>
+<figure><img src="/media/uploads/ai-seo-for-reddit-llm-indexing/reddit-citations-by-ai-engine.webp" alt="Three cards: Google AI Overviews and AI Mode lean on Reddit, Perplexity leans on Reddit, ChatGPT swings"><figcaption>Plan for Google and Perplexity. Treat ChatGPT citations as a bonus.</figcaption></figure>
+<ul><li><p><strong>Google's AI Overviews and AI Mode</strong> pull Reddit heavily, which makes sense given the data deal.</p></li><li><p><strong>Perplexity</strong> cites Reddit less often per answer, but places it high when it does.</p></li><li><p><strong>ChatGPT swings.</strong> Semrush tracked ChatGPT citing Reddit in close to 60% of responses in early August 2025, then around 10% by mid-September (<a href="https://www.semrush.com/blog/most-cited-domains-ai/">Semrush</a>). Marketing Week reported another sharp drop in August 2026, and found Claude did not cite Reddit at all in its sample (<a href="https://marketingweek.com/reddit-ai-search-complicated">Marketing Week</a>).</p></li></ul>
+<p>There's a second twist. The same Marketing Week piece points to an Ahrefs finding that ChatGPT reads Reddit pages far more often than it credits them. So a thread can shape an answer without ever appearing as a link. You may not see the citation, but the wording of the answer still comes from the thread.</p>
+<p>And Reddit isn't alone. YouTube has been catching up fast, and some 2026 studies now put it ahead of Reddit as a social source for AI answers (<a href="https://www.adweek.com/media/youtube-reddit-ai-search-engine-citations/">Adweek</a>). A brand that wants to show up in AI answers should treat Reddit as one strong channel, not the only one.</p>
+<div data-youtube-video=""><iframe allowfullscreen="" src="https://www.youtube-nocookie.com/embed/iUVOAcBRNbY?modestbranding=1&amp;rel=1" title="Reddit and AI Answers: What Changed, and What Still Works"></iframe></div>
+<p>Above: a good short explainer on the August 2026 drop in visible ChatGPT citations and why Reddit still matters for AI answers.</p>
+<h2>What kind of Reddit content gets cited</h2>
+<p>AI tools don't cite the most promotional thread. They cite the one that answers the question most clearly. In practice that means:</p>
+<ol><li><p><strong>Threads that already rank on Google.</strong> AI search tools run web searches first. A thread on page one for "best X for Y" is far more likely to be retrieved than a new post with three upvotes.</p></li><li><p><strong>Comments, not just posts.</strong> The useful answer is often a reply halfway down, and AI tools quote a good comment as readily as the original post.</p></li><li><p><strong>Specific, first-hand detail.</strong> Numbers, prices, timelines and "here's what went wrong" survive summarising. Vague praise doesn't.</p></li><li><p><strong>Balanced answers.</strong> A reply that names who a product is not right for reads as honest, to both people and models.</p></li></ol>
+<figure><img src="/media/uploads/ai-seo-for-reddit-llm-indexing/anatomy-of-citable-reddit-comment.webp" alt="An example Reddit comment annotated with four traits: says who they are, answers in the first line, gives a real number, admits a limit"><figcaption>An illustrative comment with the four traits that make it easy to quote.</figcaption></figure>
+<div class="callout callout--key"><p>Write the first line of every comment as if it were the only line an AI will quote. Answer first, then explain.</p></div>
+<h2>A five-step plan for brands</h2>
+<h3>1. Find the threads that already shape answers</h3>
+<p>Search Google for your top buying questions plus "reddit", and ask ChatGPT, Perplexity and Google AI Mode the same questions. Note every Reddit thread that ranks or gets cited, and what it says about you and your competitors. This is the core of our <a href="/packages/audit/">Reddit Visibility Audit</a>, and you can do a rough version yourself in an afternoon.</p>
+<h3>2. Join those threads openly</h3>
+<p>Old threads that rank keep getting read. If a thread compares tools in your category and you're missing, a helpful, clearly labelled reply from someone at your company can be read for years. Check the subreddit's rules first: many only allow brand replies when they answer the question directly.</p>
+<div class="link-card" data-url="https://vikoredditexperts.com/insights/reddit-self-promotion-rules-in-2026-what-25-subreddits-actually-allow/" data-title="Reddit self-promotion rules in 2026: what 25 subreddits actually allow" data-description="Most ban promotion or squeeze it into one thread. Here's where you can post."><a href="https://vikoredditexperts.com/insights/reddit-self-promotion-rules-in-2026-what-25-subreddits-actually-allow/">Reddit self-promotion rules in 2026: what 25 subreddits actually allow</a></div>
+<h3>3. Answer new questions as they appear</h3>
+<p>New threads are where tomorrow's citations come from. Reply early with a real answer. The first good reply in a thread tends to collect the upvotes, and upvoted replies are the ones Google shows and AI tools quote.</p>
+<h3>4. Give people something worth citing</h3>
+<p>Original data travels. A small survey, a benchmark, or real campaign numbers give Redditors something to link to and AI tools something to repeat. When we share Reddit Ads results, we share the full dashboard, as in our <a href="/case-studies/beyond-plains-ads/">safari Reddit Ads case study</a>: $939.88 spent, 10,303 clicks, 135 leads.</p>
+<h3>5. Measure monthly</h3>
+<p>Re-run your question list each month in the main AI tools and in Google. Track which threads appear, whether you're mentioned, and whether the sentiment is fair. Citation patterns shift quickly, so one month's result is a snapshot, not a verdict.</p>
+<div data-youtube-video=""><iframe allowfullscreen="" src="https://www.youtube-nocookie.com/embed/reOltoeO_zU?modestbranding=1&amp;rel=1" title="How to Use Reddit for AI Visibility (3-Month Study)"></iframe></div>
+<p>Above: a three-month study that tracked 482 Reddit posts to see which ones got cited in AI answers.</p>
+<h2>What not to do: the rules caught up in 2026</h2>
+<p>When AI started quoting Reddit, a wave of marketers tried to plant fake "recommendations" for the bots to find. Both Reddit and Google have now said clearly that this is spam.</p>
+<ul><li><p><strong>Reddit</strong> said in July 2026 that its systems catch around 25,000 spammy posts and comments a day and revoke nearly 2 million inauthentic votes a day, using AI to spot coordinated hype (<a href="https://www.socialmediatoday.com/news/reddit-reports-more-than-23m-daily-spam-views/824541/">Social Media Today</a>).</p></li><li><p><strong>Google</strong> updated its spam policies on 15 May 2026 to say they apply to AI Overviews and AI Mode too, so manipulating AI answers is treated like any other search spam (<a href="https://www.seroundtable.com/google-spam-policies-apply-ai-responses-41331.html">Search Engine Roundtable</a>). Google's own <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">guide to its generative AI features</a> is the baseline to work from.</p></li></ul>
+<div class="callout callout--warning"><p>Fake accounts, bought upvotes and undisclosed "happy customer" posts are the fastest way to get your domain flagged on Reddit, and a removed thread can't be cited by anyone. We don't offer these, and we'd advise any brand to stop if a vendor does.</p></div>
+<p>The safe version of AI SEO on Reddit is simply good Reddit marketing: be useful, be open about who you are, and be specific. That's also what gets cited.</p>
+<div class="link-card" data-url="https://vikoredditexperts.com/insights/building-community-trust-on-reddit/" data-title="Trust is the only currency on Reddit" data-description="What trust looks like on Reddit in 2026, and how brands earn it."><a href="https://vikoredditexperts.com/insights/building-community-trust-on-reddit/">Trust is the only currency on Reddit</a></div>
+<h2>Frequently asked questions</h2>
+<h3>Can I pay to be cited in ChatGPT through Reddit?</h3>
+<p>No. You can run Reddit Ads, but ads aren't what AI tools cite. Citations come from organic threads and comments, which is why the content has to be genuinely useful.</p>
+<h3>How long until a Reddit comment shows up in AI answers?</h3>
+<p>If the thread already ranks on Google, a strong reply can be picked up within weeks. New threads need to earn upvotes and rankings first, which usually takes longer. There's no guaranteed timeline, and anyone promising one is guessing.</p>
+<h3>Should we still bother if ChatGPT cites Reddit less now?</h3>
+<p>Yes, for two reasons. Google's AI features and Perplexity still lean on Reddit, and the same threads rank in normal Google results that buyers read directly. Reddit visibility pays off even when no AI is involved.</p>
+<div class="article-cta"><a class="btn btn-primary btn-lg" href="/packages/audit/">See which Reddit threads AI shows for your brand</a></div>
