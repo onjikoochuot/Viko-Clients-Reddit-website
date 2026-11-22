@@ -480,3 +480,22 @@ section.container, .results, .pk, .founder, .faq2 { padding-block: clamp(48px, 6
 
 .catalog-cta .btn { flex: 0 0 auto; font: 600 15px/1 var(--sans); }
 .hero:not(:has(.hero-grid)) + .case-panel, .hero:not(:has(.hero-grid)) + section .case-panel { border-top: 0; }
+
+/* Insights listing: dark page, white cards */
+.insights-section {
+    margin-top: -8px; padding-top: clamp(28px, 4vw, 44px); padding-bottom: clamp(48px, 6vw, 80px);
+    background: var(--ink); box-shadow: 0 0 0 100vmax var(--ink); clip-path: inset(0 -100vmax);
+}
+.insights-section .insight-card { border-color: #fff; box-shadow: none; }
+.insights-section .insight-card:hover { border-color: var(--accent-on-ink); box-shadow: 0 0 0 3px var(--accent-on-ink); }
+.insights-section .insight-card--featured { border-color: #fff; }
+.insights-section .insight-card--featured .insight-body { background: #fff; border-left: 5px solid var(--accent); }
+.insights-section .insight-card--featured .insight-body h3 { color: var(--ink); }
+.insights-section .insight-card--featured:hover .insight-body h3 { color: var(--accent-dark); }
+.insights-section .insight-card--featured .insight-body p { color: var(--ink-soft); }
+.insights-section .insight-card--featured .insight-meta { border-top-color: var(--line); color: var(--muted); }
+.insights-section .catalog-cta { border: 1px solid var(--ink-line); background: var(--ink-raised); }
+body:has(.insights-section) .hero { border-bottom: 1px solid var(--ink-line); }
+main:has(> .insights-section:last-child) { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+body:has(.insights-section) { background: var(--ink); }
+body:has(.insights-section) .site-header, body:has(.insights-section) header { background-color: var(--paper); }
