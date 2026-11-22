@@ -343,8 +343,21 @@ section.container, .results, .pk, .founder, .faq2 { padding-block: clamp(48px, 6
     .cookie-bar-btns .btn { flex: 1; }
 }
 
-/* Client reviews */
-.reviews { padding-block: 8px 24px; }
+/* Client reviews (dark band) */
+.reviews-band { margin-block: clamp(40px, 5vw, 72px); padding-block: clamp(48px, 6vw, 80px); background: var(--ink); color: var(--on-ink); }
+.reviews-band .sec-title { color: var(--on-ink-strong); }
+.reviews-band .sec-lead { color: var(--on-ink-muted); }
+.reviews-band .reviews-badge { border-color: var(--ink-line); background: rgba(255,255,255,.04); color: var(--on-ink); }
+.reviews-band .reviews-badge strong, .reviews-band .reviews-badge .hx-link { color: var(--on-ink-strong); }
+.reviews-band .reviews-badge .hx-link { text-decoration-color: var(--ink-line); }
+.reviews-band .reviews-badge:hover { border-color: var(--accent-on-ink); }
+.reviews-band .review { border-color: var(--ink-line); background: rgba(255,255,255,.04); }
+.reviews-band .review blockquote p { color: var(--on-ink-strong); }
+.reviews-band .review--featured { border-left-color: var(--accent-on-ink); }
+.reviews-band .review figcaption { color: var(--on-ink-muted); }
+.reviews-band .review figcaption strong { color: var(--on-ink-strong); }
+.reviews-band .reviews-stars { color: #ff9a5c; }
+.reviews { padding-block: 0; }
 .reviews-badge { display: flex; flex-direction: column; gap: 4px; padding: 14px 18px; border: 1px solid var(--line-strong); background: var(--viko-card); color: var(--ink); text-decoration: none; font-size: 15px; }
 .reviews-badge:hover { border-color: var(--accent); }
 .reviews-stars { color: #e8590c; letter-spacing: 2px; font-size: 18px; line-height: 1; }
