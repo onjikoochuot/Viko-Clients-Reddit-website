@@ -87,9 +87,19 @@ export class GitHub {
     }
   }
 
-  async getFile(path) {
-    const f = await this.req(`/repos/${this.repo}/contents/${encodePath(path)}?ref=${encodeURIComponent(this.branch)}`);
+  async getFile(path, ref) {
+    const f = await this.req(`/repos/${this.repo}/contents/${encodePath(path)}?ref=${encodeURIComponent(ref || this.branch)}`);
     return { text: base64ToUtf8(f.content || ""), sha: f.sha, path: f.path };
+  }
+
+  // Starts a GitHub Actions workflow (needs the token's "Actions: Read and write" permission).
+  async runWorkflow(file) {
+    return this.req(`/repos/${this.repo}/actions/workflows/${encodeURIComponent(file)}/dispatches`, { method: "POST", body: { ref: this.branch } });
+  }
+
+  async latestRun(file) {
+    const r = await this.req(`/repos/${this.repo}/actions/workflows/${encodeURIComponent(file)}/runs?per_page=1`);
+    return (r.workflow_runs || [])[0] || null;
   }
 
   async fileSha(path) {

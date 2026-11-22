@@ -1,0 +1,44 @@
+# Refreshes the Analytics tab in Viko Studio every hour.
+# Reads Google Analytics, encrypts the summary, and saves it on the
+# "analytics-data" branch (not main, so the website isn't rebuilt each hour).
+name: Refresh analytics
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: analytics
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Read Google Analytics
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_SERVICE_ACCOUNT: ${{ secrets.GA4_SERVICE_ACCOUNT }}
+          ANALYTICS_PASSWORD: ${{ secrets.ANALYTICS_PASSWORD }}
+          OUT: /tmp/summary.enc.json
+        run: node lib/ga-report.mjs
+      # One commit, replaced each hour, so the branch never grows.
+      - name: Save to the analytics-data branch
+        run: |
+          git config user.name "viko-analytics"
+          git config user.email "viko-analytics@users.noreply.github.com"
+          git checkout --orphan analytics-data
+          git rm -rf --cached . >/dev/null
+          mkdir -p analytics
+          cp /tmp/summary.enc.json analytics/summary.enc.json
+          git add analytics/summary.enc.json
+          git commit -m "Analytics summary"
+          git push -f origin analytics-data

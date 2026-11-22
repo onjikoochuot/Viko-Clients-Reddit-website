@@ -17,6 +17,7 @@ import { Figure, Callout, CALLOUT_KINDS, LinkCard, RedditEmbed, FileCard, CtaBut
 import { cropImage, chooseImage, pickFile, pdfWorkspace, classifyUrl } from "./tools.js";
 import { importWord } from "./importers.js";
 import { showAuthors, loadAuthors, getAuthors, findAuthor } from "./authors.js";
+import { showAnalytics } from "./analytics.js";
 
 const REPO = site.repo;
 const BRANCH = site.branch || "main";
@@ -68,6 +69,14 @@ window.addEventListener("hashchange", route);
 
 function route() {
   if (!gh) return;
+  const listTop = () => topBar(
+        h("a", { class: "st-btn st-btn--ghost", href: "/insights/", target: "_blank" }, icon("arrow-up-right-from-square"), h("span", {}, "View site")),
+        h("button", { class: "st-btn st-btn--ghost", onclick: signOut }, icon("right-from-bracket"), h("span", {}, "Sign out")));
+  if (/^#\/analytics\/?$/.test(location.hash)) {
+    if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
+    kind = "insights";
+    return showAnalytics({ gh, app, topBar: listTop, tabs: navTabs });
+  }
   if (/^#\/authors\/?$/.test(location.hash)) {
     if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
     kind = "insights";
@@ -129,7 +138,8 @@ function navTabs(active) {
   return h("nav", { class: "st-tabs", "aria-label": "Sections" },
     tab("insights", KINDS.insights.label, "newspaper", KINDS.insights.hash),
     tab("cases", KINDS.cases.label, "briefcase", KINDS.cases.hash),
-    tab("authors", "Authors", "user-pen", "#/authors"));
+    tab("authors", "Authors", "user-pen", "#/authors"),
+    tab("analytics", "Analytics", "chart-line", "#/analytics"));
 }
 
 async function loadList(force = false) {
