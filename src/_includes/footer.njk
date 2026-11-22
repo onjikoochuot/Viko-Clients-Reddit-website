@@ -23,6 +23,6 @@
                     </ul>
                 </div>
             </div>
-            <p class="footer-legal"><span>© {{ build.year }} {{ site.legalName }}</span> <a href="/terms/">Terms and Conditions</a> <a href="/privacy/">Privacy Policy</a></p>
+            <p class="footer-legal"><span>© {{ build.year }} {{ site.legalName }}</span> <a href="/terms/">Terms and Conditions</a> <a href="/privacy/">Privacy Policy</a>{% if site.googleTag %} <button type="button" class="footer-link-btn" data-consent-open>Cookie settings</button>{% endif %}</p>
         </div>
     </footer>

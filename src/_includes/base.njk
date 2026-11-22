@@ -6,6 +6,19 @@
 {%- set canonical = page.url | absolute(site.url) %}
 {%- set shareImage = (thumbnail or "/viko-logo-512.png") | absolute(site.url) %}
 <head>
+    {%- if site.googleTag %}
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      // Privacy first: visitors in the UK, EU and EEA are asked before any analytics cookies are set.
+      gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500,
+        region: ['GB','AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','CH'] });
+      gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+      try { var c = localStorage.getItem('viko-consent'); if (c) gtag('consent', 'update', { analytics_storage: c === 'yes' ? 'granted' : 'denied' }); } catch (e) {}
+    </script>
+    <script async src="https://www.googletagmanager.com/gtm.js?id={{ site.googleTag }}"></script>
+    <script>gtag('js', new Date());</script>
+    {%- endif %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ pageTitle }}</title>
@@ -50,6 +63,13 @@
         <a class="mcta-wa" href="https://wa.me/{{ site.whatsapp }}?text={{ site.whatsappText | urlencode }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
         <a class="mcta-book" href="/#booking"><i class="far fa-calendar-check" aria-hidden="true"></i> Book a free call</a>
     </nav>
+    {%- endif %}
+    {%- if site.googleTag %}
+    <div class="cookie-bar" id="cookie-bar" role="region" aria-label="Cookie choice" hidden>
+        <p>We use analytics cookies to see which pages help visitors, nothing else. <a href="/privacy/#cookies-and-analytics">Privacy policy</a></p>
+        <div class="cookie-bar-btns"><button type="button" class="btn btn-outline" data-consent="no">Decline</button><button type="button" class="btn btn-primary" data-consent="yes">Accept</button></div>
+    </div>
+    <script src="/assets/js/analytics.js" defer></script>
     {%- endif %}
     {%- block scripts %}{% endblock %}
 </body>
