@@ -7,6 +7,7 @@ thumbnail: /media/uploads/reddit-self-promotion-rules-in-2026-what-25-subreddits
 thumbnail_alt: 'Cover graphic: Reddit self-promotion rules in 2026, what 25 subreddits actually allow'
 attachment: /media/uploads/reddit-self-promotion-rules-in-2026-what-25-subreddits-actually-allow/reddit-self-promotion-rules-25-subreddit-y75ni5.docx
 attachment_name: Reddit-self-promotion-rules-25-subreddits-2026.docx
+category: Organic growth
 draft: false
 ---
 <p>Scroll LinkedIn for Reddit advice and you'll see the same ratio again and again: give 90% value, promote 10%. <a href="https://www.linkedin.com/posts/romanlakhnyuk_here-are-5-ways-how-to-use-reddit-for-growing-activity-7429952543587221504-JmxXj">One post we read this week</a> said 95/5. It sounds precise. Most subreddits don't use it.</p>

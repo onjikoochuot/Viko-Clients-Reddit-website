@@ -418,3 +418,65 @@ section.container, .results, .pk, .founder, .faq2 { padding-block: clamp(48px, 6
     .lm-pages { grid-template-columns: 1fr; }
     .lm-box { grid-template-columns: 1fr; } .lm-box img { width: 120px; }
 }
+
+/* ======================================================================
+   Contrast pass: dark bands and clearly separated cards
+   ====================================================================== */
+/* Page headers on inner pages become full-width dark bands */
+.hero:not(:has(.hero-grid)), .page-head {
+    position: relative; margin-bottom: 8px;
+    padding-block: clamp(36px, 5vw, 64px) !important;
+    background: var(--ink); box-shadow: 0 0 0 100vmax var(--ink); clip-path: inset(0 -100vmax);
+}
+.hero:not(:has(.hero-grid)) h1, .page-head h1, .page-head .sec-title { color: var(--on-ink-strong) !important; }
+.hero:not(:has(.hero-grid)) p, .page-head .sec-lead, .page-head p { color: var(--on-ink-muted) !important; }
+.hero:not(:has(.hero-grid)) a:not(.btn), .page-head a:not(.btn) { color: var(--accent-on-ink); }
+
+/* Cards: white surface, firm border, shadow, so each one reads as its own block */
+.insight-grid { gap: 30px; margin-top: 30px; }
+.insight-card, .service-tile, .result-card {
+    border: 1px solid var(--line-strong); background: #fff;
+    box-shadow: 0 1px 2px rgba(29,27,23,.06), 0 6px 18px rgba(29,27,23,.07);
+}
+.insight-card:hover, .service-tile:hover { background: #fff; border-color: var(--ink); box-shadow: 0 2px 4px rgba(29,27,23,.08), 0 14px 30px rgba(29,27,23,.12); }
+.insight-thumb { border-bottom: 1px solid var(--line-strong); }
+.insight-body { gap: 10px; padding: 20px 22px 18px; }
+.insight-body .section-kicker { display: inline-block; align-self: flex-start; padding: 3px 9px; background: var(--ink); color: var(--on-ink-strong) !important; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; }
+.insight-body h3 { color: var(--ink); }
+.insight-meta { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); }
+
+/* Featured article: dark text panel beside the image */
+.insight-card--featured { border-color: var(--ink); }
+.insight-card--featured .insight-body { background: var(--ink); }
+.insight-card--featured .insight-body h3 { color: var(--on-ink-strong); }
+.insight-card--featured:hover .insight-body h3 { color: var(--accent-on-ink); }
+.insight-card--featured .insight-body p { color: var(--on-ink-muted); }
+.insight-card--featured .insight-meta { border-top-color: var(--ink-line); color: var(--on-ink-muted); }
+.insight-card--featured .insight-body .section-kicker { background: var(--accent); }
+
+/* "7 case studies" tile on the home page goes dark */
+.result-more { border-color: var(--ink); background: var(--ink); }
+.result-more-num { color: var(--on-ink-strong); }
+.result-more > span:nth-child(2) { color: var(--on-ink-muted); }
+.result-more .hx-link { color: var(--on-ink-strong); text-decoration-color: var(--ink-line); }
+.result-more:hover { border-color: var(--accent-on-ink); }
+
+/* CTA panels: dark */
+.cta-band { border-color: var(--ink); border-top-color: var(--accent); background: var(--ink); color: var(--on-ink); }
+.cta-band h2 { color: var(--on-ink-strong); }
+.cta-band p { color: var(--on-ink-muted); }
+.cta-band .hx-link, .cta-band a:not(.btn) { color: var(--on-ink-strong); }
+.catalog-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; margin-top: 40px; padding: 22px 26px; background: var(--ink); color: var(--on-ink-strong); font: 500 22px/1.25 var(--serif); }
+
+/* Footer: dark */
+.footer { margin-top: 0; padding: 40px 0 18px; border-top: 3px solid var(--accent); background: var(--ink); }
+.footer p, .footer li { color: var(--on-ink-muted); }
+.footer a { color: var(--on-ink); }
+.footer a:hover { color: var(--accent-on-ink); }
+.footer-brand { color: var(--on-ink-strong) !important; }
+.footer-heading { color: var(--on-ink-muted) !important; letter-spacing: .08em; text-transform: uppercase; }
+.footer-legal { border-top-color: var(--ink-line); }
+.footer-link-btn { color: var(--on-ink); }
+
+.catalog-cta .btn { flex: 0 0 auto; font: 600 15px/1 var(--sans); }
+.hero:not(:has(.hero-grid)) + .case-panel, .hero:not(:has(.hero-grid)) + section .case-panel { border-top: 0; }
