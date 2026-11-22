@@ -81,10 +81,10 @@ function passwordCard(unlock, error) {
 function setupCard(gh) {
   return h("div", { class: "st-an-card" },
     h("h2", {}, "Connect Google Analytics"),
-    h("p", {}, "The Analytics tab fills in once the hourly refresh job has run for the first time. It needs three secrets in GitHub (Settings → Secrets and variables → Actions):"),
+    h("p", {}, "The Analytics tab fills in once the hourly refresh job has run for the first time. It needs four secrets in GitHub (Settings → Secrets and variables → Actions):"),
     h("ul", {},
       h("li", {}, h("strong", {}, "GA4_PROPERTY_ID"), ": the number under Admin → Property details in Google Analytics."),
-      h("li", {}, h("strong", {}, "GA4_SERVICE_ACCOUNT"), ": the whole JSON key file of a Google Cloud service account that has Viewer access to the property."),
+      h("li", {}, h("strong", {}, "GCP_WIF_PROVIDER"), " and ", h("strong", {}, "GCP_SERVICE_ACCOUNT"), ": the two lines printed by the Google Cloud Shell setup."),
       h("li", {}, h("strong", {}, "ANALYTICS_PASSWORD"), ": any password you choose. You'll type it here once.")),
     h("p", {}, "Then run the job once: GitHub → Actions → Refresh analytics → Run workflow. After that it refreshes every hour by itself."),
     runButton(gh));

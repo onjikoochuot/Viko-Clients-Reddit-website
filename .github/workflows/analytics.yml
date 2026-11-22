@@ -1,5 +1,6 @@
 # Refreshes the Analytics tab in Viko Studio every hour.
-# Reads Google Analytics, encrypts the summary, and saves it on the
+# Signs in to Google without any stored key (Workload Identity Federation),
+# reads Google Analytics, encrypts the summary, and saves it on the
 # "analytics-data" branch (not main, so the website isn't rebuilt each hour).
 name: Refresh analytics
 
@@ -10,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 concurrency:
   group: analytics
@@ -23,10 +25,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Sign in to Google (keyless)
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/analytics.readonly
       - name: Read Google Analytics
         env:
           GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
-          GA4_SERVICE_ACCOUNT: ${{ secrets.GA4_SERVICE_ACCOUNT }}
+          GA4_ACCESS_TOKEN: ${{ steps.auth.outputs.access_token }}
+          GA4_ACCOUNT_EMAIL: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           ANALYTICS_PASSWORD: ${{ secrets.ANALYTICS_PASSWORD }}
           OUT: /tmp/summary.enc.json
         run: node lib/ga-report.mjs
