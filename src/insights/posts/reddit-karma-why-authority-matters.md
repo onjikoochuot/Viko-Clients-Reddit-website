@@ -1,26 +1,49 @@
 ---
-title: "Reddit karma in 2025: why authority matters more than ever"
-description: "How Reddit’s algorithm changes affect brand visibility and what to do about it."
+title: "Reddit karma in 2026: why authority matters more than the number"
+description: "What Reddit karma is, the hidden trust score that matters more, what changed in 2026, why bought karma and aged accounts now backfire, and how a brand account earns real authority."
 author: Elvis Ochuot
 date: 2026-05-10
+updated: 2026-11-22
 category: "Authority"
 thumbnail: /media/uploads/reddit-karma-why-authority-matters/reddit-karma-authority-cover.webp
 thumbnail_alt: 'Cover graphic: Reddit karma, why authority matters'
 draft: false
 legacy_id: blog-1
 ---
-**The Reddit ecosystem has changed.** In 2025, karma and account history are now strong signals that decide whether your content lands in front of a community or gets filtered out.
-
-Brands that treat Reddit as a long-term community channel are winning. Short-term self-promotion gets buried fast, while authority-based storytelling continues to surface.
-
-## What actually matters now
-
-Top-performing Reddit posts share three traits:
-
--   True relevance to the subreddit
--   High-value comments and follow-up engagement
--   Author credibility built over time
-
-## How to use this for your brand
-
-Start by mapping out the communities your audience already trusts. Create a posting cadence that prioritizes helpful guides, not ads. Then, layer in subtle brand mentions after trust is established.
+<p>Ask a marketer what a Reddit account needs before it can post for a brand, and you'll usually hear one word: karma. It's the number on every profile, and many subreddits still use it as a gate. But in 2026 karma is the least interesting part of an account's reputation. Reddit now leans on a hidden trust score, human verification and AI moderation, and it has said openly that it wants karma to matter less.</p>
+<p>This guide explains what karma actually measures, the score that matters more, what changed this year, and how a brand account builds authority that holds up.</p>
+<h2>What Reddit karma is</h2>
+<p>Karma is a running score of how other users have voted on your posts and comments. Upvotes raise it and downvotes lower it, but it isn't a one-to-one count: Reddit describes it as an approximate reflection of your votes, and it doesn't expire (<a href="https://androidauthority.com/reddit-karma-explained-3156433">Android Authority</a>). Your profile shows post karma and comment karma separately.</p>
+<p>Karma still does two practical jobs. Some subreddits set a minimum before you can post, and other users glance at it to judge whether an account is real. Neither job says much about whether the account is trustworthy, because karma is easy to inflate in meme and "free karma" subreddits that have nothing to do with your business.</p>
+<h2>The score that matters more: Contributor Quality Score</h2>
+<p>Reddit keeps a separate, hidden trust rating for every account called the Contributor Quality Score (CQS). It was opened to all communities in September 2023 as a moderator tool, described by Reddit as an internal classification to spot likely spammers and accounts less likely to contribute positively (<a href="https://www.reddit.com/r/modnews/comments/16is6dh/contributor_quality_score_available_to_all/">r/modnews</a>).</p>
+<figure><img src="/media/uploads/reddit-karma-why-authority-matters/reddit-karma-vs-contributor-quality-score.webp" alt="Comparison: karma is public, roughly upvotes minus downvotes and easy to inflate; Contributor Quality Score is hidden, used by moderators to filter accounts, and rated from lowest to highest"><figcaption>Karma is what people see. CQS is what moderators' filters see.</figcaption></figure>
+<p>Moderators can tell AutoModerator to filter posts and comments from accounts with a low CQS, often combined with a low amount of karma earned in their own subreddit. In Reddit's pilot, communities that switched from karma and account-age gates to CQS saw a 43 percentage point drop in automod reversals and 40% fewer daily removals (<a href="https://www.reddit.com/r/modnews/comments/16is6dh/contributor_quality_score_available_to_all/">r/modnews</a>). In other words, CQS catches bad actors more accurately than karma does.</p>
+<p>Reddit doesn't publish the formula, but it has pointed to signals like the account's past actions and security steps such as email verification. A clean, consistent history in relevant communities is what moves it.</p>
+<div class="callout callout--key"><p>Total karma is a vanity number. Karma earned in the subreddit you want to post in, plus a healthy trust score, is what actually gets your content through.</p></div>
+<h2>What changed in 2026</h2>
+<ul><li><p><strong>Human verification for suspicious accounts (March).</strong> Reddit began asking accounts that behave like bots, for example by posting unusually fast, to prove a human is behind them, and accounts that fail can be restricted (<a href="https://www.techspot.com/community/topics/reddit-cracks-down-on-bots-with-new-labels-and-human-verification.296928/">TechSpot</a>).</p></li><li><p><strong>A large spam crackdown (July).</strong> Reddit reported revoking close to 2 million inauthentic votes a day, using its own AI to detect coordinated behaviour (<a href="https://engadget.com/2208616/reddit-to-combat-ai-with-more-ai">Engadget</a>).</p></li><li><p><strong>Karma gates on the way out (August).</strong> Reddit said it is building abuse-prevention systems that could let communities stop relying on karma and account-age requirements, and that karma's importance could decline. Its AI rule tool, Rules Hub, had been tested by more than 700 communities (<a href="https://techcrunch.com/2026/08/05/reddit-aims-to-make-karma-less-important-for-first-time-posters-with-shift-to-ai-moderation-tools/">TechCrunch</a>).</p></li></ul>
+<p>Put together, the direction is clear: Reddit is replacing a simple public number with systems that look at behaviour. That's good news for honest brands and bad news for shortcuts.</p>
+<div class="link-card" data-url="https://vikoredditexperts.com/insights/building-community-trust-on-reddit/" data-title="Trust is the only currency on Reddit: how brands earn it in 2026" data-description="What trust looks like on Reddit, and seven habits that build it."><a href="https://vikoredditexperts.com/insights/building-community-trust-on-reddit/">Trust is the only currency on Reddit: how brands earn it in 2026</a></div>
+<h2>Why bought karma and aged accounts backfire now</h2>
+<p>For years there was a market in "aged, high-karma" Reddit accounts and karma farming services. A brand would buy an account that looked established and post through it. Three things now work against that:</p>
+<ol><li><p><strong>Behaviour gives it away.</strong> An account that sat dormant, then suddenly posts about one product, looks nothing like a real user. That's the pattern Reddit's detection is built to catch.</p></li><li><p><strong>Karma from the wrong places doesn't help.</strong> Moderators increasingly filter on karma earned in their own community. Thousands of points from unrelated subreddits don't count there.</p></li><li><p><strong>It's undisclosed by design.</strong> The point of a bought account is to hide who's posting. Reddit treats that as content manipulation, and in the US the FTC's rule on fake reviews and testimonials covers undisclosed insider endorsements (<a href="https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials">FTC</a>).</p></li></ol>
+<div class="callout callout--warning"><p>If a vendor offers to "warm up" accounts, sell aged accounts or farm karma for your brand, walk away. When those accounts get flagged, the posts they made disappear and your domain can end up treated as spam. We don't offer it.</p></div>
+<h2>How a brand account earns real authority</h2>
+<figure><img src="/media/uploads/reddit-karma-why-authority-matters/reddit-brand-account-trust-signals.webp" alt="Six trust signals for a brand account: verified email and 2FA, a clear brand name, steady human pace, karma in the right places, no removals or bans, open about who you are"><figcaption>None of these can be bought. All of them can be built in a month.</figcaption></figure>
+<p>Start with one clearly named account for your brand, set up in Reddit Pro, Reddit's free toolkit for businesses. Then let the first month look like what it is: a real company learning a community before it speaks.</p>
+<figure><img src="/media/uploads/reddit-karma-why-authority-matters/new-reddit-brand-account-first-30-days.webp" alt="Timeline of a new brand account's first 30 days: set it up properly, listen and answer, share something useful, speak as the brand"><figcaption>A realistic first month for a new brand account.</figcaption></figure>
+<p>After that, consistency does most of the work. A handful of genuinely helpful replies each week in your niche earns community karma, keeps the trust score healthy, and builds a history that moderators and readers can check. When you do mention your product, the account already has a record of being useful.</p>
+<div data-youtube-video=""><iframe allowfullscreen="" src="https://www.youtube-nocookie.com/embed/WwMObYA_qNI?modestbranding=1&amp;rel=1" title="How Reddit karma works"></iframe></div>
+<p>Above: a short walkthrough of how karma works, the difference between post and comment karma, and where to find yours.</p>
+<div class="link-card" data-url="https://vikoredditexperts.com/insights/build-reddit-authority-without-direct-promotion/" data-title="How to build Reddit authority without direct promotion" data-description="The five-step ladder from listening to being recommended."><a href="https://vikoredditexperts.com/insights/build-reddit-authority-without-direct-promotion/">How to build Reddit authority without direct promotion</a></div>
+<h2>Frequently asked questions</h2>
+<h3>How much karma does a brand account need?</h3>
+<p>There's no universal number. Each subreddit sets its own rules, and many now rely on trust filters rather than karma alone. Check the rules and sidebar of each community you care about, and focus on earning karma inside those communities.</p>
+<h3>Can I check my Contributor Quality Score?</h3>
+<p>Reddit doesn't show it on your profile. Some help communities, such as r/reddithelp, offer a command that tells you your current tier. A low score usually improves with time, a verified email, good account security and a clean history of helpful posts.</p>
+<h3>Is karma going away?</h3>
+<p>Not entirely. Reddit has said its importance could decline as better abuse-prevention tools arrive, but it hasn't announced removing it. Plan as if trust and behaviour matter more than the number, because they already do.</p>
+<h3>Should we use an employee's personal account instead?</h3>
+<p>Staff can take part as themselves, but they should say they work for you whenever they talk about your products. For most brands, one official, clearly labelled account is simpler, safer and easier to measure.</p>
+<div class="article-cta"><a class="btn btn-primary btn-lg" href="/packages/ambassador/">Get an official brand account, run properly</a></div>

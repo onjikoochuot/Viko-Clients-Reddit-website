@@ -39,5 +39,11 @@
     "earned": "$70K+",
     "checked": "2026-11-22"
   },
-  "googleTag": "G-9ZTDQHF0Z0"
+  "googleTag": "G-9ZTDQHF0Z0",
+  "leadMagnet": {
+    "title": "The Reddit Visibility Check",
+    "pdf": "/media/downloads/reddit-visibility-check.pdf",
+    "page": "/reddit-visibility-check/",
+    "cover": "/media/downloads/reddit-visibility-check-cover.webp"
+  }
 }

@@ -71,6 +71,9 @@
     </div>
     <script src="/assets/js/analytics.js" defer></script>
     {%- endif %}
+    {%- if section == "leadmagnet" or layout == "post.njk" or page.url.startsWith("/insights/") %}
+    <script src="/assets/js/leadmagnet.js" defer></script>
+    {%- endif %}
     {%- block scripts %}{% endblock %}
 </body>
 

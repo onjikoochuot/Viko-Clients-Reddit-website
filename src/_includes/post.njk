@@ -92,6 +92,16 @@
                     </div>
                     {%- endif %}
 
+                    <aside class="lm-box" aria-labelledby="lm-box-title">
+                        <img src="{{ site.leadMagnet.cover }}" alt="" width="160" height="226" loading="lazy">
+                        <div>
+                            <p class="section-kicker">Free PDF</p>
+                            <h2 id="lm-box-title">The Reddit Visibility Check</h2>
+                            <p>A 30-minute self-audit: see which Reddit threads Google and AI tools show about your brand, score yourself out of 30, and get a 30-day plan.</p>
+                            {% set lmCompact = true %}{% set lmSource = "article: " + title %}{% include "leadmagnet-form.njk" %}
+                        </div>
+                    </aside>
+
                     <div class="article-share">
                         <span>Share this article</span>
                         <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ pageUrl | urlencode }}" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>

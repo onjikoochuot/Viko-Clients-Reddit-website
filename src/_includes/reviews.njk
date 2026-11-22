@@ -1,0 +1,23 @@
+{%- set up = site.upwork %}
+<section class="container reviews" id="reviews" aria-labelledby="reviews-title">
+    <div class="sec-head">
+        <div>
+            <h2 id="reviews-title" class="sec-title">What clients say</h2>
+            <p class="sec-lead">Word for word from client reviews on my Upwork contracts.</p>
+        </div>
+        <a class="reviews-badge" href="{{ up.url }}" target="_blank" rel="noopener">
+            <span class="reviews-stars" aria-hidden="true">★★★★★</span>
+            <span><strong>{{ up.badge }}</strong> on Upwork · {{ up.jss }} Job Success</span>
+            <span class="hx-link">Read all reviews</span>
+        </a>
+    </div>
+    <div class="reviews-grid">
+        {%- for r in reviews %}
+        <figure class="review{% if r.featured %} review--featured{% endif %}">
+            <span class="reviews-stars" role="img" aria-label="{{ r.rating }} out of 5 stars">{% for i in range(0, r.rating) %}★{% endfor %}</span>
+            <blockquote><p>{{ r.quote }}</p></blockquote>
+            <figcaption><strong>Verified Upwork client</strong><span>{{ r.project }} · {{ r.dates }}</span></figcaption>
+        </figure>
+        {%- endfor %}
+    </div>
+</section>

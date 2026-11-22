@@ -12,6 +12,7 @@ const ACCENT = "#c4421f";
 
 const EVENT_LABELS = {
   generate_lead: "Enquiries (forms + calls)",
+  sign_up: "Free PDF sign-ups",
   whatsapp_click: "WhatsApp clicks",
   book_call_click: "Book-a-call clicks",
   select_package: "\"Book this package\" clicks",
@@ -127,7 +128,7 @@ function render(body, d, gh, file) {
     const daily = fillDays(d.daily || [], Number(days)).map((x) => ({ ...x, users: x.users || 0 }));
     const evs = (d.dailyEvents || []).filter((e) => toIso(e.date) >= since);
     const total = (name) => evs.filter((e) => e.event === name).reduce((s, e) => s + e.count, 0);
-    const actionsByDay = fillDays(Object.values(evs.filter((e) => e.event !== "generate_lead").reduce((m, e) => {
+    const actionsByDay = fillDays(Object.values(evs.filter((e) => e.event !== "generate_lead" && e.event !== "sign_up").reduce((m, e) => {
       (m[e.date] ||= { date: e.date, count: 0 }).count += e.count; return m;
     }, {})), Number(days), "count");
     const [users, sessions, views, avgDur] = r.totals || [0, 0, 0, 0];
@@ -138,7 +139,7 @@ function render(body, d, gh, file) {
         tile("Enquiries", fmt(total("generate_lead")), "Forms sent and calls booked", true),
         tile("WhatsApp clicks", fmt(total("whatsapp_click"))),
         tile("Book-a-call clicks", fmt(total("book_call_click"))),
-        tile("Package clicks", fmt(total("select_package"))),
+        tile("PDF sign-ups", fmt(total("sign_up")), "Free Reddit Visibility Check"),
         d.realtime ? tile("On the site now", fmt(d.realtime.activeUsers), "Last 30 minutes") : tile("Avg. visit", `${Math.round((avgDur || 0) / 60)}m ${Math.round((avgDur || 0) % 60)}s`)),
       h("div", { class: "st-an-grid" },
         panel("Visitors per day", lineChart(daily, "users", "visitors"), "wide"),
