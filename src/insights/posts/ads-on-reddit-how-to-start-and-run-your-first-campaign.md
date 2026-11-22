@@ -19,7 +19,7 @@ draft: false
 <p>Four formats cover most business needs:</p>
 <table><tbody><tr><th><p>Format</p></th><th><p>Best used for</p></th></tr><tr><td><p>Free-form</p></td><td><p>Text-led stories that look like a normal post</p></td></tr><tr><td><p>Image</p></td><td><p>One clear offer or product shot</p></td></tr><tr><td><p>Video</p></td><td><p>Demos and short explainers</p></td></tr><tr><td><p>Carousel</p></td><td><p>Several products, features, or steps</p></td></tr></tbody></table>
 <h3>Are Reddit paid ads worth the spend?</h3>
-<div data-youtube-video=""><iframe allowfullscreen="" title="Video"></iframe></div>
+<div data-youtube-video=""><iframe allowfullscreen="" src="https://www.youtube-nocookie.com/embed/5zB1OiM8Ugg?modestbranding=1&amp;rel=1" title="Video"></iframe></div>
 <p>They are worth it for most B2B software, finance, travel, health, and hobby-driven products, because <strong>Reddit users research before they buy</strong>. They are a poor fit when you need instant sales from cold traffic, or when your product has no community around it.</p>
 <p>Expect results to depend on creative and tracking more than on budget. In <a href="https://vikoredditexperts.com/case-studies/beyond-plains-ads">a managed campaign we ran for Beyond the Plains Safaris</a>, Reddit Ads produced 471,707 impressions and 135 leads.</p>
 <blockquote><p>Reddit ads reward relevance to a community, not volume of spend.</p></blockquote>
