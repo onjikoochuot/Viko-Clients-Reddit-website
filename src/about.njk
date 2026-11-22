@@ -1,0 +1,60 @@
+---
+layout: base.njk
+permalink: /about/
+section: about
+title: About Elvis and Viko
+seoTitle: "About Viko — Elvis Ochuot, Reddit marketer"
+description: "Viko is run by Elvis Ochuot, a Top Rated Reddit marketer on Upwork based in Nakuru, Kenya, with 5+ years helping SaaS, app and travel brands get found on Reddit."
+---
+{%- set up = site.upwork %}
+{%- set f = site.founder %}
+        <section class="container about">
+            <div class="about-grid">
+                <div class="founder-mark founder-mark--lg" aria-hidden="true">{% if f.photo %}<img src="{{ f.photo }}" alt="">{% else %}<span>EO</span>{% endif %}</div>
+                <div>
+                    <h1 class="sec-title sec-title--xl">Hi, I'm Elvis.</h1>
+                    <p class="sec-lead">I run Viko, a small Reddit marketing agency based in {{ f.location }}. For {{ f.years }} years I've helped SaaS, app and travel brands get found in the Reddit threads their buyers read, and that Google and AI tools now quote.</p>
+                    <a class="proof-strip proof-strip--inline" href="{{ up.url }}" target="_blank" rel="noopener" aria-label="My Upwork profile (opens Upwork)">
+                        <span class="proof-strip-src"><i class="fas fa-circle-check" aria-hidden="true"></i> Verified on Upwork</span>
+                        <span><strong>{{ up.badge }}</strong></span>
+                        <span><strong>{{ up.jss }}</strong> Job Success</span>
+                        <span><strong>{{ up.jobs }}</strong> jobs</span>
+                        <span><strong>{{ up.reviews }}</strong> reviews</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container about-body">
+            <div class="about-cols">
+                <div>
+                    <h2>Why Reddit</h2>
+                    <p>When people want an honest answer about a product, they add "reddit" to their search. Those threads now rank near the top of Google and show up inside ChatGPT and Perplexity answers. A brand that's helpful in those conversations gets recommended for years; a brand that's absent, or caught faking it, loses the sale.</p>
+                    <h2>How I work</h2>
+                    <p>Everything is done by hand and follows each community's rules. I prefer the open routes: managed Reddit Ads, an official brand account that speaks as your company, and genuinely useful posts. I don't buy votes, sell accounts or write fake reviews. Reddit catches those now, and they put your brand at risk.</p>
+                    <p>You'll deal with me directly, from the first call to every weekly report.</p>
+                </div>
+                <div>
+                    <h2>Background</h2>
+                    <ul class="about-facts">
+                        <li><strong>{{ up.badge }} on Upwork</strong> with {{ up.jss }} Job Success, {{ up.jobs }} completed jobs and {{ up.earned }} earned</li>
+                        <li><strong>{{ f.years }} years</strong> of Reddit marketing for SaaS, finance apps, fitness, travel and real estate</li>
+                        <li><strong>BEng, Civil Engineering</strong>, Moi University</li>
+                        <li><strong>BCom, Marketing</strong>, University of Nairobi</li>
+                        <li><strong>Based in {{ f.location }}</strong> (East Africa Time, UTC+3), working with clients in the US, UK and Europe</li>
+                        <li>English and Swahili</li>
+                    </ul>
+                    <p><a class="hx-link" href="/case-studies/">See the case studies</a></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="cta-band">
+                <div>
+                    <h2>Let's see if Reddit fits your brand</h2>
+                    <p>A free 30-minute call. I'll give you an honest answer, even if it's "not yet".</p>
+                </div>
+                <a class="btn btn-primary btn-lg" href="/#booking"><i class="far fa-calendar-check" aria-hidden="true"></i> Book a free strategy call</a>
+            </div>
+        </section>

@@ -10,10 +10,10 @@
                 </div>
             </a>
             <nav class="primary-nav" aria-label="Main navigation">
-                <a href="/"{% if section == "home" %} aria-current="page"{% endif %}>Home</a>
-                <a href="/#capabilities"{% if section == "services" %} aria-current="page"{% endif %}>Services</a>
                 <a href="/case-studies/"{% if section == "cases" %} aria-current="page"{% endif %}>Case studies</a>
+                <a href="/pricing/"{% if section == "pricing" or section == "services" %} aria-current="page"{% endif %}>Pricing</a>
                 <a href="/insights/"{% if section == "insights" %} aria-current="page"{% endif %}>Insights</a>
+                <a href="/about/"{% if section == "about" %} aria-current="page"{% endif %}>About</a>
             </nav>
             <div class="header-actions">
                 <a href="{{ wa }}" target="_blank" rel="noopener" class="btn btn-wa" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i> Whatsapp</a>

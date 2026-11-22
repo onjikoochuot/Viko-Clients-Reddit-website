@@ -10,7 +10,7 @@ stats:
 icon: fa-chart-line
 thumbnail: /media/case-studies/case-study-1.webp
 thumbnail_alt: GetROI thread in r/fatFIRE
-featured: true
+featured: false
 order: 1
 ---
 ## Client: GetROI (Copy Trading & Net Worth Tracking App)

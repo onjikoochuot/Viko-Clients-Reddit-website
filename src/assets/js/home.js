@@ -87,4 +87,30 @@
         var text = name && message ? "Hi Viko, I'm " + name + '. ' + message : (message || cfg.whatsappText);
         window.open(whatsappLink(text), '_blank', 'noopener');
     });
+
+    // ----- "Book this package": pre-fill the form and the WhatsApp message -----
+    function choosePackage(id) {
+        var label = (cfg.packages || {})[id];
+        if (!label) return;
+        var msg = form.elements.message;
+        var line = "I'm interested in the " + label + ". ";
+        if (!msg.value || /^I'm interested in the /.test(msg.value)) msg.value = line + 'About my brand: ';
+        var wa = document.querySelector('#booking .btn-wa');
+        if (wa) wa.href = whatsappLink('Hi Viko, ' + line.trim());
+        var note = document.getElementById('package-note');
+        if (!note) {
+            note = document.createElement('p');
+            note.id = 'package-note';
+            note.className = 'package-note';
+            form.parentNode.insertBefore(note, form.parentNode.querySelector('.booking-btn-group'));
+        }
+        note.textContent = 'You picked the ' + label + '. Book a call, message on WhatsApp, or send the form below: it already mentions the package.';
+    }
+    document.addEventListener('click', function (e) {
+        var link = e.target.closest && e.target.closest('[data-package]');
+        if (!link) return;
+        choosePackage(link.getAttribute('data-package'));
+    });
+    var picked = new URLSearchParams(location.search).get('package');
+    if (picked) choosePackage(picked);
 })();

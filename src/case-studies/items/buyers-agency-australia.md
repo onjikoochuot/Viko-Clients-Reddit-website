@@ -10,7 +10,7 @@ stats:
 icon: fa-house
 thumbnail: /media/case-studies/case-study-8-section-1.webp
 thumbnail_alt: Buyers Agency Australia Ads dashboard
-featured: false
+featured: true
 order: 5
 ---
 ## Client: Buyers Agency Australia

@@ -1,0 +1,90 @@
+---
+layout: base.njk
+permalink: /pricing/
+section: pricing
+title: Pricing
+seoTitle: "Reddit marketing packages and prices — Viko"
+description: "Clear prices for Reddit marketing: a $300 visibility audit, managed Reddit Ads from $80 a week, an official brand account from $85 a week, and organic growth from $210 a week."
+---
+{%- set audit = packages | findBy("id", "audit") %}
+{%- set watch = packages | findBy("id", "thread-watch") %}
+        <section class="container page-head">
+            <h1 class="sec-title sec-title--xl">Packages and prices</h1>
+            <p class="sec-lead">Every package is run by hand by Elvis and follows each subreddit's rules. Weekly packages are billed weekly in advance and can be cancelled with notice. Reddit ad spend is paid separately, straight to Reddit.</p>
+        </section>
+
+        <section class="container">
+            <a class="pk-entry pk-entry--big" href="/packages/audit/">
+                <span class="pk-entry-tag">Start here</span>
+                <span class="pk-entry-main"><strong>{{ audit.title }}</strong> <span class="pk-entry-price">{{ audit.price }} {{ audit.period }}</span></span>
+                <span class="pk-entry-text">{{ audit.summary }} If you start a package within 30 days, the fee comes off your first invoice.</span>
+            </a>
+
+            <div class="pk-grid pk-grid--page">
+                {%- for id in ["ads", "ambassador", "organic"] %}
+                {%- set p = packages | findBy("id", id) %}
+                <article class="pk-card{% if id == 'organic' %} pk-card--top{% endif %}">
+                    {%- if id == 'organic' %}<p class="pk-flag">Most complete</p>{% endif %}
+                    <p class="pk-chip">{{ p.chip }}</p>
+                    <h2>{{ p.title }}</h2>
+                    <p class="pk-price">{{ p.price }} <span>{{ p.period }}</span></p>
+                    <p class="pk-sum">{{ p.summary }}</p>
+                    <ul class="pk-list">
+                        {%- for f in p.included %}<li>{{ f }}</li>{% endfor %}
+                    </ul>
+                    <div class="pk-actions">
+                        <a class="btn {% if id == 'organic' %}btn-primary{% else %}btn-outline{% endif %}" href="/?package={{ p.id }}#booking">Book this package</a>
+                        <a class="hx-link" href="/packages/{{ p.id }}/">Full details</a>
+                    </div>
+                </article>
+                {%- endfor %}
+            </div>
+
+            <div class="pk-addon">
+                <div>
+                    <p class="pk-chip">Add-on or on its own</p>
+                    <h2>{{ watch.title }} <span class="pk-price pk-price--inline">{{ watch.price }} <span>{{ watch.period }}</span></span></h2>
+                    <p>{{ watch.summary }}</p>
+                </div>
+                <div class="pk-actions"><a class="btn btn-outline" href="/?package=thread-watch#booking">Book Thread Watch</a><a class="hx-link" href="/packages/thread-watch/">What's included</a></div>
+            </div>
+        </section>
+
+        <section class="container compare" aria-labelledby="compare-title">
+            <h2 id="compare-title" class="sec-title">Which one fits?</h2>
+            <div class="comparison-wrap">
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th scope="col">If you want…</th><th scope="col">Choose</th><th scope="col">Price</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row">To know where you stand before spending</th><td><a href="/packages/audit/">Reddit Visibility Audit</a></td><td>$300 one-off</td></tr>
+                        <tr><th scope="row">Clicks and leads this month</th><td><a href="/packages/ads/">Reddit Ads Accelerator</a></td><td>$80 / week + ad spend</td></tr>
+                        <tr><th scope="row">A trusted, official brand presence on Reddit</th><td><a href="/packages/ambassador/">Reddit Ambassador Program</a></td><td>$85 / week</td></tr>
+                        <tr><th scope="row">Steady visibility in the threads buyers read and AI tools cite</th><td><a href="/packages/organic/">Organic Growth Engine</a></td><td>$210 / week</td></tr>
+                        <tr><th scope="row">To hear about every thread that mentions you</th><td><a href="/packages/thread-watch/">Thread Watch</a></td><td>$250 / month</td></tr>
+                        <tr><th scope="row">Something bigger or unusual</th><td>Custom campaign</td><td><a href="/#booking">Ask for a quote</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="container faq2" aria-labelledby="pfaq-title">
+            <h2 id="pfaq-title" class="sec-title">Billing questions</h2>
+            <div class="faq-grid">
+                <details class="faq-item"><summary>How do I pay?</summary><p>Weekly packages are invoiced in advance each week; Thread Watch monthly; the audit once. All prices are in US dollars. Work starts when the first payment arrives.</p></details>
+                <details class="faq-item"><summary>Is Reddit ad spend included?</summary><p>No. Our fee covers the work. You pay Reddit directly for ads, so you can see every cent. We'll suggest a starting budget on the call.</p></details>
+                <details class="faq-item"><summary>Can I cancel?</summary><p>Yes. Give notice before your next billing week and the work stops at the end of the week you've paid for. Details are in our <a href="/terms/">Terms</a>.</p></details>
+                <details class="faq-item"><summary>Can I combine packages?</summary><p>Yes. Ads plus the Ambassador Program is a common pairing: ads bring traffic fast while the brand account builds trust. Thread Watch works alongside any package.</p></details>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="cta-band">
+                <div>
+                    <h2>Not sure which to pick?</h2>
+                    <p>Book a free 30-minute call. We'll recommend one package, or tell you if Reddit isn't right for you yet.</p>
+                </div>
+                <a class="btn btn-primary btn-lg" href="/#booking"><i class="far fa-calendar-check" aria-hidden="true"></i> Book a free strategy call</a>
+            </div>
+        </section>

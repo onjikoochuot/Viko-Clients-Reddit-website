@@ -3,7 +3,7 @@
   "legalName": "Viko Marketing Agency",
   "url": "https://vikoredditexperts.com",
   "tagline": "Community-first marketing for the AI era.",
-  "description": "Viko is a Reddit growth agency: organic community marketing, managed Reddit ads, AI search visibility and reputation management for brands.",
+  "description": "Viko gets brands recommended on Reddit, openly: managed Reddit Ads, official brand accounts and community work, with clear weekly prices.",
   "email": "info@vikoredditexperts.com",
   "whatsapp": "254726979973",
   "whatsappText": "Hi Viko, I want to grow on Reddit",
@@ -21,5 +21,22 @@
   ],
   "repo": "onjikoochuot/Viko-Clients-Reddit-website",
   "branch": "main",
-  "defaultAuthor": "Viko team"
+  "defaultAuthor": "Elvis Ochuot",
+  "founder": {
+    "name": "Elvis Ochuot",
+    "role": "Founder, Viko",
+    "years": "5+",
+    "location": "Nakuru, Kenya",
+    "photo": "",
+    "bio": "Elvis runs Viko from Nakuru, Kenya. He has spent 5+ years on Reddit marketing for SaaS, app and travel brands and is a Top Rated freelancer on Upwork."
+  },
+  "upwork": {
+    "url": "https://www.upwork.com/freelancers/~0151ee93f8fa00ec58",
+    "badge": "Top Rated",
+    "jss": "94%",
+    "jobs": "145",
+    "reviews": "68",
+    "earned": "$70K+",
+    "checked": "2026-11-22"
+  }
 }

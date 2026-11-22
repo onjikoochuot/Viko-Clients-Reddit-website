@@ -7,7 +7,18 @@
     --muted: #403c33;
     --line: #d9d4ca;
     --line-strong: #bdb6aa;
-    --accent: #d94d2b;
+    --accent: #c4421f;
+    --accent-on-ink: #ff8a66;
+    --wa: #1f8f4e;
+    --on-accent: #fffdf8;
+    --on-ink: #e9e5dc;
+    --on-ink-strong: #fffdf8;
+    --on-ink-muted: #cfc9bd;
+    --ink-line: #4a453c;
+    --ink-raised: #2b2822;
+    --ok-on-ink: #7fd6a2;
+    --paper-glass: rgba(246, 244, 239, .96);
+    --hatch: rgba(189, 182, 170, .28);
     --accent-dark: #b93b20;
     --viko-bg: var(--paper);
     --viko-card: #fffefa;
@@ -29,7 +40,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
     margin: 0;
     min-width: 320px;
-    overflow-x: hidden;
+    overflow-x: clip;
     background: var(--paper);
     color: var(--ink);
     font: 500 19px/1.7 var(--sans);

@@ -1,10 +1,38 @@
 [
   {
+    "id": "audit",
+    "title": "Reddit Visibility Audit",
+    "price": "$300",
+    "period": "one-off",
+    "tag": "A clear picture of where you stand on Reddit, in one week",
+    "chip": "Start here",
+    "summary": "Find out which Reddit threads Google and AI tools show for your brand and competitors, and get a 90-day plan.",
+    "lead": "Before spending on Reddit, see exactly where you stand. We look at the Reddit threads that rank on Google and appear in AI answers for your brand, your competitors and your category, then turn it into a practical plan you can run yourself or with us.",
+    "includedTitle": "What you get",
+    "included": [
+      "The Reddit threads that rank on Google for your brand, competitors and top buying searches",
+      "Whether ChatGPT and Perplexity cite Reddit when asked about your category, and which threads",
+      "Sentiment: what Redditors say about you and your competitors, with examples",
+      "10 subreddits worth targeting, with their rules on brands and self-promotion",
+      "A 90-day plan with the first actions to take",
+      "A written report plus a 30-minute walkthrough call"
+    ],
+    "proof": null,
+    "note": "Perfect for brands deciding whether Reddit is worth it, or worried about what Reddit says about them. If you start a package within 30 days, the audit fee comes off your first invoice.",
+    "cta": "Order the Reddit Visibility Audit",
+    "cardFeatures": [
+      "Threads ranking on Google for you and competitors",
+      "Where AI tools cite Reddit in your category",
+      "10 target subreddits and their rules",
+      "90-day plan and a walkthrough call"
+    ]
+  },
+  {
     "id": "ads",
     "title": "Reddit Ads Accelerator",
     "price": "$80",
     "period": "/ week",
-    "tag": "55,000+ targeted impressions every week",
+    "tag": "Managed Reddit Ads, optimised every day",
     "chip": "Fast traffic",
     "summary": "Fully managed Reddit ads for qualified impressions, clicks, leads, and bookings.",
     "lead": "Drive real results on Reddit with a fully managed advertising service. We create, launch, optimize, and monitor high-performing Reddit Ads that feel native to the platform while delivering measurable ROI.",
@@ -24,29 +52,13 @@
       "url": "/case-studies/beyond-plains-ads/"
     },
     "note": "Perfect for safari operators, SaaS companies, e-commerce brands, and service businesses ready to scale visibility and generate qualified traffic fast.",
-    "cta": "Start the Reddit Ads Accelerator"
-  },
-  {
-    "id": "organic",
-    "title": "Organic Growth Engine",
-    "price": "$210",
-    "period": "/ week",
-    "tag": "12+ authentic brand mentions every week",
-    "chip": "Organic + AI",
-    "summary": "Steady organic visibility through strategic posts, comments, and LLM-friendly Reddit placement.",
-    "lead": "Build authentic brand visibility on Reddit with consistent, high-quality engagement every single week. We craft strategic posts and comments that position your brand as a trusted authority while supporting long-term AI and LLM discoverability.",
-    "includedTitle": "What’s included every week",
-    "included": [
-      "6 premium organic posts placed in the most relevant high-engagement subreddits for your niche",
-      "12 strategic promotional comments across new posts and existing high-traffic Reddit threads",
-      "1 contextual brand mention on 5 existing high-traffic threads already ranking on Google",
-      "Full subreddit research and content creation tailored to your audience",
-      "Natural, experience-based storytelling that survives moderation",
-      "Karma building, reputation management, and a weekly report covering views, upvotes, comments, sentiment, and estimated reach"
-    ],
-    "proof": null,
-    "note": "Perfect for SaaS, Fintech, health and wellness, travel, and service brands looking for steady organic presence and AI-powered visibility.",
-    "cta": "Start the Organic Growth Engine"
+    "cta": "Start the Reddit Ads Accelerator",
+    "cardFeatures": [
+      "1 new ad created every week, copy and visual",
+      "Targeting in the subreddits your buyers use",
+      "Daily bid tuning and A/B tests",
+      "Weekly report on clicks, leads and cost"
+    ]
   },
   {
     "id": "ambassador",
@@ -68,6 +80,67 @@
     ],
     "proof": null,
     "note": "Perfect for brands that want a permanent, transparent home on Reddit — a professional, accountable voice rather than anonymous promotion.",
-    "cta": "Start the Reddit Ambassador Program"
+    "cta": "Start the Reddit Ambassador Program",
+    "cardFeatures": [
+      "Your official, labelled brand account",
+      "Open advice in relevant subreddits",
+      "Replies to mentions and questions",
+      "Drafts sent to you before posting"
+    ]
+  },
+  {
+    "id": "organic",
+    "title": "Organic Growth Engine",
+    "price": "$210",
+    "period": "/ week",
+    "tag": "6 posts and 12 comments every week",
+    "chip": "Organic + AI",
+    "summary": "Steady visibility through helpful posts and comments in the threads your buyers read, and that Google and AI tools surface.",
+    "lead": "Build lasting visibility on Reddit with consistent, useful contributions every week. We write posts and comments that answer real questions in your niche, following each community’s rules, so your brand shows up where buyers research and where Google and AI tools look for answers.",
+    "includedTitle": "What’s included every week",
+    "included": [
+      "6 posts a week in the most relevant subreddits for your niche, written to each community’s rules",
+      "12 helpful comments a week in new and high-traffic threads",
+      "Brand mentions in 5 existing threads that already rank on Google, only where they genuinely answer the question",
+      "Full subreddit research and content written for your audience",
+      "Experience-based content written to survive moderation, never spam",
+      "Reputation monitoring and a weekly report on views, upvotes, comments, sentiment and estimated reach"
+    ],
+    "proof": null,
+    "note": "Perfect for SaaS, Fintech, health and wellness, travel, and service brands looking for steady organic presence and AI-powered visibility.",
+    "cta": "Start the Organic Growth Engine",
+    "cardFeatures": [
+      "6 posts a week in relevant subreddits",
+      "12 helpful comments a week",
+      "Mentions in threads that rank on Google",
+      "Weekly report on reach and sentiment"
+    ]
+  },
+  {
+    "id": "thread-watch",
+    "title": "Thread Watch",
+    "price": "$250",
+    "period": "/ month",
+    "tag": "Never miss a Reddit thread about your brand",
+    "chip": "Monitoring",
+    "summary": "Weekly alerts on Reddit threads that mention your brand or competitors, with reply drafts your team can post.",
+    "lead": "Conversations about your brand happen on Reddit whether you join them or not. Thread Watch tracks them for you every week and tells you which ones need a reply, with a ready-to-post draft written in your brand’s voice.",
+    "includedTitle": "What’s included every month",
+    "included": [
+      "Weekly scan of Reddit for your brand, product and competitor names",
+      "A short weekly email: new threads, sentiment, and which ones need attention",
+      "Reply drafts for the threads worth answering, for your team to post openly",
+      "Alerts within one working day for urgent or negative threads",
+      "Monthly summary of what people are saying and how it’s changing"
+    ],
+    "proof": null,
+    "note": "Works on its own or as an add-on to any package. Perfect for brands that already get talked about on Reddit and want to stay on top of it.",
+    "cta": "Start Thread Watch",
+    "cardFeatures": [
+      "Weekly brand and competitor scan",
+      "Reply drafts for threads that matter",
+      "Same-day alerts for negative threads",
+      "Monthly sentiment summary"
+    ]
   }
 ]

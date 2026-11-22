@@ -66,6 +66,8 @@ export default function (eleventyConfig) {
     return { numbers, tags };
   });
 
+  eleventyConfig.addFilter("findBy", (arr, key, value) => (arr || []).find((x) => x && x[key] === value));
+
   // Filters
   eleventyConfig.addFilter("readableDate", (d) =>
     new Date(d).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }));

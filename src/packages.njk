@@ -13,7 +13,7 @@ eleventyComputed:
 ---
         <section class="hero">
             <div class="container">
-                <a class="article-back" href="/#packages"><i class="fas fa-arrow-left"></i> All packages</a>
+                <a class="article-back" href="/pricing/"><i class="fas fa-arrow-left"></i> All packages and prices</a>
                 <h1>{{ p.title }} — {{ p.chip }}</h1>
                 <p>{{ p.summary }}</p>
             </div>
@@ -43,18 +43,18 @@ eleventyComputed:
                 </div>
                 {%- endif %}
 
-                <p>All work is 100% manual using our network of high-karma accounts. No bots. No spam. Just sustainable growth and long-term credibility.</p>
+                <p>Every piece of work is done by hand and follows each subreddit’s rules. No bots, no bought votes, no fake reviews. Reddit ad spend, where relevant, is paid separately and directly to Reddit.</p>
                 <p>{{ p.note }}</p>
 
                 <h2>Ready to start?</h2>
                 <p>Choose the <strong>{{ p.title }}</strong> and start building momentum on Reddit this week.</p>
                 <div class="cta-row">
-                    <a class="btn btn-primary" href="/#booking"><i class="far fa-calendar-check"></i> {{ p.cta }} — book a call</a>
+                    <a class="btn btn-primary" href="/?package={{ p.id }}#booking"><i class="far fa-calendar-check"></i> {{ p.cta }}</a>
                     <a class="btn btn-outline" href="mailto:{{ site.email }}">Email us instead</a>
                 </div>
                 <p class="package-others">Prefer something else? Compare the
                     {%- set sep = joiner(" or the") %}
                     {%- for other in packages %}{% if other.id != p.id %}{{ sep() }} <a href="/packages/{{ other.id }}/">{{ other.title }}</a>{% endif %}{% endfor %},
-                    or <a href="/#packages">see all packages side by side</a>.</p>
+                    or <a href="/pricing/">see all packages side by side</a>.</p>
             </div>
         </section>

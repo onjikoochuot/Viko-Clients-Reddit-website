@@ -45,6 +45,12 @@
     </main>
 
     {% include "footer.njk" %}
+    {%- if section != "home-booking" %}
+    <nav class="mcta" aria-label="Contact Viko">
+        <a class="mcta-wa" href="https://wa.me/{{ site.whatsapp }}?text={{ site.whatsappText | urlencode }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+        <a class="mcta-book" href="/#booking"><i class="far fa-calendar-check" aria-hidden="true"></i> Book a free call</a>
+    </nav>
+    {%- endif %}
     {%- block scripts %}{% endblock %}
 </body>
 
