@@ -501,8 +501,8 @@ body:has(.insights-section) { background: var(--paper-deep); }
 .theme-toggle { display: inline-grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line-strong); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; font-size: 16px; transition: border-color .15s ease, color .15s ease, background .15s ease; }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 .theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.theme-toggle .fa-sun, html[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
-html[data-theme="dark"] .theme-toggle .fa-sun { display: inline; }
+.theme-toggle .ti-sun, html[data-theme="dark"] .theme-toggle .ti-moon { display: none; }
+html[data-theme="dark"] .theme-toggle .ti-sun { display: block; }
 @media (max-width: 760px) { .theme-toggle { width: 35px; height: 35px; font-size: 14px; } }
 html.theme-anim, html.theme-anim * { transition: background-color .3s ease, border-color .3s ease, color .3s ease !important; }
 
@@ -568,3 +568,27 @@ html[data-theme="dark"] .article-toc details { background: transparent; }
 html[data-theme="dark"] .article-cover img, html[data-theme="dark"] .post-content img { border-color: var(--line); }
 /* Screenshots and graphics keep their own colours; just tone down the glare a little */
 html[data-theme="dark"] .post-content img, html[data-theme="dark"] .insight-thumb img, html[data-theme="dark"] .related-card img, html[data-theme="dark"] .article-cover img { filter: brightness(.92); }
+
+/* Theme switch: larger, with a hover label */
+.theme-toggle { position: relative; width: 48px; height: 48px; border-width: 1.5px; border-color: var(--ink); background: var(--viko-card); font-size: 20px; }
+.theme-toggle::after {
+    content: "Switch to dark mode"; position: absolute; top: calc(100% + 10px); left: 50%; z-index: 200;
+    padding: 7px 11px; border-radius: 6px; background: var(--band); color: #fffdf8;
+    font: 600 13px/1.2 var(--sans); white-space: nowrap; pointer-events: none;
+    opacity: 0; transform: translate(-50%, -4px); transition: opacity .15s ease, transform .15s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,.18);
+}
+.theme-toggle::before {
+    content: ""; position: absolute; top: calc(100% + 4px); left: 50%; z-index: 201; border: 6px solid transparent; border-bottom-color: var(--band);
+    border-top: 0; opacity: 0; transform: translate(-50%, -4px); transition: opacity .15s ease, transform .15s ease; pointer-events: none;
+}
+html[data-theme="dark"] .theme-toggle::after { content: "Switch to light mode"; background: #fffdf8; color: #1d1b17; }
+html[data-theme="dark"] .theme-toggle::before { border-bottom-color: #fffdf8; }
+.theme-toggle:hover::after, .theme-toggle:focus-visible::after, .theme-toggle:hover::before, .theme-toggle:focus-visible::before { opacity: 1; transform: translate(-50%, 0); }
+html[data-theme="dark"] .theme-toggle { border-color: var(--line-strong); }
+html[data-theme="dark"] .theme-toggle .ti-sun { color: #ffc35a; }
+@media (max-width: 760px) {
+    .theme-toggle { width: 42px; height: 42px; font-size: 18px; }
+    .theme-toggle::after { left: auto; right: 0; transform: translateY(-4px); }
+    .theme-toggle:hover::after, .theme-toggle:focus-visible::after { transform: translateY(0); }
+}

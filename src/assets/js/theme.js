@@ -6,7 +6,7 @@
         var dark = root.getAttribute('data-theme') === 'dark';
         document.querySelectorAll('[data-theme-toggle]').forEach(function (b) {
             var t = dark ? 'Switch to light mode' : 'Switch to dark mode';
-            b.setAttribute('aria-label', t); b.title = t; b.setAttribute('aria-pressed', dark ? 'true' : 'false');
+            b.setAttribute('aria-label', t); b.removeAttribute('title'); b.setAttribute('aria-pressed', dark ? 'true' : 'false');
         });
     }
     function set(t, save) {
