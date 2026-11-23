@@ -1,6 +1,7 @@
-{#- Email sign-up for the free PDF. Set lmCompact = true for the short version inside articles. -#}
-{%- set lm = site.leadMagnet %}
-<form class="lm-form{% if lmCompact %} lm-form--compact{% endif %}" data-leadmagnet data-key="{{ site.web3formsKey }}" data-pdf="{{ lm.pdf }}" data-source="{{ lmSource or page.url }}" novalidate>
+{#- Email sign-up for a free PDF. Pass lm (an entry from freebies.json); defaults to the default one.
+    Set lmCompact = true for the short version inside articles. -#}
+{%- if not lm %}{% set lm = freebies | defaultFreebie %}{% endif %}
+<form class="lm-form{% if lmCompact %} lm-form--compact{% endif %}" data-leadmagnet data-key="{{ site.web3formsKey }}" data-pdf="{{ lm.pdf }}" data-title="{{ lm.title }}" data-id="{{ lm.id }}" data-source="{{ lmSource or page.url }}" novalidate>
     <div class="lm-fields">
         {%- if not lmCompact %}
         <label class="lm-field"><span>First name</span><input type="text" name="name" autocomplete="given-name" placeholder="Jane"></label>
@@ -13,7 +14,7 @@
     <input type="checkbox" name="botcheck" class="lm-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <label class="lm-consent"><input type="checkbox" name="updates" value="yes"> <span>Also send me occasional Reddit marketing tips (no more than twice a month, unsubscribe any time).</span></label>
     <button class="btn btn-primary{% if not lmCompact %} btn-lg{% endif %}" type="submit"><i class="fas fa-file-arrow-down" aria-hidden="true"></i> Send me the free PDF</button>
-    <p class="lm-note">Free, 10 pages, downloads straight away. See our <a href="/privacy/">privacy policy</a>.</p>
+    <p class="lm-note">Free{% if lm.pages %}, {{ lm.pages }} page{% if lm.pages != 1 %}s{% endif %}{% endif %}, downloads straight away. See our <a href="/privacy/">privacy policy</a>.</p>
     <div class="lm-done" hidden role="status">
         <p><strong>It's yours.</strong> Your download should start now. If it doesn't, use the button below.</p>
         <a class="btn btn-primary" href="{{ lm.pdf }}" download><i class="fas fa-download" aria-hidden="true"></i> Download the PDF</a>

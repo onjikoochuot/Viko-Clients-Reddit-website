@@ -38,7 +38,7 @@
                 done.hidden = false;
                 Array.prototype.forEach.call(form.querySelectorAll('.lm-fields, .lm-consent, button[type="submit"], .lm-note'), function (el) { el.hidden = true; });
                 download(pdf);
-                if (window.gtag) gtag('event', 'sign_up', { method: 'visibility_check_pdf', location: form.classList.contains('lm-form--compact') ? 'article' : 'landing_page', saved: ok ? 'yes' : 'no' });
+                if (window.gtag) gtag('event', 'sign_up', { method: 'pdf_' + (form.getAttribute('data-id') || 'download'), location: form.classList.contains('lm-form--compact') ? 'article' : 'landing_page', saved: ok ? 'yes' : 'no' });
             };
 
             fetch('https://api.web3forms.com/submit', {
@@ -46,12 +46,13 @@
                 headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
                 body: JSON.stringify({
                     access_key: form.getAttribute('data-key'),
-                    subject: 'New PDF download: Reddit Visibility Check',
+                    subject: 'New PDF download: ' + (form.getAttribute('data-title') || 'free PDF'),
                     from_name: 'Viko website',
                     email: email,
                     name: name || '(not given)',
                     website: website || '(not given)',
                     wants_tips: updates,
+                    pdf: form.getAttribute('data-title') || '',
                     signed_up_from: form.getAttribute('data-source') || location.pathname
                 })
             })

@@ -66,6 +66,13 @@ export default function (eleventyConfig) {
     return { numbers, tags };
   });
 
+  // Free PDFs (src/_data/freebies.json). An article's `freebie` is an id, "none", or empty for the default.
+  const defaultFreebie = (list) => (list || []).find((f) => f.default) || (list || [])[0] || null;
+  eleventyConfig.addFilter("defaultFreebie", defaultFreebie);
+  eleventyConfig.addFilter("freebieFor", (list, id) => {
+    if (id === "none" || id === false) return null;
+    return (id && (list || []).find((f) => f.id === id)) || defaultFreebie(list);
+  });
   eleventyConfig.addFilter("findBy", (arr, key, value) => (arr || []).find((x) => x && x[key] === value));
 
   // Filters

@@ -398,3 +398,21 @@ button.st-gallery-item:hover { border-color: var(--st-accent); box-shadow: 0 0 0
 .st-an-table .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .st-an-page { display: flex; flex-direction: column; } .st-an-page .st-muted { font-size: 12px; }
 @media (max-width: 860px) { .st-an-grid { grid-template-columns: 1fr; } }
+
+/* Free PDFs tab */
+.st-freebies { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }
+.st-freebie-card { display: flex; gap: 18px; padding: 18px; border: 1px solid var(--st-line); border-radius: 14px; background: #fff; }
+.st-freebie-card.is-default { border-color: var(--accent, #c9482b); box-shadow: inset 4px 0 0 var(--accent, #c9482b); }
+.st-freebie-cover { flex: 0 0 96px; width: 96px; height: 136px; object-fit: cover; object-position: top; border: 1px solid var(--st-line); border-radius: 4px; background: #f6f4ef; }
+.st-freebie-body { flex: 1; min-width: 0; }
+.st-freebie-body h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 2px 0 6px; font-size: 18px; }
+.st-freebie-body p { margin: 2px 0 6px; }
+.st-freebie-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.st-freebie-file { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.st-freebie-coverbox { display: flex; align-items: center; gap: 18px; }
+.st-freebie-coverbox img, .st-freebie-nocover { width: 96px; height: 136px; object-fit: cover; object-position: top; border: 1px solid var(--st-line); border-radius: 4px; background: #f6f4ef; }
+.st-freebie-nocover { display: grid; place-items: center; padding: 8px; color: #8a8478; font-size: 12px; text-align: center; }
+.st-freebie-preview { margin: 0 !important; grid-template-columns: 110px 1fr !important; }
+.st-freebie-preview h2 { font-size: 22px !important; }
+.st-empty { padding: 28px; border: 1px dashed var(--st-line); border-radius: 14px; text-align: center; }
+@media (max-width: 560px) { .st-freebies { grid-template-columns: 1fr; } .st-freebie-card { flex-direction: column; } }

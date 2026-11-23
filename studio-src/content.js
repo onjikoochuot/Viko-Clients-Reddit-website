@@ -11,7 +11,7 @@ export const UPLOADS_DIR = "src/media/uploads";
 
 // Fields written in this order; anything else already in a file is kept after them.
 const FIELD_ORDER = ["title", "short_title", "summary", "lead", "description", "date", "updated", "category", "author", "stats", "icon",
-  "thumbnail", "thumbnail_alt", "featured", "order", "attachment", "attachment_name", "draft"];
+  "thumbnail", "thumbnail_alt", "featured", "order", "attachment", "attachment_name", "freebie", "draft"];
 
 export function parseArticle(text) {
   const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);

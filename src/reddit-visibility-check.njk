@@ -7,7 +7,7 @@ seoTitle: "Free Reddit Visibility Check: a 30-minute self-audit for brands (PDF)
 description: "A free 10-page PDF self-audit: see which Reddit threads Google and AI tools show about your brand, score yourself out of 30, and get a 30-day action plan."
 thumbnail: /media/downloads/reddit-visibility-check-cover.webp
 ---
-{%- set lm = site.leadMagnet %}
+{%- set lm = freebies | freebieFor("reddit-visibility-check") or (freebies | defaultFreebie) %}
         <section class="container lm-hero">
             <div class="lm-copy">
                 <p class="section-kicker">Free PDF · 10 pages</p>

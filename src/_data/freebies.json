@@ -1,0 +1,12 @@
+[
+  {
+    "id": "reddit-visibility-check",
+    "title": "The Reddit Visibility Check",
+    "blurb": "A 30-minute self-audit: see which Reddit threads Google and AI tools show about your brand, score yourself out of 30, and get a 30-day plan.",
+    "pages": 10,
+    "pdf": "/media/downloads/reddit-visibility-check.pdf",
+    "cover": "/media/downloads/reddit-visibility-check-cover.webp",
+    "page": "/reddit-visibility-check/",
+    "default": true
+  }
+]

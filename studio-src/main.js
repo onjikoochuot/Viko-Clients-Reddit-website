@@ -18,6 +18,7 @@ import { cropImage, chooseImage, pickFile, pdfWorkspace, classifyUrl } from "./t
 import { importWord } from "./importers.js";
 import { showAuthors, loadAuthors, getAuthors, findAuthor } from "./authors.js";
 import { showAnalytics } from "./analytics.js";
+import { showFreebies, loadFreebies, getFreebies, defaultFreebie } from "./freebies.js";
 
 const REPO = site.repo;
 const BRANCH = site.branch || "main";
@@ -60,7 +61,7 @@ async function start() {
     b.done();
     return showSignIn(e.message);
   }
-  await loadAuthors(gh);
+  await Promise.all([loadAuthors(gh), loadFreebies(gh)]);
   b.done();
   route();
 }
@@ -76,6 +77,12 @@ function route() {
     if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
     kind = "insights";
     return showAnalytics({ gh, app, topBar: listTop, tabs: navTabs });
+  }
+  if (/^#\/freebies\/?$/.test(location.hash)) {
+    if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
+    kind = "insights";
+    return showFreebies({ gh, app, topBar: listTop, tabs: navTabs,
+      listArticles: async () => { const prev = kind; kind = "insights"; try { return await loadList(true); } finally { kind = prev; } } });
   }
   if (/^#\/authors\/?$/.test(location.hash)) {
     if (currentEditor) { currentEditor.destroy(); currentEditor = null; }
@@ -139,6 +146,7 @@ function navTabs(active) {
     tab("insights", KINDS.insights.label, "newspaper", KINDS.insights.hash),
     tab("cases", KINDS.cases.label, "briefcase", KINDS.cases.hash),
     tab("authors", "Authors", "user-pen", "#/authors"),
+    tab("freebies", "Free PDFs", "file-arrow-down", "#/freebies"),
     tab("analytics", "Analytics", "chart-line", "#/analytics"));
 }
 
@@ -560,6 +568,30 @@ function buildSide() {
   const featured = h("input", { type: "checkbox", onchange: (e) => { state.data.featured = e.target.checked; markDirty(); } });
   const order = h("input", { type: "number", min: "1", step: "1", oninput: (e) => { state.data.order = e.target.value === "" ? "" : Number(e.target.value); markDirty(); } });
   const alt = h("input", { type: "text", placeholder: "Describe the thumbnail in a few words", oninput: (e) => { state.data.thumbnail_alt = e.target.value; markDirty(); } });
+  const freebieSel = h("select", { onchange: (e) => {
+    const v = e.target.value;
+    if (v) state.data.freebie = v; else delete state.data.freebie;
+    freebieNote();
+    markDirty();
+  } });
+  const freebieHint = h("small", {});
+  const freebieNote = () => {
+    const v = state.data.freebie;
+    const def = defaultFreebie();
+    freebieHint.replaceChildren(v === "none" ? "No download box on this article." :
+      !def && !v ? "You have no free PDFs yet. Add one in the " : "Readers enter their email to get it, at the end of the article. Manage PDFs in the ",
+      v === "none" ? "" : h("a", { href: "#/freebies", target: "_blank" }, "Free PDFs"), v === "none" ? "" : " tab.");
+  };
+  const rebuildFreebies = () => {
+    const cur = state.data.freebie || "";
+    const def = defaultFreebie();
+    const list = getFreebies();
+    freebieSel.replaceChildren(
+      h("option", { value: "", selected: !cur || (cur !== "none" && !list.some((f) => f.id === cur)) }, def ? `Default: ${def.title}` : "Default (none added yet)"),
+      ...list.filter((f) => f !== def).map((f) => h("option", { value: f.id, selected: f.id === cur }, f.title)),
+      h("option", { value: "none", selected: cur === "none" }, "Don't include a free PDF"));
+    freebieNote();
+  };
   const attachBox = h("div", { class: "st-attach" });
   const urlHint = h("small", {});
   els.checks = h("ul", { class: "st-checks" });
@@ -572,6 +604,7 @@ function buildSide() {
     date.value = state.data.date || "";
     rebuildCats();
     rebuildAuthors();
+    rebuildFreebies();
     shortTitle.value = state.data.short_title || "";
     summary.value = state.data.summary || "";
     iconSel.value = state.data.icon || "fa-chart-line";
@@ -617,6 +650,9 @@ function buildSide() {
       h("h2", {}, "Thumbnail"),
       h("button", { class: "st-btn st-btn--block", onclick: chooseThumbnail }, icon("image"), " Choose thumbnail"),
       h("label", { class: "st-field" }, h("span", {}, "Thumbnail description"), alt)),
+    isCase() ? null : h("section", { class: "st-side-sec" },
+      h("h2", {}, "Free PDF (email sign-up)"),
+      h("label", { class: "st-field" }, h("span", {}, "Box at the end of the article"), freebieSel, freebieHint)),
     h("section", { class: "st-side-sec" },
       h("h2", {}, "Download for readers"),
       h("p", { class: "st-muted st-small" }, `Attach the original PDF or document. It appears as a download at the end of the ${K().one}.`),
