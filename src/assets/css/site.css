@@ -491,3 +491,6 @@ body:has(.insights-section) { background: var(--paper-deep); }
 .insight-body h3 { color: #2a2721; }
 .insight-body p { color: #4a463e; line-height: 1.6; }
 .insight-meta { border-top-color: #e2dccf; color: #6a655b; }
+
+/* Wider pages: use more of the screen on large displays */
+.container { max-width: 1880px; padding-inline: clamp(18px, 3vw, 56px); }

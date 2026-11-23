@@ -87,6 +87,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("enhanceArticle", (html, previews) => enhanceArticle(html, previews || {}));
   eleventyConfig.addFilter("minutesRead", (words) => Math.max(1, Math.round((words || 0) / 220)) + " min read");
   eleventyConfig.addFilter("limit", (arr, n) => (arr || []).slice(0, n));
+  // Related articles: same category first (newest first), then the newest of the rest.
+  eleventyConfig.addFilter("related", (posts, url, category) => {
+    const rest = (posts || []).filter((p) => p.url !== url);
+    const same = category ? rest.filter((p) => p.data.category === category) : [];
+    return [...same, ...rest.filter((p) => !same.includes(p))];
+  });
   eleventyConfig.addFilter("exclude", (arr, url) => (arr || []).filter((i) => i.url !== url));
   eleventyConfig.addFilter("json", (v) => JSON.stringify(v));
   eleventyConfig.addFilter("absolute", (path, base) => new URL(path, base).href);

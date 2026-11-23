@@ -56,7 +56,9 @@
             <figure class="article-cover"><img src="{{ thumbnail }}" alt="{{ thumbnail_alt or '' }}" decoding="async" fetchpriority="high"></figure>
             {%- endif %}
 
-            <div class="article-layout{% if art.toc.length >= 3 %} has-toc{% endif %}">
+            {%- set related = collections.posts | related(page.url, category) %}
+            {%- set side = related | limit(3) %}
+            <div class="article-layout{% if art.toc.length >= 3 %} has-toc{% endif %}{% if side.length %} has-related{% endif %}">
                 {%- if art.toc.length >= 3 %}
                 <aside class="article-toc" aria-label="On this page">
                     <details open>
@@ -123,10 +125,29 @@
                         <a href="/#booking" class="btn btn-primary btn-lg"><i class="far fa-calendar-check"></i> Book a strategy call</a>
                     </div>
                 </div>
+
+                {%- if side.length %}
+                <aside class="article-related" aria-labelledby="related-title">
+                    <div class="related-inner">
+                        <p class="related-kicker" id="related-title">Keep reading</p>
+                        {%- for post in side %}
+                        <a class="related-card" href="{{ post.url }}">
+                            {%- if post.data.thumbnail %}<img src="{{ post.data.thumbnail }}" alt="" loading="lazy" decoding="async">{% endif %}
+                            <span class="related-text">
+                                {%- if post.data.category %}<span class="related-cat">{{ post.data.category }}</span>{% endif %}
+                                <span class="related-title">{{ post.data.title }}</span>
+                                <span class="related-meta">{{ post.date | readableDate }}{% set rt = post.content | readingTime %}{% if rt %} · {{ rt }}{% endif %}</span>
+                            </span>
+                        </a>
+                        {%- endfor %}
+                        <a class="related-all hx-link" href="/insights/">All insights <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </aside>
+                {%- endif %}
             </div>
         </article>
 
-        {%- set more = collections.posts | exclude(page.url) | limit(3) %}
+        {%- set more = related.slice(3, 6) %}
         {%- if more.length %}
         <section class="container more-insights">
             <h2 class="section-title">More insights</h2>
