@@ -40,6 +40,11 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#f6f4ef">
+    <script>
+      // Light/dark theme: the reader's saved choice, otherwise their device setting. Runs before paint.
+      (function () { try { var t = localStorage.getItem('viko-theme'); if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t); document.querySelector('meta[name="theme-color"]').content = t === 'dark' ? '#161412' : '#f6f4ef'; } catch (e) {} })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -74,6 +79,7 @@
     {%- if section == "leadmagnet" or layout == "post.njk" or page.url.startsWith("/insights/") %}
     <script src="/assets/js/leadmagnet.js?v={{ build.v }}" defer></script>
     {%- endif %}
+    <script src="/assets/js/theme.js?v={{ build.v }}" defer></script>
     {%- block scripts %}{% endblock %}
 </body>
 
